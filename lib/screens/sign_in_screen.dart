@@ -1,3 +1,4 @@
+import 'package:business_bridge/screens/login_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -7,20 +8,50 @@ class Signin_screen extends StatefulWidget {
 }
 
 class _Signin_screenState extends State<Signin_screen> {
-
+  String? chooseItem;
+  List listitem = [
+    "Afghanistan",
+    "Algeria",
+    "Angola",
+    "Argentina",
+    "Bangladesh",
+    "Brazil",
+    "Canada",
+    "China",
+    "Colombia",
+    "Congo",
+    "Egypt",
+    "Ethiopia",
+    "France",
+    "Germany",
+    "Ghana",
+    "India",
+    "Indonesia",
+    "Iran",
+    "Iraq",
+    "Italy",
+    "Japan",
+    "Kenya",
+    "Madagascar",
+    "Malaysia",
+    "Mexico",
+    "Morocco",
+    "Mozambique",
+    "Myanmar",
+    "Nepal",
+    "Nigeria",
+    "Pakistan"
+  ];
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
+  bool _obsecureText = true;
 
   @override
   Widget build(BuildContext context) {
-
-    bool _obsecureText=true;
     final keyBoardSpace = MediaQuery.of(context).viewInsets.bottom;
 
     return Scaffold(
-
       resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
-
         physics: BouncingScrollPhysics(),
         child: Form(
           key: formkey,
@@ -34,11 +65,11 @@ class _Signin_screenState extends State<Signin_screen> {
                   // ------------------login heading and Logo ---------------------//
                   CircleAvatar(
                     child: Image.asset(
-                        'assets/WhatsApp Image 2023-07-11 at 6.13.16 PM.jpeg'),
-                    maxRadius: 50,
+                        'assets/images/Group 50.png'),
+                    maxRadius: 70,
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                   Container(
                     child: Center(
@@ -50,7 +81,7 @@ class _Signin_screenState extends State<Signin_screen> {
                           //textAlign: TextAlign.center,
                           style: Theme.of(context)
                               .textTheme
-                              .headlineLarge!
+                              .headlineMedium!
                               .copyWith(
                                 color: Theme.of(context)
                                     .colorScheme
@@ -60,102 +91,9 @@ class _Signin_screenState extends State<Signin_screen> {
                       ),
                     ),
                   ),
-
                   SizedBox(
-                    height: 50,
+                    height: 15,
                   ),
-
-            // SizedBox(
-            //   width: 300,
-            //   child: Column(
-            //     children: [
-            //       TextFormField(
-            //         validator: (value) {
-            //           if (value!.isEmpty) {
-            //             return 'please Enter E-mail';
-            //           }
-            //           return null;
-            //         },
-            //         //controller: ,
-            //         keyboardType: TextInputType.emailAddress,
-            //         cursorColor: Theme.of(context).colorScheme.primary,
-            //         decoration: InputDecoration(
-            //           hintText: 'Enter Business Name:',
-            //           hintStyle: Theme.of(context)
-            //               .textTheme
-            //               .titleMedium!
-            //               .copyWith(
-            //             color: Theme.of(context).colorScheme.primary,
-            //           ),
-            //           label: Text(
-            //             'Business Name',
-            //             style: Theme.of(context)
-            //                 .textTheme
-            //                 .titleMedium!
-            //                 .copyWith(
-            //               color:
-            //               Theme.of(context).colorScheme.primary,
-            //             ),
-            //           ),
-            //           prefixIcon: Icon(
-            //             Icons.mail,
-            //             color: Theme.of(context).colorScheme.primary,
-            //           ),
-            //           enabledBorder: OutlineInputBorder(
-            //             borderRadius: BorderRadius.circular(20),
-            //           ),
-            //           focusedBorder: OutlineInputBorder(
-            //             borderRadius: BorderRadius.circular(20),
-            //             borderSide: BorderSide(
-            //               width: 2,
-            //               color: Theme.of(context).colorScheme.primary,
-            //             ),
-            //           ),
-            //         ),
-            //       ),
-            //       TextFormField(
-            //         decoration: InputDecoration(
-            //           label: Text(
-            //             'Country',
-            //             style: Theme.of(context)
-            //                 .textTheme
-            //                 .titleMedium!
-            //                 .copyWith(
-            //               color:
-            //               Theme.of(context).colorScheme.primary,
-            //             ),
-            //           ),
-            //           enabledBorder: OutlineInputBorder(
-            //             borderRadius: BorderRadius.circular(20),
-            //           ),
-            //           focusedBorder: OutlineInputBorder(
-            //             borderRadius: BorderRadius.circular(20),
-            //             borderSide: BorderSide(
-            //               width: 2,
-            //               color: Theme.of(context).colorScheme.primary,
-            //             ),
-            //           ),
-            //         ),
-            //       ),
-            //
-            //
-            //     ],
-            //   )
-            // ),
-
-
-
-
-
-
-
-
-
-
-
-
-
-                  //------------------ another components ---------------------//
                   Container(
                     decoration: BoxDecoration(),
                     child: Column(
@@ -165,12 +103,12 @@ class _Signin_screenState extends State<Signin_screen> {
                         TextFormField(
                           validator: (value) {
                             if (value!.isEmpty) {
-                              return 'please Enter E-mail';
+                              return 'please Enter business name';
                             }
                             return null;
                           },
                           //controller: ,
-                          keyboardType: TextInputType.emailAddress,
+                          keyboardType: TextInputType.name,
                           cursorColor: Theme.of(context).colorScheme.primary,
                           decoration: InputDecoration(
                             hintText: 'Enter Business Name:',
@@ -191,7 +129,7 @@ class _Signin_screenState extends State<Signin_screen> {
                                   ),
                             ),
                             prefixIcon: Icon(
-                              Icons.mail,
+                              Icons.work_sharp,
                               color: Theme.of(context).colorScheme.primary,
                             ),
                             enabledBorder: OutlineInputBorder(
@@ -206,29 +144,33 @@ class _Signin_screenState extends State<Signin_screen> {
                             ),
                           ),
                         ),
-                        // SizedBox(
-                        //   height: 20,
-                        // ),
-
+                        SizedBox(
+                          height: 10,
+                        ),
                         //------------  Country  ---------------------------------//
-                        TextFormField(
+                        DropdownButtonFormField(
+
                           decoration: InputDecoration(
-                            hintText: 'Enter Password:',
+                            hintText: 'Choose Your Country',
                             hintStyle: Theme.of(context)
                                 .textTheme
                                 .titleMedium!
                                 .copyWith(
-                                  color: Theme.of(context).colorScheme.primary,
-                                ),
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
                             label: Text(
                               'Country',
                               style: Theme.of(context)
                                   .textTheme
                                   .titleMedium!
                                   .copyWith(
-                                    color:
-                                        Theme.of(context).colorScheme.primary,
-                                  ),
+                                color:
+                                Theme.of(context).colorScheme.primary,
+                              ),
+                            ),
+                            prefixIcon: Icon(
+                              Icons.flag,
+                              color: Theme.of(context).colorScheme.primary,
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20),
@@ -241,8 +183,23 @@ class _Signin_screenState extends State<Signin_screen> {
                               ),
                             ),
                           ),
-                        ),
+                          value: chooseItem,
+                          onChanged: (newValue) {
+                            setState(() {
+                              chooseItem = newValue as String? ;
+                            });
+                          },
+                          items: listitem.map((valueItem) {
+                            return DropdownMenuItem(
+                              value: valueItem,
+                              child: Text(valueItem),
+                            );
+                          }).toList(),
 
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
                         //------------  License no./Gst no.  ---------------------------------//
                         TextFormField(
                           validator: (value) {
@@ -260,20 +217,20 @@ class _Signin_screenState extends State<Signin_screen> {
                                 .textTheme
                                 .titleMedium!
                                 .copyWith(
-                              color: Theme.of(context).colorScheme.primary,
-                            ),
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
                             label: Text(
                               'License no./Gst no.',
                               style: Theme.of(context)
                                   .textTheme
                                   .titleMedium!
                                   .copyWith(
-                                color:
-                                Theme.of(context).colorScheme.primary,
-                              ),
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
+                                  ),
                             ),
                             prefixIcon: Icon(
-                              Icons.mail,
+                              Icons.insert_page_break_sharp,
                               color: Theme.of(context).colorScheme.primary,
                             ),
                             enabledBorder: OutlineInputBorder(
@@ -288,7 +245,9 @@ class _Signin_screenState extends State<Signin_screen> {
                             ),
                           ),
                         ),
-
+                        SizedBox(
+                          height: 10,
+                        ),
                         //------------  set user name.  ---------------------------------//
                         TextFormField(
                           validator: (value) {
@@ -306,20 +265,20 @@ class _Signin_screenState extends State<Signin_screen> {
                                 .textTheme
                                 .titleMedium!
                                 .copyWith(
-                              color: Theme.of(context).colorScheme.primary,
-                            ),
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
                             label: Text(
                               'Set User Name',
                               style: Theme.of(context)
                                   .textTheme
                                   .titleMedium!
                                   .copyWith(
-                                color:
-                                Theme.of(context).colorScheme.primary,
-                              ),
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
+                                  ),
                             ),
                             prefixIcon: Icon(
-                              Icons.mail,
+                              Icons.perm_identity_sharp,
                               color: Theme.of(context).colorScheme.primary,
                             ),
                             enabledBorder: OutlineInputBorder(
@@ -334,7 +293,9 @@ class _Signin_screenState extends State<Signin_screen> {
                             ),
                           ),
                         ),
-
+                        SizedBox(
+                          height: 10,
+                        ),
                         //------------  set PassWord  ---------------------------------//
                         TextFormField(
                           keyboardType: TextInputType.visiblePassword,
@@ -347,7 +308,7 @@ class _Signin_screenState extends State<Signin_screen> {
                             }
                             return null;
                           },
-                          //controller: passController,
+                          // controller: passController,
                           cursorColor: Theme.of(context).colorScheme.primary,
                           obscureText: _obsecureText,
                           decoration: InputDecoration(
@@ -356,16 +317,17 @@ class _Signin_screenState extends State<Signin_screen> {
                                 .textTheme
                                 .titleMedium!
                                 .copyWith(
-                              color: Theme.of(context).colorScheme.primary,
-                            ),
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
                             label: Text(
-                              'Password',
+                              'Set Password',
                               style: Theme.of(context)
                                   .textTheme
                                   .titleMedium!
                                   .copyWith(
-                                color: Theme.of(context).colorScheme.primary,
-                              ),
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
+                                  ),
                             ),
                             prefixIcon: Icon(
                               Icons.lock_outline_sharp,
@@ -413,7 +375,12 @@ class _Signin_screenState extends State<Signin_screen> {
                               ),
                             ),
                             TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) {
+                                        return Login_screen();
+                                      }));
+                                },
                                 child: Text(
                                   "Log IN ",
                                   style: TextStyle(
@@ -446,7 +413,7 @@ class _Signin_screenState extends State<Signin_screen> {
                       ],
                     ),
                   ),
-            ],
+                ],
               ),
             ),
           ),

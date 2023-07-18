@@ -13,7 +13,7 @@ class _Login_screenState extends State<Login_screen> {
   TextEditingController emailController = new TextEditingController();
   TextEditingController passController = new TextEditingController();
   int e = 0;
-  bool _obsecureText = false;
+  bool _obsecureText = true;
 
   // FirebaseDatabase database = FirebaseDatabase.instance;
 
@@ -70,11 +70,11 @@ class _Login_screenState extends State<Login_screen> {
                   // ------------------login heading and Logo ---------------------//
                   CircleAvatar(
                     child: Image.asset(
-                        'assets/WhatsApp Image 2023-07-11 at 6.13.16 PM.jpeg'),
-                    maxRadius: 70,
+                        'assets/images/Group 50.png'),
+                    maxRadius: 80,
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
                   Container(
                     child: Center(
@@ -92,7 +92,7 @@ class _Login_screenState extends State<Login_screen> {
                     ),
                   ),
                   SizedBox(
-                    height: 50,
+                    height: 30,
                   ),
 
                   // ------------------ another components ---------------------//
