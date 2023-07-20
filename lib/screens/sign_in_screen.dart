@@ -1,6 +1,14 @@
+import 'package:business_bridge/models/business_category.dart';
+import 'package:business_bridge/provider/category_provider.dart';
+import 'package:business_bridge/screens/b_categories.dart';
 import 'package:business_bridge/screens/login_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:riverpod/riverpod.dart';
+import 'package:business_bridge/provider/category_provider.dart';
+
+import '../data/dummy_data.dart';
+
 
 class Signin_screen extends StatefulWidget {
   @override
@@ -8,6 +16,8 @@ class Signin_screen extends StatefulWidget {
 }
 
 class _Signin_screenState extends State<Signin_screen> {
+
+
   String? chooseItem;
   List listitem = [
     "Afghanistan",
@@ -49,6 +59,7 @@ class _Signin_screenState extends State<Signin_screen> {
   Widget build(BuildContext context) {
     final keyBoardSpace = MediaQuery.of(context).viewInsets.bottom;
 
+   // final availablecategory = ref.watch(mealsProvider);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
@@ -398,7 +409,12 @@ class _Signin_screenState extends State<Signin_screen> {
 
                         //------------  submit  ---------------------------------//
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            // Navigator.push(context,
+                            //     MaterialPageRoute(builder: (context) {
+                            //      // return category_page(availableMeals:availablecategory );
+                            //     }));
+                          },
                           child: Text(
                             'Sign In',
                             style:
