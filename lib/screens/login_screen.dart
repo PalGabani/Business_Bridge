@@ -1,3 +1,4 @@
+import 'package:business_bridge/screens/homepage.dart';
 import 'package:business_bridge/screens/sign_in_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -306,7 +307,12 @@ class _Login_screenState extends State<Login_screen> {
 
                         //------------  submit  ---------------------------------//
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                                return homepage();
+                              }));
+                        },
                           child: Text(
                             'SUBMIT',
                             style:
