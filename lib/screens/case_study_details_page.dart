@@ -57,11 +57,18 @@ class case_Study_details_page extends ConsumerWidget {
               const SizedBox(
                 height: 5,
               ),
-              for (final ingredient in cs.Situation)
-                Text(
-                  ingredient,
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: Theme.of(context).colorScheme.onBackground),
+              for (final step in cs.ClientGoal)
+                Padding(
+                  padding:
+                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5),
+                  child: Text(
+                    step,
+                    textAlign: TextAlign.justify,
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      color: Theme.of(context).colorScheme.onBackground,
+                        fontSize: 15
+                    ),
+                  ),
                 ),
               const SizedBox(
                 height: 17,
@@ -87,7 +94,8 @@ class case_Study_details_page extends ConsumerWidget {
                     textAlign: TextAlign.justify,
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         color: Theme.of(context).colorScheme.onBackground,
-                        fontSize: 15),
+                        fontSize: 15
+                        ),
                   ),
                 ),
               const SizedBox(
