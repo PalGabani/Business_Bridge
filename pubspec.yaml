@@ -71,6 +71,13 @@ flutter:
     - assets/images/case_study/case_sales.jpg
     - assets/images/case_study/case_supersoda.jpg
     - assets/images/case_study/case_transport.jpg
+    - assets/images/services/service_financial.jpg
+    - assets/images/services/service_make_franchises.jpg
+    - assets/images/services/service_marketing.jpg
+    - assets/images/services/service_sales.jpg
+    - assets/images/services/service_takeover.jpg
+    - assets/images/services/service_upscale.jpg
+    - assets/images/services/service_other.jpg
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -54,6 +54,7 @@ const availableCategories = [
     color: Colors.lightBlueAccent,
   ),
 ];
+
 const dummyMeals = [
   case_Study(
     id: 'c1',
@@ -69,6 +70,7 @@ const dummyMeals = [
       'The CEO of Talbot Trucks has approached McKinsey to help determine the attractiveness of an investment in eTruck manufacturing for its European market. '
     ],
   ),
+
   case_Study(
     id: 'c2',
     title: 'BEAUTIFY LTD.',

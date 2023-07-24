@@ -4,7 +4,7 @@ import 'package:business_bridge/provider/category_provider.dart';
 import 'package:business_bridge/screens/case_study_page.dart';
 import 'package:business_bridge/screens/history_page.dart';
 import 'package:business_bridge/screens/profile_page.dart';
-import 'package:business_bridge/screens/sercvices_page.dart';
+import 'package:business_bridge/screens/services_page.dart';
 import 'package:business_bridge/screens/work_portal_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
