@@ -57,7 +57,8 @@ class _homepageState extends ConsumerState<homepage> {
                 size: 25,
                 color: Theme.of(context).colorScheme.primary,
               ),
-              label: "profile"),
+              label: "profile"
+          ),
           BottomNavigationBarItem(
               icon: Icon(Icons.file_copy_outlined, size: 25, color: Theme.of(context).colorScheme.primary,),
               label: "work portal"),
@@ -72,7 +73,7 @@ class _homepageState extends ConsumerState<homepage> {
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
         unselectedItemColor: Color(0x7C000000),
-        selectedItemColor: Colors.deepPurple,
+        selectedItemColor: Theme.of(context).colorScheme.primary,
       ),
       body: IndexedStack(
         index: _selectedIndex,
