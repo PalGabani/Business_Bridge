@@ -14,9 +14,8 @@ class _services_pageState extends State<services_page> {
       appBar: AppBar(
         elevation: 0,
         leadingWidth: 300,
-        leading: Text(" SERVICES",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 38)),
-        // iconTheme: CupertinoIconThemeData(color: Colors.black),
+        leading: Text("  SERVICES",
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 38,fontFamily: AutofillHints.jobTitle)),
         backgroundColor: Colors.transparent,
         scrolledUnderElevation: 0,
       ),
@@ -25,11 +24,268 @@ class _services_pageState extends State<services_page> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(height: 200,width: 300,
-              decoration: BoxDecoration(image: DecorationImage(image: AssetImage("assets/images/services/service_marketing.jpg"))),),
-
-            Container(height: 200,width: 300,
-            decoration: BoxDecoration(image: DecorationImage(image: AssetImage("assets/images/case_study/case_transport.jpg"))),)
+            Container(
+              padding:
+                  EdgeInsets.only(top: 10, bottom: 20, left: 20, right: 20),
+              child: Column(
+                children: [
+                  Container(
+                    child: Column(
+                      children: [
+                        Container(
+                          height: 180,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              image: DecorationImage(
+                                  image: AssetImage(
+                                      "assets/images/services/service_upscale.jpg"),
+                                  fit: BoxFit.cover)),
+                        ),
+                        Container(
+                          alignment: AlignmentDirectional.topStart,
+                          padding: EdgeInsets.all(6),
+                          child: Text(" Upscale Your Business",
+                              style: TextStyle(fontSize: 30)),
+                        ),
+                        Row(
+                          children: [
+                            Container(
+                              padding: EdgeInsets.only(left: 10, right: 10),
+                              width: 140,
+                              height: 50,
+                              child: ElevatedButton(
+                                style: ButtonStyle(
+                                    shape: MaterialStatePropertyAll(
+                                        RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+                                    backgroundColor: MaterialStatePropertyAll(
+                                      Theme.of(context).colorScheme.primary,
+                                    )),
+                                onPressed: () {},
+                                child: Text(
+                                  'Get',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge!
+                                      .copyWith(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .background,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.only(left: 10, right: 10),
+                              width: 180,
+                              height: 50,
+                              child: ElevatedButton(
+                                style: ButtonStyle(
+                                  shape: MaterialStatePropertyAll(
+                                      RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10))),
+                                ),
+                                onPressed: () {},
+                                child: Text(
+                                  'Know More..',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge!
+                                      .copyWith(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onPrimaryContainer,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18),
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              padding:
+                  EdgeInsets.only(top: 10, bottom: 10, left: 20, right: 20),
+              child: Column(
+                children: [
+                  Container(
+                    child: Column(
+                      children: [
+                        Container(
+                          height: 180,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              image: DecorationImage(
+                                  image: AssetImage(
+                                      "assets/images/services/service_financial.jpg"),
+                                  fit: BoxFit.cover)),
+                        ),
+                        Container(
+                          alignment: AlignmentDirectional.topStart,
+                          padding: EdgeInsets.all(6),
+                          child: Text(" Financial Solution",
+                              style: TextStyle(fontSize: 30)),
+                        ),
+                        Row(
+                          children: [
+                            Container(
+                              padding: EdgeInsets.only(left: 10, right: 10),
+                              width: 140,
+                              height: 50,
+                              child: ElevatedButton(
+                                style: ButtonStyle(
+                                  backgroundColor: MaterialStatePropertyAll(
+                                    Theme.of(context).colorScheme.primary,
+                                  ),
+                                  shape: MaterialStatePropertyAll(
+                                      RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10))),
+                                ),
+                                onPressed: () {},
+                                child: Text('Get',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge!
+                                      .copyWith(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .background,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.only(left: 10, right: 10),
+                              width: 180,
+                              height: 50,
+                              child: ElevatedButton(
+                                style: ButtonStyle(
+                                  shape: MaterialStatePropertyAll(
+                                      RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10))),
+                                ),
+                                onPressed: () {},
+                                child: Text(
+                                  'Know More..',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge!
+                                      .copyWith(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onPrimaryContainer,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18),
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              padding:
+              EdgeInsets.only(top: 10, bottom: 10, left: 20, right: 20),
+              child: Column(
+                children: [
+                  Container(
+                    child: Column(
+                      children: [
+                        Container(
+                          height: 180,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              image: DecorationImage(
+                                  image: AssetImage(
+                                      "assets/images/services/service_takeover.jpg"),
+                                  fit: BoxFit.cover)),
+                        ),
+                        Container(
+                          alignment: AlignmentDirectional.topStart,
+                          padding: EdgeInsets.all(6),
+                          child: Text(" Take Over The Business",
+                              style: TextStyle(fontSize: 30)),
+                        ),
+                        Row(
+                          children: [
+                            Container(
+                              padding: EdgeInsets.only(left: 10, right: 10),
+                              width: 140,
+                              height: 50,
+                              child: ElevatedButton(
+                                style: ButtonStyle(
+                                  backgroundColor: MaterialStatePropertyAll(
+                                    Theme.of(context).colorScheme.primary,
+                                  ),
+                                  shape: MaterialStatePropertyAll(
+                                      RoundedRectangleBorder(
+                                          borderRadius:
+                                          BorderRadius.circular(10))),
+                                ),
+                                onPressed: () {},
+                                child: Text('Get',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge!
+                                      .copyWith(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .background,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              padding: EdgeInsets.only(left: 10, right: 10),
+                              width: 180,
+                              height: 50,
+                              child: ElevatedButton(
+                                style: ButtonStyle(
+                                  shape: MaterialStatePropertyAll(
+                                      RoundedRectangleBorder(
+                                          borderRadius:
+                                          BorderRadius.circular(10))),
+                                ),
+                                onPressed: () {},
+                                child: Text(
+                                  'Know More..',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge!
+                                      .copyWith(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onPrimaryContainer,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18),
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
