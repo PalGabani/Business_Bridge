@@ -52,7 +52,7 @@ class _homepageState extends ConsumerState<homepage> {
                 color: Theme.of(context).colorScheme.secondary,
               ),
               activeIcon: Icon(Icons.medical_services_rounded),
-              label: "services"),
+              label: "Services"),
           BottomNavigationBarItem(
               icon: Icon(
                 Icons.account_circle_outlined,
@@ -60,7 +60,7 @@ class _homepageState extends ConsumerState<homepage> {
                 color: Theme.of(context).colorScheme.secondary,
               ),
               activeIcon: Icon(Icons.account_circle_sharp),
-              label: "profile"
+              label: "Profile"
           ),
           BottomNavigationBarItem(
               icon: Icon(
@@ -69,7 +69,7 @@ class _homepageState extends ConsumerState<homepage> {
                 color: Theme.of(context).colorScheme.secondary,
               ),
               activeIcon: Icon(Icons.file_copy_rounded),
-              label: "work portal"),
+              label: "Work portal"),
           BottomNavigationBarItem(
               icon: Icon(
                 Icons.history,
@@ -77,11 +77,11 @@ class _homepageState extends ConsumerState<homepage> {
                 color: Theme.of(context).colorScheme.secondary,
               ),
               activeIcon: Icon(Icons.history_rounded),
-              label: "history"),
+              label: "History"),
         ],
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
-        unselectedItemColor: Color(0x7C000000),
+        selectedIconTheme: IconThemeData(size: 28),
         selectedItemColor: Theme.of(context).colorScheme.secondary,
       ),
       body: IndexedStack(

@@ -1,3 +1,4 @@
+import 'package:business_bridge/screens/services_getservice.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +14,6 @@ class _services_pageState extends State<services_page> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-
         leadingWidth: 300,
         leading: Text("  SERVICES",
             style: TextStyle(color: Theme.of(context).colorScheme.secondary,fontWeight: FontWeight.bold, fontSize: 38,fontFamily: AutofillHints.jobTitle)),
@@ -62,7 +62,12 @@ class _services_pageState extends State<services_page> {
                                     backgroundColor: MaterialStatePropertyAll(
                                       Theme.of(context).colorScheme.secondary,
                                     )),
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (contex) {
+                                    return services_getservice();
+                                  },));
+                                },
                                 child: Text(
                                   'Get',
                                   style: Theme.of(context)
