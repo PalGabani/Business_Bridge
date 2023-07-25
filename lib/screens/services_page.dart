@@ -13,9 +13,10 @@ class _services_pageState extends State<services_page> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
+
         leadingWidth: 300,
         leading: Text("  SERVICES",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 38,fontFamily: AutofillHints.jobTitle)),
+            style: TextStyle(color: Theme.of(context).colorScheme.secondary,fontWeight: FontWeight.bold, fontSize: 38,fontFamily: AutofillHints.jobTitle)),
         backgroundColor: Colors.transparent,
         scrolledUnderElevation: 0,
       ),
@@ -26,14 +27,14 @@ class _services_pageState extends State<services_page> {
           children: [
             Container(
               padding:
-                  EdgeInsets.only(top: 10, bottom: 20, left: 20, right: 20),
+                  EdgeInsets.only(top: 10, bottom: 10, left: 20, right: 20),
               child: Column(
                 children: [
                   Container(
                     child: Column(
                       children: [
                         Container(
-                          height: 180,
+                          height: 170,
                           width: double.infinity,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
@@ -46,20 +47,20 @@ class _services_pageState extends State<services_page> {
                           alignment: AlignmentDirectional.topStart,
                           padding: EdgeInsets.all(6),
                           child: Text(" Upscale Your Business",
-                              style: TextStyle(fontSize: 30)),
+                              style: TextStyle(fontSize: 28)),
                         ),
                         Row(
                           children: [
                             Container(
                               padding: EdgeInsets.only(left: 10, right: 10),
                               width: 140,
-                              height: 50,
+                              height: 40,
                               child: ElevatedButton(
                                 style: ButtonStyle(
                                     shape: MaterialStatePropertyAll(
                                         RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
                                     backgroundColor: MaterialStatePropertyAll(
-                                      Theme.of(context).colorScheme.primary,
+                                      Theme.of(context).colorScheme.secondary,
                                     )),
                                 onPressed: () {},
                                 child: Text(
@@ -79,7 +80,7 @@ class _services_pageState extends State<services_page> {
                             Container(
                               padding: EdgeInsets.only(left: 10, right: 10),
                               width: 180,
-                              height: 50,
+                              height: 40,
                               child: ElevatedButton(
                                 style: ButtonStyle(
                                   shape: MaterialStatePropertyAll(
@@ -119,7 +120,7 @@ class _services_pageState extends State<services_page> {
                     child: Column(
                       children: [
                         Container(
-                          height: 180,
+                          height: 170,
                           width: double.infinity,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
@@ -132,18 +133,18 @@ class _services_pageState extends State<services_page> {
                           alignment: AlignmentDirectional.topStart,
                           padding: EdgeInsets.all(6),
                           child: Text(" Financial Solution",
-                              style: TextStyle(fontSize: 30)),
+                              style: TextStyle(fontSize: 28)),
                         ),
                         Row(
                           children: [
                             Container(
                               padding: EdgeInsets.only(left: 10, right: 10),
                               width: 140,
-                              height: 50,
+                              height: 40,
                               child: ElevatedButton(
                                 style: ButtonStyle(
                                   backgroundColor: MaterialStatePropertyAll(
-                                    Theme.of(context).colorScheme.primary,
+                                    Theme.of(context).colorScheme.secondary,
                                   ),
                                   shape: MaterialStatePropertyAll(
                                       RoundedRectangleBorder(
@@ -167,7 +168,7 @@ class _services_pageState extends State<services_page> {
                             Container(
                               padding: EdgeInsets.only(left: 10, right: 10),
                               width: 180,
-                              height: 50,
+                              height: 40,
                               child: ElevatedButton(
                                 style: ButtonStyle(
                                   shape: MaterialStatePropertyAll(
@@ -207,7 +208,7 @@ class _services_pageState extends State<services_page> {
                     child: Column(
                       children: [
                         Container(
-                          height: 180,
+                          height: 170,
                           width: double.infinity,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
@@ -220,18 +221,18 @@ class _services_pageState extends State<services_page> {
                           alignment: AlignmentDirectional.topStart,
                           padding: EdgeInsets.all(6),
                           child: Text(" Take Over The Business",
-                              style: TextStyle(fontSize: 30)),
+                              style: TextStyle(fontSize: 28)),
                         ),
                         Row(
                           children: [
                             Container(
                               padding: EdgeInsets.only(left: 10, right: 10),
                               width: 140,
-                              height: 50,
+                              height: 40,
                               child: ElevatedButton(
                                 style: ButtonStyle(
                                   backgroundColor: MaterialStatePropertyAll(
-                                    Theme.of(context).colorScheme.primary,
+                                    Theme.of(context).colorScheme.secondary,
                                   ),
                                   shape: MaterialStatePropertyAll(
                                       RoundedRectangleBorder(
@@ -255,7 +256,7 @@ class _services_pageState extends State<services_page> {
                             Container(
                               padding: EdgeInsets.only(left: 10, right: 10),
                               width: 180,
-                              height: 50,
+                              height: 40,
                               child: ElevatedButton(
                                 style: ButtonStyle(
                                   shape: MaterialStatePropertyAll(

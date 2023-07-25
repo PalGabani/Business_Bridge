@@ -37,10 +37,11 @@ class _homepageState extends ConsumerState<homepage> {
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
               icon: Icon(
-                Icons.cases_rounded,
+                Icons.cases_outlined,
                 size: 25,
-                color: Theme.of(context).colorScheme.primary,
+                color: Theme.of(context).colorScheme.secondary,
               ),
+              activeIcon: Icon(Icons.cases_rounded),
               label: "Case Study",
 
           ),
@@ -48,32 +49,40 @@ class _homepageState extends ConsumerState<homepage> {
               icon: Icon(
                 Icons.medical_services_outlined,
                 size: 25,
-                color: Theme.of(context).colorScheme.primary,
+                color: Theme.of(context).colorScheme.secondary,
               ),
+              activeIcon: Icon(Icons.medical_services_rounded),
               label: "services"),
           BottomNavigationBarItem(
               icon: Icon(
-                Icons.account_circle_sharp,
+                Icons.account_circle_outlined,
                 size: 25,
-                color: Theme.of(context).colorScheme.primary,
+                color: Theme.of(context).colorScheme.secondary,
               ),
+              activeIcon: Icon(Icons.account_circle_sharp),
               label: "profile"
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.file_copy_outlined, size: 25, color: Theme.of(context).colorScheme.primary,),
+              icon: Icon(
+                Icons.file_copy_outlined,
+                size: 25,
+                color: Theme.of(context).colorScheme.secondary,
+              ),
+              activeIcon: Icon(Icons.file_copy_rounded),
               label: "work portal"),
           BottomNavigationBarItem(
               icon: Icon(
                 Icons.history,
                 size: 25,
-                color: Theme.of(context).colorScheme.primary,
+                color: Theme.of(context).colorScheme.secondary,
               ),
+              activeIcon: Icon(Icons.history_rounded),
               label: "history"),
         ],
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
         unselectedItemColor: Color(0x7C000000),
-        selectedItemColor: Theme.of(context).colorScheme.primary,
+        selectedItemColor: Theme.of(context).colorScheme.secondary,
       ),
       body: IndexedStack(
         index: _selectedIndex,
