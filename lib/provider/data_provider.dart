@@ -5,3 +5,7 @@ import 'package:riverpod/riverpod.dart';
 final caseStudyProvider=Provider((ref) {
   return dummyMeals;
 });
+
+final servicesProvider=Provider((ref) {
+  return dummyData_services;
+});

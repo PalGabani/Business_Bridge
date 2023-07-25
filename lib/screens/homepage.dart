@@ -1,10 +1,10 @@
 import 'package:business_bridge/models/case_study.dart';
 import 'package:business_bridge/provider/casse_provider.dart';
-import 'package:business_bridge/provider/category_provider.dart';
+import 'package:business_bridge/provider/data_provider.dart';
 import 'package:business_bridge/screens/case_study_page.dart';
 import 'package:business_bridge/screens/history_page.dart';
 import 'package:business_bridge/screens/profile_page.dart';
-import 'package:business_bridge/screens/sercvices_page.dart';
+import 'package:business_bridge/screens/services_page.dart';
 import 'package:business_bridge/screens/work_portal_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +28,7 @@ class _homepageState extends ConsumerState<homepage> {
   }
 
   Widget build(BuildContext context) {
+
     final availablec_s = ref.watch(filtercaseProvider);
     final details = ref.watch(caseStudyProvider);
 
@@ -37,10 +38,11 @@ class _homepageState extends ConsumerState<homepage> {
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
               icon: Icon(
-                Icons.cases_rounded,
+                Icons.cases_outlined,
                 size: 25,
-                color: Theme.of(context).colorScheme.primary,
+                color: Theme.of(context).colorScheme.secondary,
               ),
+              activeIcon: Icon(Icons.cases_rounded),
               label: "Case Study",
 
           ),
@@ -48,32 +50,40 @@ class _homepageState extends ConsumerState<homepage> {
               icon: Icon(
                 Icons.medical_services_outlined,
                 size: 25,
-                color: Theme.of(context).colorScheme.primary,
+                color: Theme.of(context).colorScheme.secondary,
               ),
-              label: "services"),
+              activeIcon: Icon(Icons.medical_services_rounded),
+              label: "Services"),
           BottomNavigationBarItem(
               icon: Icon(
-                Icons.account_circle_sharp,
+                Icons.account_circle_outlined,
                 size: 25,
-                color: Theme.of(context).colorScheme.primary,
+                color: Theme.of(context).colorScheme.secondary,
               ),
-              label: "profile"
+              activeIcon: Icon(Icons.account_circle_sharp),
+              label: "Profile"
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.file_copy_outlined, size: 25, color: Theme.of(context).colorScheme.primary,),
-              label: "work portal"),
+              icon: Icon(
+                Icons.file_copy_outlined,
+                size: 25,
+                color: Theme.of(context).colorScheme.secondary,
+              ),
+              activeIcon: Icon(Icons.file_copy_rounded),
+              label: "Work portal"),
           BottomNavigationBarItem(
               icon: Icon(
                 Icons.history,
                 size: 25,
-                color: Theme.of(context).colorScheme.primary,
+                color: Theme.of(context).colorScheme.secondary,
               ),
-              label: "history"),
+              activeIcon: Icon(Icons.history_rounded),
+              label: "History"),
         ],
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
-        unselectedItemColor: Color(0x7C000000),
-        selectedItemColor: Theme.of(context).colorScheme.primary,
+        selectedIconTheme: IconThemeData(size: 28),
+        selectedItemColor: Theme.of(context).colorScheme.secondary,
       ),
       body: IndexedStack(
         index: _selectedIndex,
@@ -83,7 +93,10 @@ class _homepageState extends ConsumerState<homepage> {
             casestudies: details,
             availableC_S: availablec_s,
           ),
-          services_page(),
+          services_page(
+            title: "Services",
+            services: [],
+          ),
           profile_page(),
           work_portal_page(),
           history_page()

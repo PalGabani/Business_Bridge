@@ -1,7 +1,9 @@
+import 'dart:developer';
+
 import 'package:business_bridge/models/business_category.dart';
 import 'package:business_bridge/models/case_study.dart';
 import 'package:flutter/material.dart';
-
+import 'package:business_bridge/models/services.dart';
 const availableCategories = [
   Category(
     id: 'b1',
@@ -54,6 +56,7 @@ const availableCategories = [
     color: Colors.lightBlueAccent,
   ),
 ];
+
 const dummyMeals = [
   case_Study(
     id: 'c1',
@@ -71,6 +74,7 @@ const dummyMeals = [
       'The CEO of Talbot Trucks has approached McKinsey to help determine the attractiveness of an investment in eTruck manufacturing for its European market. '
     ],
   ),
+
   case_Study(
     id: 'c2',
     title: 'BEAUTIFY LTD.',
@@ -172,5 +176,25 @@ const dummyMeals = [
 
 
 
-  //.....all seprated data write in above formate
+
+];
+const dummyData_services=[
+  Services(
+    id:'s1',
+    title:'Upscale Your Business',
+    imageUrl:'assets/images/services/service_upscale.jpg',
+      details:['fsdkaghhdfkgbahkdfahfbdhfbadfhbadshfhjsabdfhabfb'],
+  ),
+  Services(
+    id:'s2',
+    title:'Take Over',
+    imageUrl:'assets/images/services/service_takeover.jpg',
+    details:['qqqqwqqwqwq'],
+  ),
+  Services(
+    id:'s3',
+    title:'Sales',
+    imageUrl:'assets/images/services/service_sales.jpg',
+    details:['fgsgfsfg'],
+  ),
 ];

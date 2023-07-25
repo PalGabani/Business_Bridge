@@ -1,11 +1,11 @@
 import 'package:business_bridge/models/business_category.dart';
-import 'package:business_bridge/provider/category_provider.dart';
+import 'package:business_bridge/provider/data_provider.dart';
 import 'package:business_bridge/screens/b_categories.dart';
 import 'package:business_bridge/screens/login_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:riverpod/riverpod.dart';
-import 'package:business_bridge/provider/category_provider.dart';
+import 'package:business_bridge/provider/data_provider.dart';
 
 import '../data/dummy_data.dart';
 

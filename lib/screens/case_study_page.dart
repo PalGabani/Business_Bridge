@@ -1,5 +1,5 @@
 import 'package:business_bridge/models/case_study.dart';
-import 'package:business_bridge/provider/category_provider.dart';
+import 'package:business_bridge/provider/data_provider.dart';
 import 'package:business_bridge/screens/case_study_details_page.dart';
 import 'package:business_bridge/widgets/case_study.dart';
 import 'package:flutter/cupertino.dart';
@@ -100,7 +100,9 @@ class _case_study_pageState extends ConsumerState<case_study_page> {
   get index => data;
 
   Widget build(BuildContext context) {
+
     final data_st = ref.watch(caseStudyProvider);
+
     Widget content = Center(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -156,6 +158,7 @@ class _case_study_pageState extends ConsumerState<case_study_page> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Our Journey"),
+        scrolledUnderElevation: 0,
       ),
       body: content,
     );

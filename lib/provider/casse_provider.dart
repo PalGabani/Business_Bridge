@@ -1,4 +1,4 @@
-import 'package:business_bridge/provider/category_provider.dart';
+import 'package:business_bridge/provider/data_provider.dart';
 import 'package:riverpod/riverpod.dart';
 
 class caseProvider extends StateNotifier<Map> {
