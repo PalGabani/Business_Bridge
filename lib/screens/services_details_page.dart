@@ -41,10 +41,11 @@ class services_details_page extends ConsumerWidget {
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  'Details:',
+                  ' Details :',
                   style: Theme.of(context).textTheme.titleLarge!.copyWith(
                     color: Theme.of(context).colorScheme.primary,
-                    fontWeight: FontWeight.bold,),
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               const SizedBox(

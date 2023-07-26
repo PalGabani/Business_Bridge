@@ -1,5 +1,5 @@
 import 'package:business_bridge/models/services.dart';
-import 'package:business_bridge/screens/services_getservice.dart';
+import 'package:business_bridge/screens/services_details_page.dart';
 import 'package:business_bridge/widgets/services_items.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

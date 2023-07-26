@@ -67,8 +67,8 @@ const dummyMeals = [
     ],
     Situation: [
       'Talbot Trucks is a Europe-based private truck OEM. It produces and sells trucks all over the world. Talbot Trucks is considered a leader in quality manufacturing. Its primary customer base includes large trucking companies that own thousands of trucks and owner-operators, which are smaller customers that own fewer trucks.'
-          'Trucks today are mainly powered by diesel engines and require carbon-based petroleum fuel. Talbot Trucks is interested in exploring ways to reduce the carbon footprint of its vehicles and has specifically asked about electric trucks, or “eTrucks.”'
-          ' ETrucks and diesel trucks differ in the design—e-motor and batteries versus combustion engines—and also in the way they are fueled, meaning comparably slow charging versus quick refilling with diesel fuel at gas stations. The introduction of this new technology is disruptive for the manufacturers as well as customers both large and small.'
+          '\n\nTrucks today are mainly powered by diesel engines and require carbon-based petroleum fuel. Talbot Trucks is interested in exploring ways to reduce the carbon footprint of its vehicles and has specifically asked about electric trucks, or “eTrucks.”'
+          '\n\nETrucks and diesel trucks differ in the design—e-motor and batteries versus combustion engines—and also in the way they are fueled, meaning comparably slow charging versus quick refilling with diesel fuel at gas stations. The introduction of this new technology is disruptive for the manufacturers as well as customers both large and small.'
     ],
     Study: [
       'The CEO of Talbot Trucks has approached McKinsey to help determine the attractiveness of an investment in eTruck manufacturing for its European market. '
@@ -84,11 +84,7 @@ const dummyMeals = [
     ],
     Situation: [
       'Beautify is a global prestige cosmetics company that sells its products mainly inside high-end department stores such as Harrods and Shanghai No. 1. It also has a presence online with specialty retailers like Sephora. Beautify produces a number of makeup, fragrance, and skincare products sold under several different brands.',
-      'In department stores, beauty consultants play a critical role with consumers:',
-      ' - approaching “passive” customers',
-      ' - demonstrating their knowledge of the products',
-      ' - actively selling the products',
-      ' - maintaining a loyal customer base of repeat buyers',
+      'In department stores, beauty consultants play a critical role with consumers: \n - approaching “passive” customers \n - demonstrating their knowledge of the products \n - actively selling the products \n - maintaining a loyal customer base of repeat \n    buyers',
       'These consultants are hired directly by Beautify or through specialist, third-party agencies that find new recruits for a fee. Beautify is then responsible for selecting, training, and paying the consultants. Within Beautify, beauty consultants are managed independently by each brand in each country. For example, this may mean a consultant might be part of the Chanel team in a store. However, consumers are shifting more to online shopping, and too many beauty consultants are left working in empty department stores',
     ],
     Study: [
@@ -173,11 +169,9 @@ const dummyMeals = [
   )
 
 
-
-
-
-
 ];
+
+
 const dummyData_services=[
   Services(
     id:'s1',
@@ -187,14 +181,38 @@ const dummyData_services=[
   ),
   Services(
     id:'s2',
-    title:'Take Over',
+    title:'Take Over Businesses',
     imageUrl:'assets/images/services/service_takeover.jpg',
     details:['qqqqwqqwqwq'],
   ),
   Services(
     id:'s3',
-    title:'Sales',
+    title:'Increase Your Sales',
     imageUrl:'assets/images/services/service_sales.jpg',
     details:['fgsgfsfg'],
+  ),
+  Services(
+    id:'s4',
+    title:'Make Franchise Model',
+    imageUrl:'assets/images/services/service_make_franchises.jpg',
+    details:['qqqqwqqwqwq'],
+  ),
+  Services(
+    id:'s5',
+    title:'Improve Your Financial Decisions',
+    imageUrl:'assets/images/services/service_financial.jpg',
+    details:['qqqqwqqwqwq'],
+  ),
+  Services(
+    id:'s6',
+    title:'Marketing Straregies',
+    imageUrl:'assets/images/services/service_marketing.jpg',
+    details:['qqqqwqqwqwq'],
+  ),
+  Services(
+    id:'s7',
+    title:'Other Business Problem',
+    imageUrl:'assets/images/services/service_other.jpg',
+    details:['qqqqwqqwqwq'],
   ),
 ];

@@ -131,14 +131,14 @@ class _Login_screenState extends State<Login_screen> {
                           },
                           controller:emailController ,
                           keyboardType: TextInputType.emailAddress,
-                          cursorColor: Theme.of(context).colorScheme.primary,
+                          cursorColor: Theme.of(context).colorScheme.secondary,
                           decoration: InputDecoration(
                             hintText: 'Enter Email ID:',
                             hintStyle: Theme.of(context)
                                 .textTheme
                                 .titleMedium!
                                 .copyWith(
-                                  color: Theme.of(context).colorScheme.primary,
+                                  color: Theme.of(context).colorScheme.secondary,
                                 ),
                             label: Text(
                               'Email',
@@ -146,12 +146,12 @@ class _Login_screenState extends State<Login_screen> {
                                   .textTheme
                                   .titleMedium!
                                   .copyWith(
-                                    color: Theme.of(context).colorScheme.primary,
+                                    color: Theme.of(context).colorScheme.secondary,
                                   ),
                             ),
                             prefixIcon: Icon(
                               Icons.mail,
-                              color: Theme.of(context).colorScheme.primary,
+                              color: Theme.of(context).colorScheme.secondary,
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(20),
@@ -160,7 +160,7 @@ class _Login_screenState extends State<Login_screen> {
                               borderRadius: BorderRadius.circular(20),
                               borderSide: BorderSide(
                                 width: 2,
-                                color: Theme.of(context).colorScheme.primary,
+                                color: Theme.of(context).colorScheme.secondary,
                               ),
                             ),
                           ),
@@ -197,7 +197,7 @@ class _Login_screenState extends State<Login_screen> {
                             return null;
                           },
                           controller: passController,
-                          cursorColor: Theme.of(context).colorScheme.primary,
+                          cursorColor: Theme.of(context).colorScheme.secondary,
                           obscureText: _obsecureText,
                           decoration: InputDecoration(
                             hintText: 'Enter Password:',
@@ -205,7 +205,7 @@ class _Login_screenState extends State<Login_screen> {
                                 .textTheme
                                 .titleMedium!
                                 .copyWith(
-                                  color: Theme.of(context).colorScheme.primary,
+                                  color: Theme.of(context).colorScheme.secondary,
                                 ),
                             label: Text(
                               'Password',
@@ -213,12 +213,12 @@ class _Login_screenState extends State<Login_screen> {
                                   .textTheme
                                   .titleMedium!
                                   .copyWith(
-                                    color: Theme.of(context).colorScheme.primary,
+                                    color: Theme.of(context).colorScheme.secondary,
                                   ),
                             ),
                             prefixIcon: Icon(
                               Icons.lock_outline_sharp,
-                              color: Theme.of(context).colorScheme.primary,
+                              color: Theme.of(context).colorScheme.secondary,
                             ),
                             suffixIcon: GestureDetector(
                               onTap: () {
@@ -229,7 +229,7 @@ class _Login_screenState extends State<Login_screen> {
                                 _obsecureText
                                     ? Icons.visibility
                                     : Icons.visibility_off,
-                                color: Theme.of(context).colorScheme.primary,
+                                color: Theme.of(context).colorScheme.secondary,
                               ),
                             ),
                             enabledBorder: OutlineInputBorder(
@@ -239,7 +239,7 @@ class _Login_screenState extends State<Login_screen> {
                               borderRadius: BorderRadius.circular(20),
                               borderSide: BorderSide(
                                 width: 2,
-                                color: Theme.of(context).colorScheme.primary,
+                                color: Theme.of(context).colorScheme.secondary,
                               ),
                             ),
                           ),
@@ -254,7 +254,7 @@ class _Login_screenState extends State<Login_screen> {
                                 "Forgot password?",
                                 style: TextStyle(
                                   fontSize: 15,
-                                  color: Theme.of(context).colorScheme.primary,
+                                  color: Theme.of(context).colorScheme.secondary,
                                   // decoration: TextDecoration.underline,
                                 ),
                               )),
@@ -281,7 +281,7 @@ class _Login_screenState extends State<Login_screen> {
                               'Don\'t have an account ?',
                               style: TextStyle(
                                 fontSize: 15,
-                                color: Theme.of(context).colorScheme.primary,
+                                color: Theme.of(context).colorScheme.secondary,
                               ),
                             ),
                             TextButton(

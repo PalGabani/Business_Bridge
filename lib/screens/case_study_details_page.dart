@@ -48,7 +48,7 @@ class case_Study_details_page extends ConsumerWidget {
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  'ClientGoal:',
+                  ' Client Goal :',
                   style: Theme.of(context).textTheme.titleLarge!.copyWith(
                       color: Theme.of(context).colorScheme.primary,
                       fontWeight: FontWeight.bold,),
@@ -76,7 +76,7 @@ class case_Study_details_page extends ConsumerWidget {
               Align(
                 alignment: Alignment.centerLeft ,
                 child: Text(
-                  'Situation:',
+                  ' Situation :',
                   style: Theme.of(context).textTheme.titleLarge!.copyWith(
                       color: Theme.of(context).colorScheme.primary,
                       fontWeight: FontWeight.bold),
@@ -104,7 +104,7 @@ class case_Study_details_page extends ConsumerWidget {
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  'Study:',
+                  ' Study :',
                   style: Theme.of(context).textTheme.titleLarge!.copyWith(
                       color: Theme.of(context).colorScheme.primary,
                       fontWeight: FontWeight.bold),
