@@ -12,12 +12,12 @@ class services_page extends ConsumerStatefulWidget {
   services_page(
       {super.key,
         required this.title,
-        required this.services,
+       // required this.services,
         //required this.availableC_S
       });
 
   final String? title;
-  final List<Services> services;
+  //final List<Services> services;
   //final List<case_Study> availableC_S;
   @override
   ConsumerState<services_page> createState() => _services_pageState();

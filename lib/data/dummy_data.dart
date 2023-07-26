@@ -177,7 +177,7 @@ const dummyData_services=[
     id:'s1',
     title:'Upscale Your Business',
     imageUrl:'assets/images/services/service_upscale.jpg',
-      details:['fsdkaghhdfkgbahkdfahfbdhfbadfhbadshfhjsabdfhabfb'],
+      details:['Strategic planning is a fundamental service wherein consultants collaborate with company executives to develop long-term goals, define strategies, and create actionable plans for achieving sustainable success. They analyze market trends, competition, and internal capabilities to align the company\'s vision with practical objectives.'],
   ),
   Services(
     id:'s2',

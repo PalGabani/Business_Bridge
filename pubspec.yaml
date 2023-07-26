@@ -80,6 +80,7 @@ flutter:
     - assets/images/services/service_other.jpg
     - assets/images/services/service_detail.jpg
     - assets/images/services/service_get.jpg
+    - assets/images/services/Frame 10.jpg
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

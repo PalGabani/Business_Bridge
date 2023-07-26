@@ -73,11 +73,11 @@ class _homepageState extends ConsumerState<homepage> {
               label: "Work portal"),
           BottomNavigationBarItem(
               icon: Icon(
-                Icons.history,
+                Icons.watch_later_outlined,
                 size: 25,
                 color: Theme.of(context).colorScheme.secondary,
               ),
-              activeIcon: Icon(Icons.history_rounded),
+              activeIcon: Icon(Icons.watch_later),
               label: "History"),
         ],
         currentIndex: _selectedIndex,
@@ -95,7 +95,7 @@ class _homepageState extends ConsumerState<homepage> {
           ),
           services_page(
             title: "Services",
-            services: [],
+            //services: [],
           ),
           profile_page(),
           work_portal_page(),
