@@ -2,8 +2,10 @@ import 'dart:developer';
 
 import 'package:business_bridge/models/business_category.dart';
 import 'package:business_bridge/models/case_study.dart';
+import 'package:business_bridge/models/knowmore.dart';
 import 'package:flutter/material.dart';
 import 'package:business_bridge/models/services.dart';
+
 const availableCategories = [
   Category(
     id: 'b1',
@@ -74,7 +76,6 @@ const dummyMeals = [
       'The CEO of Talbot Trucks has approached McKinsey to help determine the attractiveness of an investment in eTruck manufacturing for its European market. '
     ],
   ),
-
   case_Study(
     id: 'c2',
     title: 'BEAUTIFY LTD.',
@@ -167,52 +168,58 @@ const dummyMeals = [
       'McKinsey has been asked to support the Loravian department of education in diagnosing the state of its current school system and in identifying the most important areas for improvement.'
     ],
   )
-
-
 ];
 
-
-const dummyData_services=[
+const dummyData_services = [
   Services(
-    id:'s1',
-    title:'Upscale Your Business',
-    imageUrl:'assets/images/services/service_upscale.jpg',
-      details:['Strategic planning is a fundamental service wherein consultants collaborate with company executives to develop long-term goals, define strategies, and create actionable plans for achieving sustainable success. They analyze market trends, competition, and internal capabilities to align the company\'s vision with practical objectives.'],
+    id: 's1',
+    title: 'Upscale Your Business',
+    imageUrl: 'assets/images/services/service_upscale.jpg',
+    details: [
+      'Strategic planning is a fundamental service wherein consultants collaborate with company executives to develop long-term goals, define strategies, and create actionable plans for achieving sustainable success. They analyze market trends, competition, and internal capabilities to align the company\'s vision with practical objectives.'
+    ],
   ),
   Services(
-    id:'s2',
-    title:'Take Over Businesses',
-    imageUrl:'assets/images/services/service_takeover.jpg',
-    details:['qqqqwqqwqwq'],
+    id: 's2',
+    title: 'Take Over Businesses',
+    imageUrl: 'assets/images/services/service_takeover.jpg',
+    details: ['qqqqwqqwqwq'],
   ),
   Services(
-    id:'s3',
-    title:'Increase Your Sales',
-    imageUrl:'assets/images/services/service_sales.jpg',
-    details:['fgsgfsfg'],
+    id: 's3',
+    title: 'Increase Your Sales',
+    imageUrl: 'assets/images/services/service_sales.jpg',
+    details: ['fgsgfsfg'],
   ),
   Services(
-    id:'s4',
-    title:'Make Franchise Model',
-    imageUrl:'assets/images/services/service_make_franchises.jpg',
-    details:['qqqqwqqwqwq'],
+    id: 's4',
+    title: 'Make Franchise Model',
+    imageUrl: 'assets/images/services/service_make_franchises.jpg',
+    details: ['qqqqwqqwqwq'],
   ),
   Services(
-    id:'s5',
-    title:'Improve Your Financial Decisions',
-    imageUrl:'assets/images/services/service_financial.jpg',
-    details:['qqqqwqqwqwq'],
+    id: 's5',
+    title: 'Improve Your Financial Decisions',
+    imageUrl: 'assets/images/services/service_financial.jpg',
+    details: ['qqqqwqqwqwq'],
   ),
   Services(
-    id:'s6',
-    title:'Marketing Straregies',
-    imageUrl:'assets/images/services/service_marketing.jpg',
-    details:['qqqqwqqwqwq'],
+    id: 's6',
+    title: 'Marketing Straregies',
+    imageUrl: 'assets/images/services/service_marketing.jpg',
+    details: ['qqqqwqqwqwq'],
   ),
   Services(
-    id:'s7',
-    title:'Other Business Problem',
-    imageUrl:'assets/images/services/service_other.jpg',
-    details:['qqqqwqqwqwq'],
+    id: 's7',
+    title: 'Other Business Problem',
+    imageUrl: 'assets/images/services/service_other.jpg',
+    details: ['qqqqwqqwqwq'],
   ),
 ];
+const knowMoreData = [
+  knowMore(id: 'k1', title: 'asdas', details: ['dfd']),
+  knowMore(id: 'k1', title: 'asdas', details: ['dfd']),
+  knowMore(id: 'k1', title: 'asdas', details: ['dfd']),
+  knowMore(id: 'k1', title: 'asdas', details: ['dfd']),
+  knowMore(id: 'k1', title: 'asdas', details: ['dfd']),
+  knowMore(id: 'k1', title: 'asdas', details: ['dfd']),  knowMore(id: 'k1', title: 'asdas', details: ['dfd']),];

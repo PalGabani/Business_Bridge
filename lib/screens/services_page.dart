@@ -1,5 +1,7 @@
+import 'package:business_bridge/models/knowmore.dart';
 import 'package:business_bridge/models/services.dart';
 import 'package:business_bridge/screens/services_details_page.dart';
+import 'package:business_bridge/screens/services_knowMore_page.dart';
 import 'package:business_bridge/widgets/services_items.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +33,7 @@ class _services_pageState extends ConsumerState<services_page> {
   Widget build(BuildContext context) {
 
     final data_st = ref.watch(servicesProvider);
-
+  final data_kn=ref.watch(knowMoreProvider);
     Widget content = Center(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -57,21 +59,29 @@ class _services_pageState extends ConsumerState<services_page> {
         ],
       ),
     );
-
-    void selectMeal(BuildContext context, Services sr) {
+    void selectService(BuildContext context, Services sr) {
       Navigator.of(context).push(
-          MaterialPageRoute(builder: (ctx) => services_details_page(sr: sr,)));
+        MaterialPageRoute(builder: (ctx) => services_details_page(sr: sr,),),);
     }
 
-    if (data_st.isNotEmpty) {
+    void selectKnow(BuildContext context, knowMore kn) {
+      Navigator.of(context).push(
+        MaterialPageRoute(builder: (ctx) => services_knowMore_page(kn: kn,),),);
+    }
+
+// final len=data_st.length && data_kn.length;
+    if (data_st.isNotEmpty || data_kn.isNotEmpty) {
       content = ListView.builder(
 
           itemCount: data_st.length,
           itemBuilder: (ctx, index) => serviceItem(
             ser : data_st[index],
-
+            kwm: data_kn[index],
+            onselectKnow: (data_kn) {
+              selectKnow(context, data_kn);
+            },
             onSelectService: (data_st) {
-              selectMeal(context, data_st);
+              selectService(context, data_st);
             },
           ));
     }

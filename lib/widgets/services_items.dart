@@ -1,3 +1,4 @@
+import 'package:business_bridge/models/knowmore.dart';
 import 'package:business_bridge/models/services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,27 +9,29 @@ import '../models/case_study.dart';
 
 class serviceItem extends StatelessWidget {
   const serviceItem(
-      {super.key, required this.ser, required this.onSelectService});
+      {super.key,
+      required this.ser,
+        required this.kwm,
+      required this.onSelectService,
+      required this.onselectKnow});
 
   final Services ser;
-
+  final knowMore kwm;
   final void Function(Services ser) onSelectService;
+  final void Function(knowMore kn) onselectKnow;
 
   @override
   Widget build(BuildContext context) {
     return Card(
-
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       elevation: 0,
       clipBehavior: Clip.hardEdge,
       color: Theme.of(context).colorScheme.background,
 
-
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(15,10,15, 10),
+        padding: const EdgeInsets.fromLTRB(15, 10, 15, 10),
         child: Column(
           children: [
-
             Container(
               child: Column(
                 children: [
@@ -41,15 +44,14 @@ class serviceItem extends StatelessWidget {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               image: DecorationImage(
-                                  image: AssetImage(
-                                      ser.imageUrl),
+                                  image: AssetImage(ser.imageUrl),
                                   fit: BoxFit.cover)),
                         ),
                         Container(
                           alignment: AlignmentDirectional.topStart,
                           padding: EdgeInsets.all(6),
-                          child: Text(ser.title,
-                              style: TextStyle(fontSize: 28)),
+                          child:
+                              Text(ser.title, style: TextStyle(fontSize: 28)),
                         ),
                         Row(
                           children: [
@@ -60,7 +62,9 @@ class serviceItem extends StatelessWidget {
                               child: ElevatedButton(
                                 style: ButtonStyle(
                                     shape: MaterialStatePropertyAll(
-                                        RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+                                        RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10))),
                                     backgroundColor: MaterialStatePropertyAll(
                                       Theme.of(context).colorScheme.secondary,
                                     )),
@@ -73,11 +77,11 @@ class serviceItem extends StatelessWidget {
                                       .textTheme
                                       .bodyLarge!
                                       .copyWith(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .background,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18),
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .background,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18),
                                 ),
                               ),
                             ),
@@ -90,11 +94,10 @@ class serviceItem extends StatelessWidget {
                                   shape: MaterialStatePropertyAll(
                                       RoundedRectangleBorder(
                                           borderRadius:
-                                          BorderRadius.circular(10))),
+                                              BorderRadius.circular(10))),
                                 ),
                                 onPressed: () {
-
-
+                                  onselectKnow(kwm);
                                 },
                                 child: Text(
                                   'Know More..',
@@ -102,11 +105,11 @@ class serviceItem extends StatelessWidget {
                                       .textTheme
                                       .bodyLarge!
                                       .copyWith(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onPrimaryContainer,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18),
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onPrimaryContainer,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18),
                                 ),
                               ),
                             ),
@@ -122,7 +125,7 @@ class serviceItem extends StatelessWidget {
         ),
       ),
 
-            // pal's code
+      // pal's code
 
       //       Padding(
       //         padding: const EdgeInsets.all(8.0),

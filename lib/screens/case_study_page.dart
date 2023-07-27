@@ -157,7 +157,7 @@ class _case_study_pageState extends ConsumerState<case_study_page> {
     // }
     return Scaffold(
       appBar: AppBar(
-        title: Text("Our Journey"),
+        leading: Text("Our Journey"),
         scrolledUnderElevation: 0,
       ),
       body: content,
