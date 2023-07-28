@@ -81,6 +81,8 @@ flutter:
     - assets/images/services/service_detail.jpg
     - assets/images/services/service_get.jpg
     - assets/images/services/Frame 10.jpg
+    - assets/images/getservices.png
+    - assets/images/iPhone 14 Pro - 17.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

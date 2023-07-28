@@ -29,6 +29,12 @@ class _GetServiceState extends State<GetService> {
         width: double.infinity,
         // color: Theme.of(context).colorScheme.secondary,
         decoration: BoxDecoration(
+        //  image:Image.asset('assets/images/getservices.png'),
+          image: DecorationImage(
+            image: AssetImage('assets/images/getservices.png'),
+            fit: BoxFit.fill,
+
+          ),
           color:  Theme.of(context).colorScheme.secondary,
           borderRadius: BorderRadius.only(topLeft: Radius.circular(25),topRight: Radius.circular(25)),
         ),
@@ -40,7 +46,7 @@ class _GetServiceState extends State<GetService> {
             children: [
               //-----------------------heading -------------------------------//
               Container(
-                 // height: 150,
+                // height: 150,
                   width: 200,
                   decoration: BoxDecoration(color: Colors.transparent),
                   child: Center(

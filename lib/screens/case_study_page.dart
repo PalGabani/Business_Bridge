@@ -156,8 +156,13 @@ class _case_study_pageState extends ConsumerState<case_study_page> {
     //   return content;
     // }
     return Scaffold(
+
       appBar: AppBar(
-        leading: Text("Our Journey"),
+
+        title: Text("Our Journey", style: Theme.of(context)
+            .textTheme
+            .bodyLarge!
+            .copyWith(color: Theme.of(context).colorScheme.onBackground,fontSize: 20),),
         scrolledUnderElevation: 0,
       ),
       body: content,

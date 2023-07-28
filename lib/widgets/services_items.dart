@@ -23,8 +23,9 @@ class serviceItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      elevation: 0,
+      elevation: 3,
       clipBehavior: Clip.hardEdge,
       color: Theme.of(context).colorScheme.background,
 
