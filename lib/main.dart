@@ -1,4 +1,5 @@
 
+import 'package:business_bridge/screens/login_page_n.dart';
 import 'package:business_bridge/screens/login_screen.dart';
 import 'package:business_bridge/screens/sign_in_screen.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +35,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: _theme,
-      home: Login_screen(),
+      home: Login_page(),
     );
   }
 }

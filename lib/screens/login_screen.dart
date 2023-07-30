@@ -49,7 +49,6 @@ class _Login_screenState extends State<Login_screen> {
   //   });
   // }
 
-
   @override
   Widget build(BuildContext context) {
     final keyBoardSpace = MediaQuery.of(context).viewInsets.bottom;
@@ -61,22 +60,18 @@ class _Login_screenState extends State<Login_screen> {
         physics: BouncingScrollPhysics(),
         child: Form(
           key: formkey,
+
+          ///////////////////////////////////////////////////////////////
+          ////--- original old Login page ----------- ///////////////
           child: Container(
             child: Padding(
-              padding: EdgeInsets.fromLTRB(40, 90, 40, keyBoardSpace + 20),
+              padding: EdgeInsets.fromLTRB(30, 250, 30, keyBoardSpace + 20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 //  crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   // ------------------login heading and Logo ---------------------//
-                  CircleAvatar(
-                    child: Image.asset(
-                        'assets/images/Group 50.png'),
-                    maxRadius: 80,
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
+
                   Container(
                     child: Center(
                       child: Padding(
@@ -117,50 +112,55 @@ class _Login_screenState extends State<Login_screen> {
                         //         ),
                         //   ),
                         // ),
-                        TextFormField(
+                        Container(
+                          height: 55,
 
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'please Enter E-mail';
-                            }
-                            if (!RegExp("^[a-zA-z0-9+_.-]+@[gmail.com]")
-                                .hasMatch(value)) {
-                              return 'Enter valid E-mail';
-                            }
-                            return null;
-                          },
-                          controller:emailController ,
-                          keyboardType: TextInputType.emailAddress,
-                          cursorColor: Theme.of(context).colorScheme.secondary,
-                          decoration: InputDecoration(
-                            hintText: 'Enter Email ID:',
-                            hintStyle: Theme.of(context)
-                                .textTheme
-                                .titleMedium!
-                                .copyWith(
-                                  color: Theme.of(context).colorScheme.secondary,
-                                ),
-                            label: Text(
-                              'Email',
-                              style: Theme.of(context)
+                          child: TextFormField(
+
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'please Enter E-mail';
+                              }
+                              if (!RegExp("^[a-zA-z0-9+_.-]+@[gmail.com]")
+                                  .hasMatch(value)) {
+                                return 'Enter valid E-mail';
+                              }
+                              return null;
+                            },
+                            controller:emailController ,
+                            keyboardType: TextInputType.emailAddress,
+                            cursorColor: Theme.of(context).colorScheme.secondary,
+                            decoration: InputDecoration(
+                              hintText: 'Enter Email ID:',
+
+                              hintStyle: Theme.of(context)
                                   .textTheme
                                   .titleMedium!
                                   .copyWith(
                                     color: Theme.of(context).colorScheme.secondary,
                                   ),
-                            ),
-                            prefixIcon: Icon(
-                              Icons.mail,
-                              color: Theme.of(context).colorScheme.secondary,
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                              borderSide: BorderSide(
-                                width: 2,
+                              label: Text(
+                                'Email',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleMedium!
+                                    .copyWith(
+                                      color: Theme.of(context).colorScheme.secondary,
+                                    ),
+                              ),
+                              prefixIcon: Icon(
+                                Icons.mail,
                                 color: Theme.of(context).colorScheme.secondary,
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide(
+                                  width: 2,
+                                  color: Theme.of(context).colorScheme.secondary,
+                                ),
                               ),
                             ),
                           ),
@@ -185,61 +185,64 @@ class _Login_screenState extends State<Login_screen> {
                         //         ),
                         //   ),
                         // ),
-                        TextFormField(
-                          keyboardType: TextInputType.visiblePassword,
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return "Please Enter Password";
-                            }
-                            if (value.trim().length < 8) {
-                              return 'Password should be in 8 characters in length';
-                            }
-                            return null;
-                          },
-                          controller: passController,
-                          cursorColor: Theme.of(context).colorScheme.secondary,
-                          obscureText: _obsecureText,
-                          decoration: InputDecoration(
-                            hintText: 'Enter Password:',
-                            hintStyle: Theme.of(context)
-                                .textTheme
-                                .titleMedium!
-                                .copyWith(
-                                  color: Theme.of(context).colorScheme.secondary,
-                                ),
-                            label: Text(
-                              'Password',
-                              style: Theme.of(context)
+                        Container(
+                          height: 55,
+                          child: TextFormField(
+                            keyboardType: TextInputType.visiblePassword,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return "Please Enter Password";
+                              }
+                              if (value.trim().length < 8) {
+                                return 'Password should be in 8 characters in length';
+                              }
+                              return null;
+                            },
+                            controller: passController,
+                            cursorColor: Theme.of(context).colorScheme.secondary,
+                            obscureText: _obsecureText,
+                            decoration: InputDecoration(
+                              hintText: 'Enter Password:',
+                              hintStyle: Theme.of(context)
                                   .textTheme
                                   .titleMedium!
                                   .copyWith(
                                     color: Theme.of(context).colorScheme.secondary,
                                   ),
-                            ),
-                            prefixIcon: Icon(
-                              Icons.lock_outline_sharp,
-                              color: Theme.of(context).colorScheme.secondary,
-                            ),
-                            suffixIcon: GestureDetector(
-                              onTap: () {
-                                _obsecureText = !_obsecureText;
-                                setState(() {});
-                              },
-                              child: Icon(
-                                _obsecureText
-                                    ? Icons.visibility
-                                    : Icons.visibility_off,
+                              label: Text(
+                                'Password',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleMedium!
+                                    .copyWith(
+                                      color: Theme.of(context).colorScheme.secondary,
+                                    ),
+                              ),
+                              prefixIcon: Icon(
+                                Icons.lock_outline_sharp,
                                 color: Theme.of(context).colorScheme.secondary,
                               ),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20),
-                              borderSide: BorderSide(
-                                width: 2,
-                                color: Theme.of(context).colorScheme.secondary,
+                              suffixIcon: GestureDetector(
+                                onTap: () {
+                                  _obsecureText = !_obsecureText;
+                                  setState(() {});
+                                },
+                                child: Icon(
+                                  _obsecureText
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
+                                  color: Theme.of(context).colorScheme.secondary,
+                                ),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide(
+                                  width: 2,
+                                  color: Theme.of(context).colorScheme.secondary,
+                                ),
                               ),
                             ),
                           ),

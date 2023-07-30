@@ -63,26 +63,29 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/Group 50.png
-    - assets/images/case_study/case_beautify.jpg
-    - assets/images/case_study/case_goverment.jpg
-    - assets/images/case_study/case_pharm.jpg
-    - assets/images/case_study/case_private_foundation.jpg
-    - assets/images/case_study/case_sales.jpg
-    - assets/images/case_study/case_supersoda.jpg
-    - assets/images/case_study/case_transport.jpg
-    - assets/images/services/service_financial.jpg
-    - assets/images/services/service_make_franchises.jpg
-    - assets/images/services/service_marketing.jpg
-    - assets/images/services/service_sales.jpg
-    - assets/images/services/service_takeover.jpg
-    - assets/images/services/service_upscale.jpg
-    - assets/images/services/service_other.jpg
-    - assets/images/services/service_detail.jpg
-    - assets/images/services/service_get.jpg
-    - assets/images/services/Frame 10.jpg
-    - assets/images/getservices.png
-    - assets/images/iPhone 14 Pro - 17.png
+    - assets/images/
+    - assets/images/case_study/
+    - assets/images/services/
+    - assets/images/icon/
+#    - assets/images/case_study/case_goverment.jpg
+#    - assets/images/case_study/case_pharm.jpg
+#    - assets/images/case_study/case_private_foundation.jpg
+#    - assets/images/case_study/case_sales.jpg
+#    - assets/images/case_study/case_supersoda.jpg
+#    - assets/images/case_study/case_transport.jpg
+#    - assets/images/services/service_financial.jpg
+#    - assets/images/services/service_make_franchises.jpg
+#    - assets/images/services/service_marketing.jpg
+#    - assets/images/services/service_sales.jpg
+#    - assets/images/services/service_takeover.jpg
+#    - assets/images/services/service_upscale.jpg
+#    - assets/images/services/service_other.jpg
+#    - assets/images/services/service_detail.jpg
+#    - assets/images/services/service_get.jpg
+#    - assets/images/services/Frame 10.jpg
+#    - assets/images/getservices.png
+#    - assets/images/iPhone 14 Pro - 17.png
+#    - assets/images/27612464.jpg
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
