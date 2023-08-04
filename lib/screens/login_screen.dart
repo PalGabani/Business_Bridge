@@ -93,7 +93,7 @@ class _Login_screenState extends State<Login_screen> {
 
                   // ------------------ another components ---------------------//
                   Container(
-                    decoration: BoxDecoration(),
+
                     child: Column(
                       children: [
                         //------------  Email ID ---------------------------------//

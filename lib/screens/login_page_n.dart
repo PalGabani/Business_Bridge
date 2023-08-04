@@ -71,6 +71,7 @@ class _Login_pageState extends State<Login_page> {
                     color: Colors.transparent,
                     height: 250,
                     width: double.infinity,
+
                     child: Padding(
                       padding: const EdgeInsets.all(30.0),
                       child: Column(
@@ -104,7 +105,21 @@ class _Login_pageState extends State<Login_page> {
                   Expanded(
                     child: Container(
                       height: double.infinity,
+                      //color: Colors.white,
+                      decoration: BoxDecoration(
                       color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(15),
+                            topRight: Radius.circular(15)),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color(0xffbadb6e).withOpacity(0.8),
+                            spreadRadius: 5,
+                            blurRadius: 10,
+                            offset: Offset(0, 5),
+                          ),
+                        ],
+                      ),
                       child: SingleChildScrollView(
                         physics: BouncingScrollPhysics(),
                         child: Padding(
@@ -139,6 +154,19 @@ class _Login_pageState extends State<Login_page> {
                                     // ),
                                     Container(
                                       height: 60,
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                        BorderRadius.circular(10),
+                                        color: Colors.white,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Color(0xff232855).withOpacity(0.3),
+                                            spreadRadius: 3,
+                                            blurRadius: 10,
+                                            offset: Offset(2, 7),
+                                          ),
+                                        ],
+                                      ),
                                       child: TextFormField(
                                         validator: (value) {
                                           if (value!.isEmpty) {
@@ -223,6 +251,19 @@ class _Login_pageState extends State<Login_page> {
                                     // ),
                                     Container(
                                       height: 060,
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                        BorderRadius.circular(10),
+                                        color: Colors.white,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Color(0xff232855).withOpacity(0.3),
+                                            spreadRadius: 3,
+                                            blurRadius: 10,
+                                            offset: Offset(2, 7),
+                                          ),
+                                        ],
+                                      ),
                                       child: TextFormField(
                                         keyboardType:
                                             TextInputType.visiblePassword,
@@ -343,7 +384,18 @@ class _Login_pageState extends State<Login_page> {
                                           borderRadius:
                                               BorderRadius.circular(10),
                                           color: Color(0xffbadb6e),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Color(0xff232855).withOpacity(0.3),
+                                              spreadRadius: 3,
+                                              blurRadius: 10,
+                                              offset: Offset(2, 7),
+                                            ),
+                                          ],
                                         ),
+
+
+
                                         child: Center(
                                           child: Text(
                                             'Login',
