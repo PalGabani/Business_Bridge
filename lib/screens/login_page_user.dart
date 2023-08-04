@@ -1,7 +1,10 @@
 import 'package:business_bridge/screens/homepage.dart';
 import 'package:business_bridge/screens/sign_in_screen.dart';
+import 'package:business_bridge/screens/sign_page_user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../widgets/pop_up.dart';
 
 class Login_page extends StatefulWidget {
   @override
@@ -67,54 +70,89 @@ class _Login_pageState extends State<Login_page> {
               color: Colors.transparent,
               child: Column(
                 children: [
+                  //---------------------------- uper part--------------------------------------//
                   Container(
+                    //color: Colors.brown,
                     color: Colors.transparent,
                     height: 250,
                     width: double.infinity,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(10,0,10,0),
+                          child: Container(
+                            color: Colors.transparent,
+                            height: 70,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
 
-                    child: Padding(
-                      padding: const EdgeInsets.all(30.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Login",
-                            style: Theme.of(context)
-                                .textTheme
-                                .headlineLarge!
-                                .copyWith(
-                                  color:
-                                      Theme.of(context).colorScheme.onTertiary,
-                                ),
+                                Container(
+                                  // width: 30,
+                                  // height: 30,
+                                  color: Colors.transparent,
+                                  child: Popup(),
+                                )
+                              ],
+                            ),
                           ),
-                          Text(
-                            "Welcome Back",
-                            style: Theme.of(context)
-                                .textTheme
-                                .headlineSmall!
-                                .copyWith(
-                                  color:
-                                      Theme.of(context).colorScheme.onTertiary,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(30),
+                          child: Container(
+                            // height: 80,
+                            //width: 250,
+                            color: Colors.transparent,
+                            // padding: EdgeInsets.all(30),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Login",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineLarge!
+                                      .copyWith(
+                                    color:
+                                    Theme.of(context).colorScheme.onTertiary,
+                                  ),
                                 ),
+                                Text(
+                                  "\"Welcome Back\"",
+
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge !
+                                      .copyWith(
+                                    color:
+                                    Theme.of(context).colorScheme.onTertiary,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ],
-                      ),
+                        )
+                      ],
                     ),
                   ),
+                  //---------------------------------------- main part-----------------------------//
                   Expanded(
                     child: Container(
                       height: double.infinity,
                       //color: Colors.white,
                       decoration: BoxDecoration(
-                      color: Colors.white,
+                        color: Colors.white,
                         borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(15),
                             topRight: Radius.circular(15)),
                         boxShadow: [
                           BoxShadow(
-                            color: Color(0xffbadb6e).withOpacity(0.8),
-                            spreadRadius: 5,
+                            color: Color(0xff9DB2BF).withOpacity(0.8),
+                            spreadRadius: 10,
                             blurRadius: 10,
                             offset: Offset(0, 5),
                           ),
@@ -155,14 +193,14 @@ class _Login_pageState extends State<Login_page> {
                                     Container(
                                       height: 60,
                                       decoration: BoxDecoration(
-                                        borderRadius:
-                                        BorderRadius.circular(10),
+                                        borderRadius: BorderRadius.circular(10),
                                         color: Colors.white,
                                         boxShadow: [
                                           BoxShadow(
-                                            color: Color(0xff232855).withOpacity(0.3),
-                                            spreadRadius: 3,
-                                            blurRadius: 10,
+                                            color: Color(0xff232855)
+                                                .withOpacity(0.3),
+                                            spreadRadius: 1,
+                                            blurRadius: 8,
                                             offset: Offset(2, 7),
                                           ),
                                         ],
@@ -252,14 +290,14 @@ class _Login_pageState extends State<Login_page> {
                                     Container(
                                       height: 060,
                                       decoration: BoxDecoration(
-                                        borderRadius:
-                                        BorderRadius.circular(10),
+                                        borderRadius: BorderRadius.circular(10),
                                         color: Colors.white,
                                         boxShadow: [
                                           BoxShadow(
-                                            color: Color(0xff232855).withOpacity(0.3),
-                                            spreadRadius: 3,
-                                            blurRadius: 10,
+                                            color: Color(0xff232855)
+                                                .withOpacity(0.3),
+                                            spreadRadius: 1,
+                                            blurRadius: 8,
                                             offset: Offset(2, 7),
                                           ),
                                         ],
@@ -349,7 +387,7 @@ class _Login_pageState extends State<Login_page> {
                                             "Forgot password?",
                                             style: TextStyle(
                                                 fontSize: 15,
-                                                color: Color(0xffbadb6e),
+                                                color: Color(0xff9DB2BF),
                                                 fontWeight: FontWeight
                                                     .bold // decoration: TextDecoration.underline,
                                                 ),
@@ -358,7 +396,8 @@ class _Login_pageState extends State<Login_page> {
                                     //-----------error msg show------------------------------///
                                     Container(
                                       alignment: AlignmentDirectional.center,
-                                      margin: EdgeInsets.only(top: 00),
+                                      //margin: EdgeInsets.only(top: 00),
+                                      padding: EdgeInsets.only(bottom: 10),
                                       child: Text(
                                         e == 2
                                             ? "Please,Enter valid Username and Password !"
@@ -371,11 +410,16 @@ class _Login_pageState extends State<Login_page> {
                                     //--------button-------///
                                     GestureDetector(
                                       onTap: () {
-                                        Navigator.push(context,
-                                            MaterialPageRoute(
-                                                builder: (context) {
-                                          return homepage();
-                                        }));
+                                        Navigator.push(
+                                          //Navigator.pushanduntill
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) {
+                                              return homepage();
+                                            },
+                                          ),
+                                            //(route)=>false
+                                        );
                                       },
                                       child: Container(
                                         width: double.infinity,
@@ -383,19 +427,17 @@ class _Login_pageState extends State<Login_page> {
                                         decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(10),
-                                          color: Color(0xffbadb6e),
+                                          color: Color(0xff9DB2BF),
                                           boxShadow: [
                                             BoxShadow(
-                                              color: Color(0xff232855).withOpacity(0.3),
-                                              spreadRadius: 3,
-                                              blurRadius: 10,
+                                              color: Color(0xff232855)
+                                                  .withOpacity(0.3),
+                                              spreadRadius: 1,
+                                              blurRadius: 8,
                                               offset: Offset(2, 7),
                                             ),
                                           ],
                                         ),
-
-
-
                                         child: Center(
                                           child: Text(
                                             'Login',
@@ -592,14 +634,15 @@ class _Login_pageState extends State<Login_page> {
                                               Navigator.push(context,
                                                   MaterialPageRoute(
                                                       builder: (context) {
-                                                return Signin_screen();
+                                                return Signin_page();
                                               }));
                                             },
                                             child: Text(
                                               "Sign IN ",
                                               style: TextStyle(
                                                   fontSize: 15,
-                                                  color: Color(0xffbadb6e),
+                                                  color: Color(0xff9DB2BF),
+                                                 // color: Color(0xffbadb6e),
                                                   fontWeight: FontWeight.bold),
                                             )),
                                       ],
