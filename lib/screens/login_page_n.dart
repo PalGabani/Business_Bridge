@@ -546,13 +546,13 @@ class _Login_pageState extends State<Login_page> {
                                                           height: 20,
                                                           width: 20,
                                                           child: Image.asset(
-                                                              'assets/images/icon/facebook.png'),
+                                                              'assets/images/icon/linkedin.png'),
                                                         ),
                                                         SizedBox(
                                                           width: 10,
                                                         ),
                                                         Text(
-                                                          'FaceBook',
+                                                          'LinkedIn',
                                                           style: TextStyle(
                                                             color: Colors.black,
                                                             // fontWeight: FontWeight.bold,

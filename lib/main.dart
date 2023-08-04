@@ -5,6 +5,7 @@ import 'package:business_bridge/screens/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/services.dart';
 
 final _theme = ThemeData(
   useMaterial3: true,
@@ -16,6 +17,11 @@ final _theme = ThemeData(
 );
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown
+  ]);
   runApp(
      ProviderScope(
       child: App(
