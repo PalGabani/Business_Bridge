@@ -67,6 +67,7 @@ flutter:
     - assets/images/case_study/
     - assets/images/services/
     - assets/images/icon/
+    - assets/images/workportal/
 #    - assets/images/case_study/case_goverment.jpg
 #    - assets/images/case_study/case_pharm.jpg
 #    - assets/images/case_study/case_private_foundation.jpg
@@ -84,7 +85,7 @@ flutter:
 #    - assets/images/services/service_get.jpg
 #    - assets/images/services/Frame 10.jpg
 #    - assets/images/getservices.png
-#    - assets/images/iPhone 14 Pro - 17.png
+#    - assets/images/workportalbg1.png
 #    - assets/images/27612464.jpg
 
 

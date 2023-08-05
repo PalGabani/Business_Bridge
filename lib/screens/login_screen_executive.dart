@@ -1,3 +1,5 @@
+import 'package:business_bridge/screens/executive_details.dart';
+import 'package:business_bridge/screens/executive_login.dart';
 import 'package:business_bridge/screens/homepage.dart';
 import 'package:business_bridge/screens/sign_in_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,8 +11,6 @@ class Login_screen_executive extends StatefulWidget {
 }
 
 class _Login_screen_executiveState extends State<Login_screen_executive> {
-
-
   // FirebaseDatabase database = FirebaseDatabase.instance;
 
   // void _verifydata() async {
@@ -49,14 +49,72 @@ class _Login_screen_executiveState extends State<Login_screen_executive> {
     final keyBoardSpace = MediaQuery.of(context).viewInsets.bottom;
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: SingleChildScrollView(
-
-        physics: BouncingScrollPhysics(),
-        child: Container(
-
+        // appBar: AppBar(
+        //   backgroundColor: Colors.transparent,
+        // ),
+        body: Container(
+      height: double.infinity,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage(
+            'assets/images/workportal/workportalbg1.png',
+          ),
+          fit: BoxFit.fill,
+          colorFilter: ColorFilter.mode(
+              Colors.black.withOpacity(0.5), BlendMode.saturation),
         ),
       ),
-    );
+      child: Column(
+        children: [
+          Container(
+            alignment: AlignmentDirectional.topStart,
+            padding: EdgeInsets.only(left: 30, top: 60),
+            child: Text("Executive Portal",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 36,
+                )),
+          ),
+          Container(
+            alignment: AlignmentDirectional.topStart,
+            padding: EdgeInsets.only(left: 30, top: 400, right: 30),
+            child: Text(
+                "\"Success is not one-time achievement,\nit's journey of continuous effort and improvement.\"",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 28,
+                )),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 120,top: 35),
+            child: Container(
+              alignment: AlignmentDirectional.center,
+              height: 45,
+              width: 150,
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.white,width: 2),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: ElevatedButton(
+                style: ButtonStyle(
+                    backgroundColor: MaterialStatePropertyAll(Colors.transparent),
+                ),
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) {
+                        return executive_login();
+                      }));
+                },
+                child: Text(
+                  'NEXT',style: TextStyle(color: Colors.white, fontSize: 25,),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    ));
   }
 }

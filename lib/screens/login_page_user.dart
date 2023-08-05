@@ -84,7 +84,7 @@ class _Login_pageState extends State<Login_page> {
                           padding: const EdgeInsets.fromLTRB(10,0,10,0),
                           child: Container(
                             color: Colors.transparent,
-                            height: 70,
+                            height: 110,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               crossAxisAlignment: CrossAxisAlignment.center,
@@ -473,7 +473,7 @@ class _Login_pageState extends State<Login_page> {
                                                   horizontal: 10.0),
                                               child: Container(
                                                 height: 1.0,
-                                                width: 97,
+                                                width: 90,
                                                 color: Colors.black,
                                               ),
                                             ),
@@ -496,7 +496,7 @@ class _Login_pageState extends State<Login_page> {
                                                   horizontal: 10.0),
                                               child: Container(
                                                 height: 1.0,
-                                                width: 97,
+                                                width: 90,
                                                 color: Colors.black,
                                               ),
                                             ),

@@ -27,7 +27,7 @@ class _work_portal_pageState extends State<work_portal_page> {
           width: double.infinity  ,
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/images/iPhone 14 Pro - 17.png',),
+              image: AssetImage('assets/images/workportal/workportalbg1.png',),
               fit: BoxFit.fitWidth,
               colorFilter:
               ColorFilter.mode(Colors.black.withOpacity(0.5),
