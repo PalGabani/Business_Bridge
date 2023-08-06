@@ -68,6 +68,7 @@ flutter:
     - assets/images/services/
     - assets/images/icon/
     - assets/images/workportal/
+    - assets/images/sector/
 #    - assets/images/case_study/case_goverment.jpg
 #    - assets/images/case_study/case_pharm.jpg
 #    - assets/images/case_study/case_private_foundation.jpg

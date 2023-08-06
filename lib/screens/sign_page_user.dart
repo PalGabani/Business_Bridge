@@ -1,5 +1,6 @@
 import 'package:business_bridge/screens/homepage.dart';
 import 'package:business_bridge/screens/login_page_user.dart';
+import 'package:business_bridge/screens/sector_page.dart';
 import 'package:business_bridge/screens/sign_in_screen.dart';
 import 'package:business_bridge/widgets/pop_up.dart';
 import 'package:flutter/cupertino.dart';
@@ -532,7 +533,7 @@ class _Signin_pageState extends State<Signin_page> {
                                             context,
                                             MaterialPageRoute(
                                               builder: (context) {
-                                                return homepage();
+                                                return sector_page() ;
                                               },
                                             ),
                                             //(route)=>false
