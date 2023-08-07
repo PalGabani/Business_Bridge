@@ -1,29 +1,42 @@
 import 'dart:io';
+import 'package:business_bridge/models/services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 
-class GetService extends StatefulWidget {
+class GetService extends ConsumerStatefulWidget {
+
+
   const GetService({
     super.key,
+required this.sn,
   });
 
+final String sn;
+
+
+
   @override
-  State<StatefulWidget> createState() {
-    return _GetServiceState();
-  }
+  ConsumerState<GetService> createState() => _GetServiceState();
 }
 
-class _GetServiceState extends State<GetService> {
-  final _titleController = TextEditingController();
-  final _amountController = TextEditingController();
-  DateTime? selectedDate;
+class _GetServiceState extends ConsumerState<GetService> {
 
+
+  String date = DateFormat('MMMM dd,yyyy').format(DateTime.now());
+  DateTime? selectedDate;
+@override
+  void initState() {
+    // TODO: implement initState
+
+  }
   @override
   Widget build(BuildContext context) {
     final keyBoardSpace = MediaQuery.of(context).viewInsets.bottom;
     return LayoutBuilder(builder: (ctx, constraints) {
       final width = constraints.maxWidth;
-
+      //final String sn='asd';
       return Container(
         height: double.infinity,
         width: double.infinity,
@@ -39,7 +52,7 @@ class _GetServiceState extends State<GetService> {
           borderRadius: BorderRadius.only(topLeft: Radius.circular(25),topRight: Radius.circular(25)),
         ),
         child: Padding(
-          padding: EdgeInsets.fromLTRB(16, 40, 16, keyBoardSpace + 30),
+          padding: EdgeInsets.fromLTRB(16, 40, 16, keyBoardSpace + 50),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -47,7 +60,7 @@ class _GetServiceState extends State<GetService> {
               //-----------------------heading -------------------------------//
               Container(
                 // height: 150,
-                  width: 200,
+                //  width: 280,
                   decoration: BoxDecoration(color: Colors.transparent),
                   child: Center(
                     child: Column(
@@ -87,13 +100,131 @@ class _GetServiceState extends State<GetService> {
 
                               fontSize: 35),
                         ),
+
+
                       ],
                     ),
 
                   )),
               //-----------------------data information ------------------//
-              Container(),
+              Padding(
+                padding: const EdgeInsets.only(left: 30.0,right: 30),
+                child: Container(
+                  color: Colors.transparent,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Align(
+                        alignment: AlignmentDirectional.topStart,
+                        child: Row(
+                          children: [
+                            Text(
+                              "Service type : ",
+                              textAlign: TextAlign.start,
+                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                color: Theme.of(context).colorScheme.background,
+                                fontSize: 16,
+                              ),
+                            ),
+                            Text(
+                            ' Services Name',
+
+                              textAlign: TextAlign.start,
+                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                color: Theme.of(context).colorScheme.background,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Align(
+                        alignment: AlignmentDirectional.topStart,
+                        child: Row(
+                          children: [
+                            Text(
+                              "Our Executive Name : ",
+                              textAlign: TextAlign.justify,
+                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                color: Theme.of(context).colorScheme.background,
+                                fontSize: 16,
+                              ),
+                            ),
+                            Text(
+                              "Abhishek Malhan",
+                              textAlign: TextAlign.start,
+                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                color: Theme.of(context).colorScheme.background,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Align(
+                        alignment: AlignmentDirectional.topStart,
+                        child: Row(
+                          children: [
+                            Text(
+                              "Executive Mobile no. : ",
+                              textAlign: TextAlign.justify,
+                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                color: Theme.of(context).colorScheme.background,
+                                fontSize: 16,
+                              ),
+                            ),
+                            Text(
+                              "+91 9865328754",
+                              textAlign: TextAlign.start,
+                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                color: Theme.of(context).colorScheme.background,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Align(
+                        alignment: AlignmentDirectional.topStart,
+                        child: Row(
+                          children: [
+                            Text(
+                              "Assign Date : ",
+                              textAlign: TextAlign.justify,
+                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                color: Theme.of(context).colorScheme.background,
+                                fontSize: 16,
+                              ),
+                            ),
+                            Text(
+                              date,
+                              textAlign: TextAlign.start,
+                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                color: Theme.of(context).colorScheme.background,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
               //-----------------------button-----------------------------//
+              SizedBox(height: 20,),
               Container(
                 padding: EdgeInsets.only(left: 10, right: 10),
                 width: 150,

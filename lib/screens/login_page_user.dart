@@ -1,5 +1,5 @@
 import 'package:business_bridge/screens/homepage.dart';
-import 'package:business_bridge/screens/sign_in_screen.dart';
+
 import 'package:business_bridge/screens/sign_page_user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -123,7 +123,6 @@ class _Login_pageState extends State<Login_page> {
                                 ),
                                 Text(
                                   "\"Welcome Back\"",
-
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyLarge !
@@ -612,7 +611,7 @@ class _Login_pageState extends State<Login_page> {
                                       ],
                                     )),
                                     SizedBox(
-                                      height: 50,
+                                      height: 30,
                                     ),
 
                                     //------------  sign in goto  ---------------------------------//

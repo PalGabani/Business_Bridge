@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:business_bridge/screens/login_screen_executive.dart';
+import 'package:business_bridge/screens/first_page_executive.dart';
 import 'package:business_bridge/screens/sign_page_user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

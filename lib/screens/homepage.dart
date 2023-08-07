@@ -36,6 +36,7 @@ class _homepageState extends ConsumerState<homepage> {
       //--------navigation bar ------------
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
+
           BottomNavigationBarItem(
               icon: Icon(
                 Icons.cases_outlined,
@@ -43,7 +44,9 @@ class _homepageState extends ConsumerState<homepage> {
                 color: Theme.of(context).colorScheme.secondary,
               ),
               activeIcon: Icon(Icons.cases_rounded),
+              backgroundColor: Color(0xffdee9f0),
               label: "Case Study",
+
 
           ),
           BottomNavigationBarItem(

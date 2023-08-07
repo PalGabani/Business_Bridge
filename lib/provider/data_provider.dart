@@ -7,9 +7,12 @@ final servicesProvider=Provider((ref) {
 });
 
 final caseStudyProvider=Provider((ref) {
-  return dummyMeals;
+  return dummyCase;
 });
 
 final knowMoreProvider=Provider((ref) {
   return knowMoreData;
+});
+final assignprojectProvider=Provider((ref) {
+  return assignproject;
 });

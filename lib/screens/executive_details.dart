@@ -1,14 +1,70 @@
+import 'package:business_bridge/screens/assign_project_page.dart';
+import 'package:business_bridge/widgets/work_portal_projects.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class executive_details extends StatefulWidget{
+import '../provider/data_provider.dart';
+import '../widgets/case_study.dart';
+
+class executive_details extends ConsumerStatefulWidget{
   @override
-  State<executive_details> createState() => _executive_detailsState();
+  ConsumerState<ConsumerStatefulWidget> createState() {
+   return _executive_detailsState();
+  }
+
 }
 
-class _executive_detailsState extends State<executive_details> {
+class _executive_detailsState extends ConsumerState<executive_details> {
+
+
+
   @override
   Widget build(BuildContext context) {
+    final serv = ref.watch(servicesProvider);
+
+    Widget content = Container(
+      height: 100,
+      child: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Oops ...nothing Here!',
+              style: Theme.of(context)
+                  .textTheme
+                  .headlineMedium!
+                  .copyWith(color: Theme.of(context).colorScheme.onBackground),
+            ),
+            SizedBox(
+              height: 17,
+            ),
+            Text(
+              'Please,try another Category...',
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyMedium!
+                  .copyWith(color: Theme.of(context).colorScheme.onBackground),
+            ),
+          ],
+        ),
+      ),
+    );
+    if (serv.isNotEmpty) {
+      content = ListView.builder(
+
+          itemCount: serv.length,
+          itemBuilder: (ctx, index) => workProject(
+           // wp:ser[index],
+           // sr: serv[index],
+
+            onSelectproject: (serv) {
+              //selectMeal(context, data_st);
+            },
+          ));
+    }
+
     // TODO: implement build
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -89,56 +145,11 @@ class _executive_detailsState extends State<executive_details> {
                     fontSize: 25
                   )),
             ),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 20,right: 20),
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: Container(
-                          height: 140,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.grey.withOpacity(0.35),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: Container(
-                          height: 140,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.grey.withOpacity(0.35),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: Container(
-                          height: 140,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.grey.withOpacity(0.35),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: Container(
-                          height: 140,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.grey.withOpacity(0.35),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+            Padding(
+              padding: const EdgeInsets.only(left: 20,right: 20),
+              child: Container(
+                height:500,
+                  child: content),
             )
           ],
         ),

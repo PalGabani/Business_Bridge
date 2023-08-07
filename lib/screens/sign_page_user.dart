@@ -1,7 +1,7 @@
 import 'package:business_bridge/screens/homepage.dart';
 import 'package:business_bridge/screens/login_page_user.dart';
 import 'package:business_bridge/screens/sector_page.dart';
-import 'package:business_bridge/screens/sign_in_screen.dart';
+
 import 'package:business_bridge/widgets/pop_up.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

@@ -1,7 +1,6 @@
 import 'package:business_bridge/screens/executive_details.dart';
 import 'package:business_bridge/screens/executive_login.dart';
-import 'package:business_bridge/screens/homepage.dart';
-import 'package:business_bridge/screens/sign_in_screen.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -102,10 +101,14 @@ class _Login_screen_executiveState extends State<Login_screen_executive> {
                     backgroundColor: MaterialStatePropertyAll(Colors.transparent),
                 ),
                 onPressed: () {
-                  Navigator.push(context,
+                  Navigator.pushAndRemoveUntil(context,
                       MaterialPageRoute(builder: (context) {
                         return executive_login();
-                      }));
+                      }
+
+                      ),
+                      (route)=>route.isFirst
+                  );
                 },
                 child: Text(
                   'NEXT',style: TextStyle(color: Colors.white, fontSize: 25,),

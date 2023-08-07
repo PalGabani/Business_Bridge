@@ -96,7 +96,7 @@ class _sector_pageState extends State<sector_page> {
                       })
                   );
                 },
-                child: Text('Next', style: TextStyle(color: Colors.white,fontSize: 28)
+                child: Text('Next', style: TextStyle(color: Colors.white,fontSize: 28),
                 ),
               ),
             ),
