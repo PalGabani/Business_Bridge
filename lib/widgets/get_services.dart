@@ -1,11 +1,16 @@
 import 'dart:io';
+import 'package:business_bridge/models/services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class GetService extends StatefulWidget {
+
+
   const GetService({
     super.key,
   });
+
 
   @override
   State<StatefulWidget> createState() {
@@ -16,6 +21,8 @@ class GetService extends StatefulWidget {
 class _GetServiceState extends State<GetService> {
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
+
+  String date = DateFormat('MMMM dd,yyyy').format(DateTime.now());
   DateTime? selectedDate;
 
   @override
@@ -47,7 +54,7 @@ class _GetServiceState extends State<GetService> {
               //-----------------------heading -------------------------------//
               Container(
                 // height: 150,
-                  width: 200,
+                  width: 280,
                   decoration: BoxDecoration(color: Colors.transparent),
                   child: Center(
                     child: Column(
@@ -86,6 +93,113 @@ class _GetServiceState extends State<GetService> {
                               fontWeight: FontWeight.bold,
 
                               fontSize: 35),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Align(
+                          alignment: AlignmentDirectional.topStart,
+                          child: Row(
+                            children: [
+                              Text(
+                                "Service type : ",
+                                textAlign: TextAlign.start,
+                                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                  color: Theme.of(context).colorScheme.background,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              Text(
+                                "            ",
+                                textAlign: TextAlign.start,
+                                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                  color: Theme.of(context).colorScheme.background,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Align(
+                          alignment: AlignmentDirectional.topStart,
+                          child: Row(
+                            children: [
+                              Text(
+                                "Our Executive Name : ",
+                                textAlign: TextAlign.justify,
+                                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                  color: Theme.of(context).colorScheme.background,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              Text(
+                                "Abhishek Malhan",
+                                textAlign: TextAlign.start,
+                                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                  color: Theme.of(context).colorScheme.background,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Align(
+                          alignment: AlignmentDirectional.topStart,
+                          child: Row(
+                            children: [
+                              Text(
+                                "Executive Mobile no. : ",
+                                textAlign: TextAlign.justify,
+                                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                  color: Theme.of(context).colorScheme.background,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              Text(
+                                "+91 9865328754",
+                                textAlign: TextAlign.start,
+                                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                  color: Theme.of(context).colorScheme.background,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Align(
+                          alignment: AlignmentDirectional.topStart,
+                          child: Row(
+                            children: [
+                              Text(
+                                "Assign Date : ",
+                                textAlign: TextAlign.justify,
+                                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                  color: Theme.of(context).colorScheme.background,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              Text(
+                                date,
+                                textAlign: TextAlign.start,
+                                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                  color: Theme.of(context).colorScheme.background,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),

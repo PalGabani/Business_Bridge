@@ -123,7 +123,6 @@ class _Login_pageState extends State<Login_page> {
                                 ),
                                 Text(
                                   "\"Welcome Back\"",
-
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyLarge !
@@ -612,7 +611,7 @@ class _Login_pageState extends State<Login_page> {
                                       ],
                                     )),
                                     SizedBox(
-                                      height: 50,
+                                      height: 30,
                                     ),
 
                                     //------------  sign in goto  ---------------------------------//

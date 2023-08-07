@@ -25,9 +25,7 @@ class services_details_page extends ConsumerWidget {
         //useSafeArea: true,
         //isScrollControlled: true,
         context: context,
-        builder: (cntx) => GetService(
-
-        ),
+        builder: (cntx) => GetService(),
       );
     }
     return Scaffold(

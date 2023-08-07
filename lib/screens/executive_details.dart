@@ -1,3 +1,4 @@
+import 'package:business_bridge/screens/assign_project_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -97,11 +98,24 @@ class _executive_detailsState extends State<executive_details> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(top: 10),
-                        child: Container(
-                          height: 140,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.grey.withOpacity(0.35),
+                        child: GestureDetector(
+                          onTap: (){
+                            Navigator.push(
+                                //Navigator.pushanduntill
+                                context,
+                                MaterialPageRoute(
+                                builder: (context) {
+                                  return assign_project_page();
+                                },
+                              ),
+                            );
+                          },
+                          child: Container(
+                            height: 140,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.grey.withOpacity(0.35),
+                            ),
                           ),
                         ),
                       ),
