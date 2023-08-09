@@ -13,6 +13,9 @@ final caseStudyProvider=Provider((ref) {
 final knowMoreProvider=Provider((ref) {
   return knowMoreData;
 });
-final assignprojectProvider=Provider((ref) {
-  return assignproject;
+final assignprojectdetailProvider=Provider((ref) {
+  return assignprojectdetails;
+});
+final assignedprojectsProvider=Provider((ref) {
+  return assignedprojects;
 });

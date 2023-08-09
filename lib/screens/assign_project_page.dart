@@ -1,22 +1,40 @@
+import 'package:business_bridge/models/assign_page_projects.dart';
+import 'package:business_bridge/models/assign_project_details.dart';
 import 'package:business_bridge/provider/data_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class assign_project_page extends ConsumerStatefulWidget {
+  assign_project_page({
+    super.key,
+    //required this.apd,
+  });
+
+  // final AssignedProjects apd;
+
   @override
   ConsumerState<assign_project_page> createState() =>
-      _assign_project_pageState();
+      _assign_project_pageState(
+          //apd: apd
+      );
 }
 
 class _assign_project_pageState extends ConsumerState<assign_project_page> {
+  // _assign_project_pageState({
+  //   //required this.apd,
+  //
+  // });
+
   bool isinquiryChecked = false;
   bool ismittingChecked = false;
   bool isnanalizeChecked = false;
 
+  // final AssignedProjects apd;
+
   @override
   Widget build(BuildContext context) {
-    final ap = ref.watch(assignprojectProvider);
+    final ap = ref.watch(assignprojectdetailProvider);
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -59,7 +77,6 @@ class _assign_project_pageState extends ConsumerState<assign_project_page> {
                     children: [
                       Text(
                         "Adani ltd.",
-
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: 30,

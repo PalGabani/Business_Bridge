@@ -1,6 +1,7 @@
 import 'dart:developer';
 
-import 'package:business_bridge/models/assign_project.dart';
+import 'package:business_bridge/models/assign_page_projects.dart';
+import 'package:business_bridge/models/assign_project_details.dart';
 import 'package:business_bridge/models/business_category.dart';
 import 'package:business_bridge/models/case_study.dart';
 import 'package:business_bridge/models/knowmore.dart';
@@ -123,45 +124,126 @@ const dummyData_services = [
     id: 's1',
     title: 'Upscale Your Business',
     imageUrl: 'assets/images/services/service_upscale.jpg',
+    bgimage: 'assets/images/services/illustration_upscale.jpg',
     details: [
-      'Strategic planning is a fundamental service where in consultants collaborate with company executives to develop long-term goals, define strategies, and create actionable plans for achieving sustainable success. They analyze market trends, competition, and internal capabilities to align the company\'s vision with practical objectives.'
+      'An upscale business refers to a company that targets higher-end customers and offers products or services that are considered luxurious or exclusive. These businesses generally focus on providing a superior customer experience, premium quality products, and a prestigious brand image.'
+    ],
+    types: [
+      'There are several types of upscaling strategies that we provide to enhance business upscale status:'
+          '\n - Product Upscaling'
+          '\n - Price Upscaling'
+          '\n - Brand Upscaling'
+          '\n - Customer Service Upscaling'
+          '\n - Store/Location Upscaling'
     ],
   ),
   Services(
     id: 's2',
     title: 'Take Over Businesses',
     imageUrl: 'assets/images/services/service_takeover.jpg',
-    details: ['qqqqwqqwqwq'],
+    bgimage: 'assets/images/services/illustration_take_over.jpg',
+    details: [
+      'Taking over a business refers to the acquisition or control of an existing company by another entity. It typically involves the transfer of ownership, management, assets, and liabilities from one company to another. '
+    ],
+    types: [
+      'There are several types of takeovers that can occur in a business context:'
+          '\n - Management Takeover'
+          '\n - Friendly Takeover'
+          '\n - Hostile Takeover'
+          '\n - Asset Takeover'
+          '\n - Reverse Takeover'
+    ],
   ),
   Services(
     id: 's3',
     title: 'Increase Your Sales',
     imageUrl: 'assets/images/services/service_sales.jpg',
-    details: ['fgsgfsfg'],
+    bgimage: 'assets/images/services/illustration_sales.jpg',
+    details: [
+      'Increasing sales refers to the process of generating more revenue for a business by selling more of its products or services. This can be achieved through various strategies and techniques depending on the nature of the business and its target audience. '
+    ],
+    types: [
+      'There are different types of increase sales strategies that we provide for businesses to adopt, including:'
+          '\n - Marketing and advertising'
+          '\n - Product diversification'
+          '\n - Pricing strategies'
+          '\n - Upselling and cross-selling'
+          '\n - Improving sales processes'
+          '\n - Online presence and e-commerce'
+          '\n - Customer retention'
+    ],
   ),
   Services(
     id: 's4',
     title: 'Make Franchise Model',
     imageUrl: 'assets/images/services/service_make_franchises.jpg',
-    details: ['qqqqwqqwqwq'],
+    bgimage: 'assets/images/services/illustration_franchise.jpg',
+    details: [
+      'A franchise model is a type of business arrangement where the owner of an established brand  grants a license or permission to an individual or entity (the franchisee) to operate a business under their established brand name and business system. The franchisee pays an initial fee and ongoing royalties in return for the support, training, and use of the franchisor\'s brand and operating model.'
+    ],
+    types: [
+      'We provide several types of franchise models:'
+          '\n - Product Distribution'
+          '\n - Business Format'
+          '\n - Area Development'
+          '\n - Master Franchise'
+          '\n - Co-branding'
+    ],
   ),
   Services(
     id: 's5',
     title: 'Improve Your Financial Decisions',
     imageUrl: 'assets/images/services/service_financial.jpg',
-    details: ['qqqqwqqwqwq'],
+    bgimage: 'assets/images/services/illustration_financial.jpg',
+    details: [
+      'Improving financial decisions refers to the process of making better choices related to managing money, investments, and financial planning. It involves considering various factors such as risks, costs, benefits, and long-term goals to make informed decisions that lead to improved financial outcomes.'
+    ],
+    types: [
+      'We provide different types of strategies to improve financial decisions:'
+          '\n - Budgeting'
+          '\n - Saving and Investing'
+          '\n - Debt Management'
+          '\n - Risk Management'
+          '\n - Financial Education'
+          '\n - Setting Financial Goals'
+    ],
   ),
   Services(
     id: 's6',
-    title: 'Marketing Straregies',
+    title: 'Marketing Strategies',
     imageUrl: 'assets/images/services/service_marketing.jpg',
-    details: ['qqqqwqqwqwq'],
+    bgimage: 'assets/images/services/illustration_marketing.jpg',
+    details: [
+      'Marketing strategies refer to a set of activities and tactics that businesses employ to promote and sell their products or services to target customers. These strategies aim to maximize profit and gain a competitive advantage in the marketplace.'
+    ],
+    types: [
+      'We provide various types of marketing strategies, including:'
+          '\n - Target Marketing'
+          '\n - Differentiation'
+          '\n - Branding'
+          '\n - Content Marketing'
+          '\n - Social Media Marketing'
+          '\n - Influencer Marketing'
+    ],
   ),
   Services(
     id: 's7',
     title: 'Other Business Problem',
     imageUrl: 'assets/images/services/service_other.jpg',
-    details: ['qqqqwqqwqwq'],
+    bgimage: 'assets/images/services/illustration_other.jpg',
+    details: [
+      'Other business problems can vary widely depending on the industry and company.'
+    ],
+    types: [
+      'Some common types of business problems include:'
+          '\n - Operational Challenges'
+          '\n - Human Resources'
+          '\n - Legal and Compliance'
+          '\n - Customer Service'
+          '\n - Competition'
+          '\n - Strategic Decision Making'
+          '\n\nIt is important for businesses to identify and address these problems promptly to ensure their long-term success and sustainability.'
+    ],
   ),
 ];
 const knowMoreData = [
@@ -524,12 +606,33 @@ const knowMoreData = [
   ),
 ];
 
-const assignproject = [
-  AssignProject(
+const assignprojectdetails = [
+  AssignProjectDetails(
     id: 'a1',
     title: 'Adani Ltd',
     disc:
         'Adani want\'s to make a sales engagement platform that accelerates B2B sales pipeline through a multi-channel outreach capability to book more meetings and close more revenue.',
     task: ['adf', 'asdf', 'sadf'],
   ),
+];
+const assignedprojects = [
+  AssignedProjects(
+      id: 's1',
+      title: 'Upscale Your Business',
+      country: 'india',
+      mobile: ' +91 9879382701',
+      email: 'palgabani03@gmail.com'),
+  AssignedProjects(
+      id: 's2',
+      title: 'Take Over Businesses',
+      country: 'india',
+      mobile: ' +91 9879382701',
+      email: 'smitkachdiya@gmail.com'),
+  AssignedProjects(
+      id: 's3',
+      title: 'Increase Your Sales',
+      country: 'india',
+      mobile: ' +91 9879382701',
+      email: 'jaygoyani@gmail.com'),
+
 ];

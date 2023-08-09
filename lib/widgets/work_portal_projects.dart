@@ -1,6 +1,5 @@
-import 'package:business_bridge/models/services.dart';
-import 'package:business_bridge/provider/data_provider.dart';
-import 'package:business_bridge/screens/assign_project_page.dart';
+import 'package:business_bridge/models/assign_page_projects.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,55 +9,63 @@ import 'package:transparent_image/transparent_image.dart';
 import '../models/case_study.dart';
 
 class workProject extends ConsumerStatefulWidget {
-  const workProject(
-      {super.key,required this.onSelectproject,});
+  const workProject({
+    super.key,
+    required this.onSelectA_project,
+    required this.asp,
+  });
 
+  final AssignedProjects asp;
 
- // final Services sr;
-  final void Function(case_Study caseSt) onSelectproject;
+  // final Services sr;
+  final void Function(AssignedProjects apd) onSelectA_project;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() {
-    return _workProjectState();
+    return _workProjectState(
+      ap: asp,
+      onSelectA_projects: onSelectA_project,
+    );
   }
 }
 
 class _workProjectState extends ConsumerState<workProject> {
+  _workProjectState({
+    required this.ap,
+    required this.onSelectA_projects,
+  });
 
+  final AssignedProjects ap;
+  final void Function(AssignedProjects apd) onSelectA_projects;
 
   @override
   Widget build(BuildContext context) {
-   // final d = ref.watch(servicesProvider);
-
-    return InkWell(
-      onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(
-                builder: (context) {
-                  return assign_project_page();
-                }));
-      },
-      child: Padding(
-        padding: EdgeInsets.only(left: 8, right: 8, top: 0, bottom: 10),
-        child: Container(
-          height: 140,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: Colors.grey.withOpacity(0.35),
-          ),
+    // final d = ref.watch(servicesProvider);
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 8, 20, 0),
+      child: InkWell(
+        onTap: () {
+          onSelectA_projects(ap);
+        },
+        child: Card(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          elevation: 3,
+          clipBehavior: Clip.hardEdge,
+          color: Colors.grey.withOpacity(0.35),
           child: Padding(
-            padding: const EdgeInsets.only(left: 40, top: 20),
+            padding: const EdgeInsets.only(left: 40, top: 20, bottom: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('sdf',
+                Text(ap.title,
                     style: TextStyle(color: Colors.white, fontSize: 20)),
-                Text("India",
+                Text(ap.country,
                     style: TextStyle(color: Colors.white, fontSize: 15)),
-                Text("+91 9865328754",
+                Text(ap.mobile,
                     style: TextStyle(color: Colors.white, fontSize: 15)),
-                Text("abhishek113@gmail.com",
-                    maxLines: 2,
+                Text(ap.email,
+                    //maxLines: 2,
                     style: TextStyle(color: Colors.white, fontSize: 17)),
               ],
             ),

@@ -39,6 +39,7 @@ dependencies:
   flutter_riverpod: ^2.3.6
   transparent_image: ^2.0.1
   intl: ^0.17.0
+  casa_vertical_stepper: ^0.0.5
 
 
 dev_dependencies:

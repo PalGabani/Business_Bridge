@@ -105,6 +105,7 @@ _GetServiceState({required this.sen});
                 child: Container(
                   color: Colors.transparent,
                   child: Column(
+
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Align(
@@ -117,6 +118,7 @@ _GetServiceState({required this.sen});
                               style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                                 color: Theme.of(context).colorScheme.background,
                                 fontSize: 16,
+
                               ),
                             ),
                             Text(

@@ -1,5 +1,6 @@
-class AssignProject {
-  const AssignProject({
+
+class AssignProjectDetails {
+  const AssignProjectDetails({
     required this.id,
 
     required this.title,

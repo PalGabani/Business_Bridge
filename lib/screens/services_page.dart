@@ -77,11 +77,12 @@ class _services_pageState extends ConsumerState<services_page> {
           itemBuilder: (ctx, index) => serviceItem(
             ser : data_st[index],
             kwm: data_kn[index],
-            onselectKnow: (data_kn) {
-              selectKnow(context, data_kn);
-            },
             onSelectService: (data_st) {
               selectService(context, data_st);
+            },
+
+            onselectKnow: (data_kn) {
+              selectKnow(context, data_kn);
             },
 
 

@@ -1,3 +1,5 @@
+import 'package:business_bridge/models/assign_page_projects.dart';
+import 'package:business_bridge/models/assign_project_details.dart';
 import 'package:business_bridge/screens/assign_project_page.dart';
 import 'package:business_bridge/widgets/work_portal_projects.dart';
 import 'package:flutter/cupertino.dart';
@@ -7,24 +9,20 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../provider/data_provider.dart';
 import '../widgets/case_study.dart';
 
-class executive_details extends ConsumerStatefulWidget{
+class executive_details extends ConsumerStatefulWidget {
   @override
   ConsumerState<ConsumerStatefulWidget> createState() {
-   return _executive_detailsState();
+    return _executive_detailsState();
   }
-
 }
 
 class _executive_detailsState extends ConsumerState<executive_details> {
-
-
-
   @override
   Widget build(BuildContext context) {
-    final serv = ref.watch(servicesProvider);
-
+    final ap = ref.watch(assignedprojectsProvider);
+final apd=ref.watch(assignprojectdetailProvider);
     Widget content = Container(
-      height: 100,
+      // height: 100,
       child: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -51,18 +49,23 @@ class _executive_detailsState extends ConsumerState<executive_details> {
         ),
       ),
     );
-    if (serv.isNotEmpty) {
+    void selectpro(BuildContext context, AssignedProjects ap, ) {
+      Navigator.of(context).push(
+        MaterialPageRoute(builder: (ctx) => assign_project_page(),),);
+    }
+
+    if (ap.isNotEmpty) {
       content = ListView.builder(
-
-          itemCount: serv.length,
+          itemCount: ap.length,
           itemBuilder: (ctx, index) => workProject(
-           // wp:ser[index],
-           // sr: serv[index],
-
-            onSelectproject: (serv) {
-              //selectMeal(context, data_st);
-            },
-          ));
+                // wp:ser[index],
+                // sr: serv[index],
+                asp: ap[index],
+            onSelectA_project: (asp) {
+                  // if(asp.id==apd.id){}
+              selectpro(context, asp);
+                },
+              ));
     }
 
     // TODO: implement build
@@ -74,14 +77,11 @@ class _executive_detailsState extends ConsumerState<executive_details> {
             style: TextStyle(
               color: Colors.white,
             )),
-        iconTheme: IconThemeData(
-            color: Colors.white
-        ),
+        iconTheme: IconThemeData(color: Colors.white),
       ),
-
       body: Container(
-        height: double.infinity,
-        width: double.infinity,
+        // height: double.infinity,
+        // width: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(
@@ -92,65 +92,103 @@ class _executive_detailsState extends ConsumerState<executive_details> {
                 Colors.black.withOpacity(0.5), BlendMode.saturation),
           ),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
+        child: Stack(
           children: [
-            SizedBox(
-              height: 110,
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 20,right: 20,),
-              child: Container(
-                height: 140,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.grey.withOpacity(0.35),
-                ),
-                child: Row (
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20),
-                      child: Container(
-                        height: 100,
-                        width: 100,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(100),
-                          color: Colors.white,
-                        ),
+            Container(
+              color: Colors.transparent,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  //----------------------------------name upper part ------------------------//
+                  SizedBox(
+                    height: 110,
+                  ),
+
+                  Padding(
+                    padding: EdgeInsets.only(left: 20, right: 20, bottom: 20),
+                    child: Container(
+                      height: 140,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.grey.withOpacity(0.35),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20,top: 20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      child: Row(
                         children: [
-                          Text("Abhishek Malhan",style: TextStyle(color: Colors.white,fontSize: 20)),
-                          Text("India",style: TextStyle(color: Colors.white,fontSize: 15)),
-                          Text("+91 9865328754",style: TextStyle(color: Colors.white,fontSize: 15)),
-                          Text("abhishek113@gmail.com",maxLines: 2,style: TextStyle(color: Colors.white,fontSize: 17)),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 20),
+                            child: Container(
+                              height: 100,
+                              width: 100,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(100),
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 20, top: 20),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("Abhishek Malhan",
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 20)),
+                                Text("India",
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 15)),
+                                Text("+91 9865328754",
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 15)),
+                                Text("abhishek113@gmail.com",
+                                    maxLines: 2,
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 17)),
+                              ],
+                            ),
+                          )
                         ],
                       ),
-                    )
-                  ],
-                ),
+                    ),
+                  ),
+                  //-------------------------------projects assign part------------------//
+                  Expanded(
+                      child: Container(
+                    width: double.infinity,
+                    color: Colors.transparent,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Container(
+                          color: Colors.transparent,
+                          padding: EdgeInsets.only(left: 20, top: 20),
+                          alignment: AlignmentDirectional.topStart,
+                          child: Text("Assigned Projects : ",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 25)),
+                        ),
+                        Expanded(
+                          child: Container(
+                            color: Colors.transparent,
+                            child: content,
+                          ),
+                        ),
+                        // Padding(
+                        //   padding: const EdgeInsets.only(left: 20,right: 20),
+                        //   child: Expanded(
+                        //     child: Container(
+                        //         color: Colors.blueGrey,
+                        //         // height: 460,
+                        //
+                        //         child: content),
+                        //   ),
+                        // ),
+                      ],
+                    ),
+                  )),
+                ],
               ),
             ),
-            Container(
-              padding: EdgeInsets.only(left: 20,top: 20),
-              alignment: AlignmentDirectional.topStart,
-              child: Text("Assigned Projects : ",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 25
-                  )),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20,right: 20),
-              child: Container(
-                height:500,
-                  child: content),
-            )
           ],
         ),
       ),
