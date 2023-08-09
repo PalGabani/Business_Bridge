@@ -7,7 +7,6 @@ import 'package:intl/intl.dart';
 
 class GetService extends ConsumerStatefulWidget {
 
-
   const GetService({
     super.key,
 required this.sn,
@@ -18,19 +17,16 @@ final String sn;
 
 
   @override
-  ConsumerState<GetService> createState() => _GetServiceState();
+  ConsumerState<GetService> createState() => _GetServiceState(sen: sn);
 }
 
 class _GetServiceState extends ConsumerState<GetService> {
 
-
+_GetServiceState({required this.sen});
   String date = DateFormat('MMMM dd,yyyy').format(DateTime.now());
   DateTime? selectedDate;
-@override
-  void initState() {
-    // TODO: implement initState
+ String sen;
 
-  }
   @override
   Widget build(BuildContext context) {
     final keyBoardSpace = MediaQuery.of(context).viewInsets.bottom;
@@ -100,12 +96,9 @@ class _GetServiceState extends ConsumerState<GetService> {
 
                               fontSize: 35),
                         ),
-
-
                       ],
                     ),
-
-                  )),
+                  ),),
               //-----------------------data information ------------------//
               Padding(
                 padding: const EdgeInsets.only(left: 30.0,right: 30),
@@ -127,8 +120,8 @@ class _GetServiceState extends ConsumerState<GetService> {
                               ),
                             ),
                             Text(
-                            ' Services Name',
-
+                            //' Services Name',
+sen,
                               textAlign: TextAlign.start,
                               style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                                 color: Theme.of(context).colorScheme.background,
