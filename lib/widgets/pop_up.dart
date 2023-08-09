@@ -19,7 +19,7 @@ class Popup extends StatefulWidget {
 }
 
 class _PopupState extends State<Popup> {
-  List<String> poplist = ["Admin", "User", "Executive"];
+  List<String> poplist = [ "User", "Executive","About us","Help"];
 
   @override
   Widget build(BuildContext context) {
@@ -63,6 +63,28 @@ class _PopupState extends State<Popup> {
                 },
               ), (route)=>route.isFirst
           );
+        }
+        if(value=="About us"){
+          // Navigator.pushAndRemoveUntil(
+          //   //Navigator.pushanduntill
+          //     context,
+          //     MaterialPageRoute(
+          //       builder: (context) {
+          //         return Login_screen_executive();
+          //       },
+          //     ), (route)=>route.isFirst
+          // );
+        }
+        if(value=="Help"){
+          // Navigator.pushAndRemoveUntil(
+          //   //Navigator.pushanduntill
+          //     context,
+          //     MaterialPageRoute(
+          //       builder: (context) {
+          //         return Login_screen_executive();
+          //       },
+          //     ), (route)=>route.isFirst
+          // );
         }
       },
         itemBuilder: (contex) {
