@@ -5,7 +5,7 @@ import 'package:business_bridge/screens/case_study_page.dart';
 import 'package:business_bridge/screens/history_page.dart';
 import 'package:business_bridge/screens/profile_page.dart';
 import 'package:business_bridge/screens/services_page.dart';
-import 'package:business_bridge/screens/work_portal_page.dart';
+import 'package:business_bridge/screens/dashboard_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -68,12 +68,12 @@ class _homepageState extends ConsumerState<homepage> {
           ),
           BottomNavigationBarItem(
               icon: Icon(
-                Icons.file_copy_outlined,
+                Icons.dashboard_outlined,
                 size: 25,
                 color: Theme.of(context).colorScheme.secondary,
               ),
-              activeIcon: Icon(Icons.file_copy_rounded),
-              label: "Work portal"),
+              activeIcon: Icon(Icons.dashboard_rounded),
+              label: "Dashboard"),
           BottomNavigationBarItem(
               icon: Icon(
                 Icons.watch_later_outlined,
@@ -83,6 +83,7 @@ class _homepageState extends ConsumerState<homepage> {
               activeIcon: Icon(Icons.watch_later),
               label: "History"),
         ],
+
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
         selectedIconTheme: IconThemeData(size: 28),
@@ -101,7 +102,7 @@ class _homepageState extends ConsumerState<homepage> {
             //services: [],
           ),
           profile_page(),
-          work_portal_page(),
+          dashboard_page(),
           history_page()
           //activity name
         ],

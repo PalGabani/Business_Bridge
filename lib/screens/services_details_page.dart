@@ -10,11 +10,9 @@ class services_details_page extends ConsumerWidget {
   const services_details_page({
     super.key,
     required this.sr,
-
   });
 
   final Services sr;
-
 
   // final void Function(Meal meal) onToggleFavorite;
 
@@ -25,115 +23,127 @@ class services_details_page extends ConsumerWidget {
     final String? na = sr.title;
     final ss = ref.watch(servicesProvider);
 
-
     return Scaffold(
+
       appBar: AppBar(
+        scrolledUnderElevation: 0,
         title: Text(sr.title),
       ),
-      body: SingleChildScrollView(
-          child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Column(
-                children: [
-                Hero(
-                tag: sr.id,
-                child: Container(),
-              ),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  ' Details :',
-                  style: Theme
-                      .of(context)
-                      .textTheme
-                      .titleLarge!
-                      .copyWith(
-                    color: Theme
-                        .of(context)
-                        .colorScheme
-                        .primary,
-                    fontWeight: FontWeight.bold,
-                  ),
+      body: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          children: [
+            Hero(
+              tag: sr.id,
+              child: Container(),
+            ),
+            Image.asset(sr.bgimage),
+            // Container(
+            //   height: 200,
+            //   width: double.infinity,
+            //   decoration: BoxDecoration(
+            //     image: DecorationImage(image: AssetImage(sr.bgimage),
+            //     fit: BoxFit.cover),
+            //   ),
+            // ),
+            Container(
+              height: 330,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        ' Details :',
+                        style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                              color: Theme.of(context).colorScheme.primary,
+                              fontWeight: FontWeight.bold,
+                            ),
+                      ),
+                    ),
+
+                    for (final step in sr.details)
+                      Padding(
+                        padding:
+                        const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5),
+                        child: Text(
+                          step,
+                          textAlign: TextAlign.justify,
+                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              color: Theme.of(context).colorScheme.onBackground,
+                              fontSize: 15),
+                        ),
+                      ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    for (final step1 in sr.types)
+                      Padding(
+                        padding:
+                        const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5),
+                        child: Text(
+                          step1,
+                          textAlign: TextAlign.justify,
+                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              color: Theme.of(context).colorScheme.onBackground,
+                              fontSize: 15),
+                        ),
+                      ),
+                  ],
                 ),
               ),
-              const SizedBox(
-                height: 5,
+            ),
+
+            Container(
+              padding: EdgeInsets.only(left: 10, right: 10,top: 10),
+              width: 240,
+              height: 60,
+              child: ElevatedButton(
+                style: ButtonStyle(
+                    shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10))),
+                    backgroundColor: MaterialStatePropertyAll(
+                      Theme.of(context).colorScheme.secondary,
+                    )),
+                // onPressed: () {
+                //   showBottomSheet(
+                //     context: context,
+                //
+                //     builder: (BuildContext context){
+                //       return SizedBox(
+                //         height: 100,
+                //         child: Column(
+                //           children: [
+                //
+                //           ],
+                //         ),
+                //       );
+                //     }
+                //   );
+                // },
+                onPressed: () {
+                  showModalBottomSheet(
+                    //useSafeArea: true,
+                    //isScrollControlled: true,
+                    context: context,
+                    builder: (cntx) => GetService(
+                      sn: sr.title,
+                    ),
+                  );
+                },
+                child: Text(
+                  'Get  IT',
+                  style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                      color: Theme.of(context).colorScheme.background,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 25),
+                ),
               ),
-              for (final step in sr.details)
-          Padding(
-      padding:
-      const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5),
-      child: Text(
-        step,
-        textAlign: TextAlign.justify,
-        style: Theme
-            .of(context)
-            .textTheme
-            .bodyMedium!
-            .copyWith(
-            color: Theme
-                .of(context)
-                .colorScheme
-                .onBackground,
-            fontSize: 15),
+            ),
+
+          ],
+        ),
       ),
-    ),
-    const SizedBox(
-    height: 17,
-    ),
-    Image.asset('assets/images/services/Frame 10.jpg'),
-    const SizedBox(
-    height: 100,
-    ),
-    Container(
-    padding: EdgeInsets.only(left: 10, right: 10),
-    width: 240,
-    height: 50,
-    child: ElevatedButton(
-    style: ButtonStyle(
-    shape: MaterialStatePropertyAll(RoundedRectangleBorder(
-    borderRadius: BorderRadius.circular(10))),
-    backgroundColor: MaterialStatePropertyAll(
-    Theme.of(context).colorScheme.secondary,
-    )),
-    // onPressed: () {
-    //   showBottomSheet(
-    //     context: context,
-    //
-    //     builder: (BuildContext context){
-    //       return SizedBox(
-    //         height: 100,
-    //         child: Column(
-    //           children: [
-    //
-    //           ],
-    //         ),
-    //       );
-    //     }
-    //   );
-    // },
-    onPressed: () {
-    showModalBottomSheet(
-    //useSafeArea: true,
-    //isScrollControlled: true,
-    context: context,
-    builder: (cntx) => GetService(sn: sr.title,),
-    );
-    },
-    child: Text(
-    'Get  IT',
-    style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-    color: Theme.of(context).colorScheme.background,
-    fontWeight: FontWeight.bold,
-    fontSize: 25),
-    ),
-    ),
-    ),
-    ],
-    ),
-    ),
-    )
-    ,
     );
   }
 }

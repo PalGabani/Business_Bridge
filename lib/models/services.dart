@@ -5,7 +5,8 @@ class Services {
     required this.title,
     required this.imageUrl,
     required this.details,
-
+    required this.types,
+    required this.bgimage,
 
   });
 
@@ -13,8 +14,9 @@ class Services {
 
   final String title;
   final String imageUrl;
+  final String bgimage;
 
   final List<String> details;
-
+  final List<String> types;
 
 }

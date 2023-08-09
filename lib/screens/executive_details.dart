@@ -94,7 +94,7 @@ class _executive_detailsState extends ConsumerState<executive_details> {
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
               height: 110,
@@ -147,9 +147,14 @@ class _executive_detailsState extends ConsumerState<executive_details> {
             ),
             Padding(
               padding: const EdgeInsets.only(left: 20,right: 20),
-              child: Container(
-                height:500,
-                  child: content),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    height: 460,
+                      child: content),
+                ],
+              ),
             )
           ],
         ),
