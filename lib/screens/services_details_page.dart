@@ -5,6 +5,7 @@ import 'package:business_bridge/widgets/get_services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class services_details_page extends ConsumerWidget {
   const services_details_page({
@@ -33,11 +34,24 @@ class services_details_page extends ConsumerWidget {
         padding: const EdgeInsets.all(10.0),
         child: Column(
           children: [
+            // Hero(
+            //   tag: sr.id,
+            //   child: Container(),
+            // ),
             Hero(
               tag: sr.id,
-              child: Container(),
+              child: FadeInImage(
+                placeholder: MemoryImage(kTransparentImage),
+                image: AssetImage(sr.bgimage),
+                 fit: BoxFit.cover,
+                // fadeOutCurve: Curves.bounceIn,
+                // fadeOutDuration: Duration(microseconds: 1),
+                 fadeInDuration:Duration(milliseconds: 100) ,
+                height: 300,
+                width: double.infinity,
+              ),
             ),
-            Image.asset(sr.bgimage),
+           // Image.asset(sr.bgimage),
             // Container(
             //   height: 200,
             //   width: double.infinity,

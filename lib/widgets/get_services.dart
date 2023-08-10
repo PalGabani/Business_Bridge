@@ -41,7 +41,7 @@ _GetServiceState({required this.sen});
         //  image:Image.asset('assets/images/getservices.png'),
           image: DecorationImage(
             image: AssetImage('assets/images/getservices.png'),
-            fit: BoxFit.fill,
+            fit: BoxFit.fitHeight,
 
           ),
           color:  Theme.of(context).colorScheme.secondary,
@@ -102,120 +102,136 @@ _GetServiceState({required this.sen});
               //-----------------------data information ------------------//
               Padding(
                 padding: const EdgeInsets.only(left: 30.0,right: 30),
-                child: Container(
-                  color: Colors.transparent,
-                  child: Column(
+                child: Column(
 
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Align(
-                        alignment: AlignmentDirectional.topStart,
-                        child: Row(
-                          children: [
-                            Text(
-                              "Service type : ",
-                              textAlign: TextAlign.start,
-                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                color: Theme.of(context).colorScheme.background,
-                                fontSize: 16,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      child: Row(
+                        children: [
+                          Text(
+                            "Service type : ",
+                            textAlign: TextAlign.start,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            softWrap: true,
+                            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              color: Theme.of(context).colorScheme.background,
+                              fontSize: 16,
 
-                              ),
                             ),
-                            Text(
+                          ),
+                          Expanded(
+                            child: Text(
                             //' Services Name',
-sen,
-                              textAlign: TextAlign.start,
+                                sen,
+                              //textAlign: TextAlign.start,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              softWrap: true,
                               style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                                 color: Theme.of(context).colorScheme.background,
                                 fontSize: 16,
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
+                    ),
 
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Align(
-                        alignment: AlignmentDirectional.topStart,
-                        child: Row(
-                          children: [
-                            Text(
-                              "Our Executive Name : ",
-                              textAlign: TextAlign.justify,
-                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                color: Theme.of(context).colorScheme.background,
-                                fontSize: 16,
-                              ),
-                            ),
-                            Text(
-                              "Abhishek Malhan",
-                              textAlign: TextAlign.start,
-                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                color: Theme.of(context).colorScheme.background,
-                                fontSize: 16,
-                              ),
-                            ),
-                          ],
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          "Our Executive Name : ",
+                          textAlign: TextAlign.justify,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          softWrap: true,
+                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            color: Theme.of(context).colorScheme.background,
+                            fontSize: 16,
+                          ),
                         ),
-                      ),
+                        Expanded(
+                          child: Text(
+                            "Abhishek Malhan",
+                            textAlign: TextAlign.start,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            softWrap: true,
+                            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              color: Theme.of(context).colorScheme.background,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
 
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Align(
-                        alignment: AlignmentDirectional.topStart,
-                        child: Row(
-                          children: [
-                            Text(
-                              "Executive Mobile no. : ",
-                              textAlign: TextAlign.justify,
-                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                color: Theme.of(context).colorScheme.background,
-                                fontSize: 16,
-                              ),
-                            ),
-                            Text(
-                              "+91 9865328754",
-                              textAlign: TextAlign.start,
-                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                color: Theme.of(context).colorScheme.background,
-                                fontSize: 16,
-                              ),
-                            ),
-                          ],
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          "Executive Mobile no. : ",
+                          textAlign: TextAlign.justify,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          softWrap: true,
+                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            color: Theme.of(context).colorScheme.background,
+                            fontSize: 16,
+                          ),
                         ),
-                      ),
+                        Text(
+                          "+91 9865328754",
+                          textAlign: TextAlign.justify,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          softWrap: true,
+                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            color: Theme.of(context).colorScheme.background,
+                            fontSize: 16,
 
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Align(
-                        alignment: AlignmentDirectional.topStart,
-                        child: Row(
-                          children: [
-                            Text(
-                              "Assign Date : ",
-                              textAlign: TextAlign.justify,
-                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                color: Theme.of(context).colorScheme.background,
-                                fontSize: 16,
-                              ),
-                            ),
-                            Text(
-                              date,
-                              textAlign: TextAlign.start,
-                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                color: Theme.of(context).colorScheme.background,
-                                fontSize: 16,
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
+                      ],
+                    ),
+
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          "Assign Date : ",
+                          textAlign: TextAlign.justify,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          softWrap: true,
+                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            color: Theme.of(context).colorScheme.background,
+                            fontSize: 16,
+                          ),
+                        ),
+                        Text(
+                          date,
+                          textAlign: TextAlign.justify,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          softWrap: true,
+                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            color: Theme.of(context).colorScheme.background,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
               //-----------------------button-----------------------------//
