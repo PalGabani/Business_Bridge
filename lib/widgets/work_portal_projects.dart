@@ -13,17 +13,20 @@ class workProject extends ConsumerStatefulWidget {
     super.key,
     required this.onSelectA_project,
     required this.asp,
+   // required this.pd
   });
 
-  final AssignedProjects asp;
+  final AssignedProject asp;
+//  final ProjectDetail pd;
 
   // final Services sr;
-  final void Function(AssignedProjects apd) onSelectA_project;
+  final void Function(AssignedProject apd) onSelectA_project;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() {
     return _workProjectState(
       ap: asp,
+      //pd: pd,
       onSelectA_projects: onSelectA_project,
     );
   }
@@ -32,11 +35,13 @@ class workProject extends ConsumerStatefulWidget {
 class _workProjectState extends ConsumerState<workProject> {
   _workProjectState({
     required this.ap,
+   // required this.pd,
     required this.onSelectA_projects,
   });
 
-  final AssignedProjects ap;
-  final void Function(AssignedProjects apd) onSelectA_projects;
+  final AssignedProject ap;
+//  final ProjectDetail pd;
+  final void Function(AssignedProject apd) onSelectA_projects;
 
   @override
   Widget build(BuildContext context) {

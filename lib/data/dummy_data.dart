@@ -615,24 +615,50 @@ const assignprojectdetails = [
     task: ['adf', 'asdf', 'sadf'],
   ),
 ];
-const assignedprojects = [
-  AssignedProjects(
-      id: 's1',
-      title: 'Upscale Your Business',
-      country: 'india',
-      mobile: ' +91 9879382701',
-      email: 'palgabani03@gmail.com'),
-  AssignedProjects(
-      id: 's2',
-      title: 'Take Over Businesses',
-      country: 'india',
-      mobile: ' +91 9879382701',
-      email: 'smitkachdiya@gmail.com'),
-  AssignedProjects(
-      id: 's3',
-      title: 'Increase Your Sales',
-      country: 'india',
-      mobile: ' +91 9879382701',
-      email: 'jaygoyani@gmail.com'),
+// const assignedprojects = [
+//   AssignedProjects(
+//       id: 's1',
+//       title: 'Upscale Your Business',
+//       country: 'india',
+//       mobile: ' +91 9879382701',
+//       email: 'palgabani03@gmail.com'),
+//   AssignedProjects(
+//       id: 's2',
+//       title: 'Take Over Businesses',
+//       country: 'india',
+//       mobile: ' +91 9879382701',
+//       email: 'smitkachdiya@gmail.com'),
+//   AssignedProjects(
+//       id: 's3',
+//       title: 'Increase Your Sales',
+//       country: 'india',
+//       mobile: ' +91 9879382701',
+//       email: 'jaygoyani@gmail.com'),
+//
+// ];
+List<AssignedProject> assignedProjects = [
+  AssignedProject(
+    id: 's1',
+    title: 'Upscale Your Business',
+    country: 'india',
+    mobile: '+91 9879382701',
+    email: 'palgabani03@gmail.com',
+    current_index: 0,
+    maindetails: MainDetails(
+      companyname: 'Adani Ltd.........',
+      description: 'Main Description 1',
+      duedate: '2023-09-01',
+    ),
+    details:
+      ProjectDetail( task1: 'Task 1 for Project 1',
+        task1detail: 'Task 1 detail for Project 1',
+        task2: 'Task 2 for Project 1',
+        task2detail: 'Task 2 detail for Project 1',
+        task3: 'Task 3 for Project 1',
+        task3detail: 'Task 3 detail for Project 1',),
 
+
+
+  ),
+  // You can add more entries here with similar structure
 ];

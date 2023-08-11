@@ -18,9 +18,12 @@ class executive_details extends ConsumerStatefulWidget {
 
 class _executive_detailsState extends ConsumerState<executive_details> {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,) {
     final ap = ref.watch(assignedprojectsProvider);
-final apd=ref.watch(assignprojectdetailProvider);
+
+
+// final apd=ref.watch(assignprojectdetailProvider);
+
     Widget content = Container(
       // height: 100,
       child: Center(
@@ -49,18 +52,18 @@ final apd=ref.watch(assignprojectdetailProvider);
         ),
       ),
     );
-    void selectpro(BuildContext context, AssignedProjects ap, ) {
+    void selectpro(BuildContext context, AssignedProject ap, ) {
       Navigator.of(context).push(
-        MaterialPageRoute(builder: (ctx) => assign_project_page(),),);
+        MaterialPageRoute(builder: (ctx) => assign_project_page(apd: ap,),),);
     }
 
     if (ap.isNotEmpty) {
       content = ListView.builder(
           itemCount: ap.length,
           itemBuilder: (ctx, index) => workProject(
-                // wp:ser[index],
-                // sr: serv[index],
+
                 asp: ap[index],
+
             onSelectA_project: (asp) {
                   // if(asp.id==apd.id){}
               selectpro(context, asp);
