@@ -47,7 +47,7 @@ class services_details_page extends ConsumerWidget {
                 // fadeOutCurve: Curves.bounceIn,
                 // fadeOutDuration: Duration(microseconds: 1),
                  fadeInDuration:Duration(milliseconds: 100) ,
-                height: 300,
+                height: 270,
                 width: double.infinity,
               ),
             ),

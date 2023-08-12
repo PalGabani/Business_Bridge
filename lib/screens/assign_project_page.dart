@@ -8,34 +8,29 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class assign_project_page extends ConsumerStatefulWidget {
   assign_project_page({
     super.key,
-    required this.apd,
-  //  required this.pd,
+    //required this.apd,
   });
 
-   final AssignedProject apd;
-  // final ProjectDetail pd;
+  // final AssignedProjects apd;
 
   @override
   ConsumerState<assign_project_page> createState() =>
       _assign_project_pageState(
-          apd: apd,
-          //pd: pd
+          //apd: apd
       );
 }
 
 class _assign_project_pageState extends ConsumerState<assign_project_page> {
-  final AssignedProject apd;
-//  final ProjectDetail pd;
-  _assign_project_pageState({
-    required this.apd,
-//required this.pd
-  });
+  // _assign_project_pageState({
+  //   //required this.apd,
+  //
+  // });
 
   bool isinquiryChecked = false;
   bool ismittingChecked = false;
   bool isnanalizeChecked = false;
 
-
+  // final AssignedProjects apd;
 
   @override
   Widget build(BuildContext context) {
@@ -81,15 +76,15 @@ class _assign_project_pageState extends ConsumerState<assign_project_page> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        apd.maindetails.companyname,
+                        "Adani ltd.",
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: 30,
                             fontWeight: FontWeight.bold),
                       ),
                       //Text("Upscale Business",style: TextStyle(color: Colors.black,fontSize: 20,fontWeight: FontWeight.bold),),
-                      Text(apd.maindetails.description,
-                       // "Adani want\'s to make a sales engagement platform that accelerates B2B sales pipeline through a multi-channel outreach capability to book more meetings and close more revenue.",
+                      Text(
+                        "Adani want\'s to make a sales engagement platform that accelerates B2B sales pipeline through a multi-channel outreach capability to book more meetings and close more revenue.",
                         maxLines: 5,
                         style: TextStyle(color: Colors.black, fontSize: 16),
                       ),
@@ -97,8 +92,7 @@ class _assign_project_pageState extends ConsumerState<assign_project_page> {
                       Padding(
                         padding: const EdgeInsets.only(top: 8),
                         child: Text(
-                          "Due date :"+apd.maindetails.duedate,
-                              //" Thursday,20 january 2024",
+                          "Due date : Thursday,20 january 2024",
                           style: TextStyle(color: Colors.black, fontSize: 16),
                         ),
                       )
@@ -148,8 +142,7 @@ class _assign_project_pageState extends ConsumerState<assign_project_page> {
                               },
                             ),
                           ),
-                          Text(apd.details.task1,
-                             // "Make an Inquiry call",
+                          Text("Make an Inquiry call",
                               style:
                                   TextStyle(color: Colors.black, fontSize: 16))
                         ],
@@ -171,8 +164,7 @@ class _assign_project_pageState extends ConsumerState<assign_project_page> {
                               },
                             ),
                           ),
-                          Text(apd.details.task2,
-                              //"Set meeting with client",
+                          Text("Set meeting with client",
                               style:
                                   TextStyle(color: Colors.black, fontSize: 16))
                         ],
@@ -194,8 +186,7 @@ class _assign_project_pageState extends ConsumerState<assign_project_page> {
                               },
                             ),
                           ),
-                          Text(apd.details.task3,
-                           //   "Analize client problem",
+                          Text("Analize client problem",
                               style:
                                   TextStyle(color: Colors.black, fontSize: 16))
                         ],
