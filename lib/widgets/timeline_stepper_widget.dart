@@ -23,9 +23,18 @@ class _TimelineStepperState extends State<TimelineStepper> {
         children: [
           Container(
             height: 400,
+
             child: Timeline.tileBuilder(
               theme: TimelineTheme.of(context).copyWith(
+                color: Theme.of(context).colorScheme.secondary,
+                indicatorTheme: IndicatorThemeData(
+                  color: Theme.of(context).colorScheme.secondary,
+                  size: 25,
+                ),
                 nodePosition: 0.1,
+                connectorTheme: ConnectorThemeData(
+                  thickness: 3,
+                ),
               ),
                 builder: TimelineTileBuilder.connectedFromStyle(
                   itemCount: widget.steps.length,
@@ -33,19 +42,39 @@ class _TimelineStepperState extends State<TimelineStepper> {
                     return (index < _currentStep) ? ConnectorStyle.solidLine : ConnectorStyle.dashedLine;
                   } ,
                   indicatorStyleBuilder: (context, index) {
-                    return (index < _currentStep) ? IndicatorStyle.dot : IndicatorStyle.outlined;
+                    return   (index < _currentStep)
+                        ? IndicatorStyle.dot
+                        : IndicatorStyle.outlined;
                   },
                   contentsAlign: ContentsAlign.basic,
-
+                  firstConnectorStyle: ConnectorStyle.transparent,
+                  lastConnectorStyle: ConnectorStyle.transparent,
                   contentsBuilder: (context, index) {
-                    return Container(
-                      width: 200,
-                      height: 100,
-                      child: Column(
-                        children: [
-                          Text(widget.steps[index]['title']!,),
-                          Text(widget.steps[index]['subtitle']!,),
-                        ],
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        width: 200,
+                        height: 100,
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.secondary,
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: Column(
+                          children: [
+                            Text(widget.steps[index]['title']!,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18
+                                )
+                            ),
+                            Text(widget.steps[index]['subtitle']!,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 12
+                                )
+                            ),
+                          ],
+                        ),
                       ),
                     );
                   },
@@ -57,6 +86,7 @@ class _TimelineStepperState extends State<TimelineStepper> {
           Stepper(
             physics: ClampingScrollPhysics(),
             currentStep: _currentStep,
+
             onStepContinue: () {
               setState(() {
                 _currentStep < widget.steps.length - 1
@@ -115,6 +145,8 @@ class _TimelineStepperState extends State<TimelineStepper> {
                           context: context,
                           builder: (BuildContext context) => AlertDialog(
                             title: const Text('Task Completed'),
+                            backgroundColor: Theme.of(context).colorScheme.background,
+                            elevation: 5,
                             content: const Text('Good job , you completed your task '),
                             actions: <Widget>[
                               TextButton(

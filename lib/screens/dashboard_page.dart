@@ -15,12 +15,12 @@ class _dashboard_pageState extends State<dashboard_page> {
   bool _stepervalue = false;
 
   final steps = [
-    {'title': 'Step 1', 'subtitle': 'Subtitle 1', 'content': 'Content 1','active':'1'},
-    {'title': 'Step 2', 'subtitle': 'Subtitle 2', 'content': 'Content 2','active':'2'},
-    {'title': 'Step 3', 'subtitle': 'Subtitle 3', 'content': 'Content 3','active':'3'},
-    {'title': 'Step 1', 'subtitle': 'Subtitle 1', 'content': 'Content 1','active':'1'},
-    {'title': 'Step 2', 'subtitle': 'Subtitle 2', 'content': 'Content 2','active':'2'},
-    {'title': 'Step 3', 'subtitle': 'Subtitle 3', 'content': 'Content 3','active':'3'},
+    {'title': 'Step 1', 'subtitle': 'Subtitle 1', 'content': 'Content 1','active':'0'},
+    {'title': 'Step 2', 'subtitle': 'Subtitle 2', 'content': 'Content 2','active':'1'},
+    {'title': 'Step 3', 'subtitle': 'Subtitle 3', 'content': 'Content 3','active':'2'},
+    {'title': 'Step 1', 'subtitle': 'Subtitle 1', 'content': 'Content 4','active':'3'},
+    {'title': 'Step 2', 'subtitle': 'Subtitle 2', 'content': 'Content 5','active':'4'},
+    {'title': 'Step 3', 'subtitle': 'Subtitle 3', 'content': 'Content 6','active':'5'},
   ];
 
   @override

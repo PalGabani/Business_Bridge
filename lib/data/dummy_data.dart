@@ -661,16 +661,16 @@ List<AssignedProject> assignedProjects = [
 ];
 
 const dummy_service_task = [
-  {'title': 'Step 1', 'subtitle': 'Subtitle 1', 'content': 'Content 1','active':'1'},
-  {'title': 'Step 2', 'subtitle': 'Subtitle 2', 'content': 'Content 2','active':'2'},
-  {'title': 'Step 3', 'subtitle': 'Subtitle 3', 'content': 'Content 3','active':'3'},
-  {'title': 'Step 4', 'subtitle': 'Subtitle 4', 'content': 'Content 4','active':'4'},
-  {'title': 'Step 5', 'subtitle': 'Subtitle 5', 'content': 'Content 5','active':'5'},
-  {'title': 'Step 6', 'subtitle': 'Subtitle 6', 'content': 'Content 6','active':'6'},
-  {'title': 'Step 7', 'subtitle': 'Subtitle 7', 'content': 'Content 7','active':'7'},
-  {'title': 'Step 8', 'subtitle': 'Subtitle 8', 'content': 'Content 8','active':'8'},
-  {'title': 'Step 9', 'subtitle': 'Subtitle 9', 'content': 'Content 9','active':'9'},
-  {'title': 'Step 10', 'subtitle': 'Subtitle 10', 'content': 'Content 10','active':'10'},
-  {'title': 'Step 11', 'subtitle': 'Subtitle 11', 'content': 'Content 11','active':'11'},
-  {'title': 'Step 12', 'subtitle': 'Subtitle 12', 'content': 'Content 12','active':'12'},
+  {'title': 'Step 1', 'subtitle': 'Subtitle 1', 'content': 'Content 1','active':'0'},
+  {'title': 'Step 2', 'subtitle': 'Subtitle 2', 'content': 'Content 2','active':'1'},
+  {'title': 'Step 3', 'subtitle': 'Subtitle 3', 'content': 'Content 3','active':'2'},
+  {'title': 'Step 4', 'subtitle': 'Subtitle 4', 'content': 'Content 4','active':'3'},
+  {'title': 'Step 5', 'subtitle': 'Subtitle 5', 'content': 'Content 5','active':'4'},
+  {'title': 'Step 6', 'subtitle': 'Subtitle 6', 'content': 'Content 6','active':'5'},
+  {'title': 'Step 7', 'subtitle': 'Subtitle 7', 'content': 'Content 7','active':'6'},
+  {'title': 'Step 8', 'subtitle': 'Subtitle 8', 'content': 'Content 8','active':'7'},
+  {'title': 'Step 9', 'subtitle': 'Subtitle 9', 'content': 'Content 9','active':'8'},
+  {'title': 'Step 10', 'subtitle': 'Subtitle 10', 'content': 'Content 10','active':'9'},
+  {'title': 'Step 11', 'subtitle': 'Subtitle 11', 'content': 'Content 11','active':'10'},
+  {'title': 'Step 12', 'subtitle': 'Subtitle 12', 'content': 'Content 12','active':'11'},
 ];
