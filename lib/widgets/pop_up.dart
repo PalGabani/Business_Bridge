@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:business_bridge/screens/about_us_page.dart';
 import 'package:business_bridge/screens/first_page_executive.dart';
 import 'package:business_bridge/screens/sign_page_user.dart';
 import 'package:flutter/cupertino.dart';
@@ -65,15 +66,15 @@ class _PopupState extends State<Popup> {
           );
         }
         if(value=="About us"){
-          // Navigator.pushAndRemoveUntil(
-          //   //Navigator.pushanduntill
-          //     context,
-          //     MaterialPageRoute(
-          //       builder: (context) {
-          //         return Login_screen_executive();
-          //       },
-          //     ), (route)=>route.isFirst
-          // );
+          Navigator.pushAndRemoveUntil(
+            //Navigator.pushanduntill
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return about_us_page();
+                },
+              ), (route)=>route.isFirst
+          );
         }
         if(value=="Help"){
           // Navigator.pushAndRemoveUntil(

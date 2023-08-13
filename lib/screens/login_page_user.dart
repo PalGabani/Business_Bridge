@@ -1,3 +1,4 @@
+import 'package:business_bridge/screens/forget_password_user.dart';
 import 'package:business_bridge/screens/homepage.dart';
 
 import 'package:business_bridge/screens/sign_page_user.dart';
@@ -381,7 +382,13 @@ class _Login_pageState extends State<Login_page> {
                                     Align(
                                       alignment: Alignment.centerRight,
                                       child: TextButton(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            Navigator.push(context,
+                                                MaterialPageRoute(
+                                                    builder: (context) {
+                                                      return forget_password_user();
+                                                    }));
+                                          },
                                           child: Text(
                                             "Forgot password?",
                                             style: TextStyle(
@@ -513,7 +520,7 @@ class _Login_pageState extends State<Login_page> {
                                             GestureDetector(
                                               onTap: () {},
                                               child: Container(
-                                                width: 150,
+                                                width: 145,
                                                 height: 50,
                                                 decoration: BoxDecoration(
                                                     borderRadius:
@@ -562,7 +569,7 @@ class _Login_pageState extends State<Login_page> {
                                             GestureDetector(
                                               onTap: () {},
                                               child: Container(
-                                                width: 150,
+                                                width: 145,
                                                 height: 50,
                                                 decoration: BoxDecoration(
                                                     borderRadius:

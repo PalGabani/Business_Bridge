@@ -164,16 +164,21 @@ class _executive_detailsState extends ConsumerState<executive_details> {
                       children: [
                         Container(
                           color: Colors.transparent,
-                          padding: EdgeInsets.only(left: 20, top: 20),
+                          padding: EdgeInsets.only(left: 20, top: 20,bottom: 5),
                           alignment: AlignmentDirectional.topStart,
                           child: Text("Assigned Projects : ",
                               style:
                                   TextStyle(color: Colors.white, fontSize: 25)),
                         ),
-                        Expanded(
-                          child: Container(
-                            color: Colors.transparent,
-                            child: content,
+
+                        MediaQuery.removePadding(
+                          context: context,
+                          removeTop: true,
+                          child: Expanded(
+                            child: Container(
+                              color: Colors.transparent,
+                              child: content,
+                            ),
                           ),
                         ),
                         // Padding(

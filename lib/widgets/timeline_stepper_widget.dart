@@ -16,14 +16,21 @@ class TimelineStepper extends StatefulWidget {
 class _TimelineStepperState extends State<TimelineStepper> {
   int _currentStep = 1;
 
+  Color getCorrectColor(int index) {
+    if (index < _currentStep) {
+      return Theme.of(context).colorScheme.secondary;
+    }
+    return Theme.of(context).colorScheme.secondary.withOpacity(0.7);
+  }
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         children: [
           Container(
-            height: 400,
+            height: 500,
 
+            // ------------------------ Timeline ------------------
             child: Timeline.tileBuilder(
               theme: TimelineTheme.of(context).copyWith(
                 color: Theme.of(context).colorScheme.secondary,
@@ -33,7 +40,7 @@ class _TimelineStepperState extends State<TimelineStepper> {
                 ),
                 nodePosition: 0.1,
                 connectorTheme: ConnectorThemeData(
-                  thickness: 3,
+                  thickness: 3.5,
                 ),
               ),
                 builder: TimelineTileBuilder.connectedFromStyle(
@@ -53,13 +60,15 @@ class _TimelineStepperState extends State<TimelineStepper> {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
-                        width: 200,
-                        height: 100,
+                        width: 280,
+                        alignment: Alignment.topLeft,
+                        padding: EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.secondary,
+                          color: getCorrectColor(index),
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(widget.steps[index]['title']!,
                                 style: TextStyle(
@@ -73,6 +82,12 @@ class _TimelineStepperState extends State<TimelineStepper> {
                                     fontSize: 12
                                 )
                             ),
+                            Text(widget.steps[index]['content']!,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 14
+                                )
+                            ),
                           ],
                         ),
                       ),
@@ -82,120 +97,157 @@ class _TimelineStepperState extends State<TimelineStepper> {
             ),
           ),
 
-          // ---------------------- stepper ------------------------------
-          Stepper(
-            physics: ClampingScrollPhysics(),
-            currentStep: _currentStep,
 
-            onStepContinue: () {
-              setState(() {
-                _currentStep < widget.steps.length - 1
-                    ? _currentStep += 1
-                    : _currentStep;
-              });
-            },
-            onStepCancel: () {
-              setState(() {
-                _currentStep > 0
-                    ? _currentStep -= 1
-                    : _currentStep = widget.steps.length - 1;
-              });
-            },
-            controlsBuilder:
-                (BuildContext context, ControlsDetails controlsDetails) {
-              return Row(
-                children: [
-                  if(_currentStep < widget.steps.length - 1)
-                    Padding(padding: const EdgeInsets.only(left: 80),
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                          shape: MaterialStatePropertyAll(
-                              RoundedRectangleBorder(
-                                  borderRadius:
-                                  BorderRadius.circular(20))),
-                          backgroundColor: MaterialStatePropertyAll(
-                            Theme.of(context).colorScheme.secondary,
-                          )),
-                      onPressed: controlsDetails.onStepContinue,
-                      child: Text('Next',style: Theme.of(context)
-                          .textTheme
-                          .bodyLarge!
-                          .copyWith(
-                          color: Theme.of(context)
-                              .colorScheme
-                              .background,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18),),
+          // ---------------------- stepper ------------------------------
+          Theme(
+            data: ThemeData(
+              canvasColor: Colors.yellow,
+              colorScheme: Theme.of(context).colorScheme.copyWith(
+                primary: Color(0xff0a1f34),
+                secondary: Color(0xff0a1f34),
+                background: Colors.white,
+                onPrimaryContainer: Colors.white,
+              ),
+            ),
+            child: Stepper(
+              physics: ClampingScrollPhysics(),
+              currentStep: _currentStep,
+
+              onStepContinue: () {
+                setState(() {
+                  _currentStep < widget.steps.length - 1
+                      ? _currentStep += 1
+                      : _currentStep;
+                });
+              },
+              onStepCancel: () {
+                setState(() {
+                  _currentStep > 0
+                      ? _currentStep -= 1
+                      : _currentStep = widget.steps.length - 1;
+                });
+              },
+              controlsBuilder:
+                  (BuildContext context, ControlsDetails controlsDetails) {
+                return Row(
+                  children: [
+                    if(_currentStep < widget.steps.length - 1)
+                      Padding(padding: const EdgeInsets.only(left: 80),
+                        child: Container(
+                          width: 100,
+                          child: ElevatedButton(
+                            style: ButtonStyle(
+                              shape: MaterialStatePropertyAll(
+                                  RoundedRectangleBorder(
+                                      borderRadius:
+                                      BorderRadius.circular(10))),
+                              backgroundColor: MaterialStatePropertyAll(
+                                Theme.of(context).colorScheme.secondary,
+                              )),
+                          onPressed: controlsDetails.onStepContinue,
+                          child: Text('Next',style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge!
+                              .copyWith(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .background,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18),),
+                      ),
+                        ),
+                    )
+                    else
+                      Padding(padding: const EdgeInsets.only(left: 80),
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                              shape: MaterialStatePropertyAll(
+                                  RoundedRectangleBorder(
+                                      borderRadius:
+                                      BorderRadius.circular(10))),
+                              backgroundColor: MaterialStatePropertyAll(
+                                Theme.of(context).colorScheme.secondary,
+                              )),
+
+                          // ------------- task completed ---------
+                          onPressed: () => showDialog<String>(
+                            context: context,
+                            builder: (BuildContext context) => AlertDialog(
+                              title: const Text('Task Completed'),
+                              backgroundColor: Theme.of(context).colorScheme.background,
+                              elevation: 5,
+                              content: const Text('Good job , you completed your task '),
+                              actions: <Widget>[
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context, 'OK'),
+                                  child: const Text('OK'),
+                                ),
+                              ],
+                            ),
+                          ),
+                          child: Text('Complete',style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge!
+                              .copyWith(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .background,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18),),
+                        ),
+                      ),
+                    SizedBox(width: 10),
+                    if(_currentStep != 0)
+                       Padding(
+                         padding: const EdgeInsets.only(left: 8),
+                         child: Container(
+                           width: 100,
+                           child: ElevatedButton(
+                             style: ButtonStyle(
+                               shape: MaterialStatePropertyAll(
+                                   RoundedRectangleBorder(
+                                       borderRadius:
+                                       BorderRadius.circular(10))),
+                               backgroundColor: MaterialStatePropertyAll(
+                                 Theme.of(context).colorScheme.onPrimaryContainer,
+                               )
+                             ),
+                            onPressed: controlsDetails.onStepCancel,
+                            child: Text('Previous',style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                color: Theme.of(context).colorScheme.secondary,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18),
+                            ),
+                           ),
+                         ),
+                       ),
+                  ],
+                );
+              },
+              steps: widget.steps
+                  .map(
+                    (step) => Step(
+                      isActive: _currentStep == int.parse(step['active']!),
+                      title: Text(step['title']!),
+                      content: Padding(
+                        padding: const EdgeInsets.only(left: 60,bottom: 8),
+                        child: Container(
+                          padding: EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Color(0xff0a1f34)
+                          ),
+                            child: Text(step['content']!,
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),)
+                        ),
+                      ),
                     ),
                   )
-                  else
-                    Padding(padding: const EdgeInsets.only(left: 80),
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                            shape: MaterialStatePropertyAll(
-                                RoundedRectangleBorder(
-                                    borderRadius:
-                                    BorderRadius.circular(20))),
-                            backgroundColor: MaterialStatePropertyAll(
-                              Theme.of(context).colorScheme.secondary,
-                            )),
-
-                        // ------------- task completed ---------
-                        onPressed: () => showDialog<String>(
-                          context: context,
-                          builder: (BuildContext context) => AlertDialog(
-                            title: const Text('Task Completed'),
-                            backgroundColor: Theme.of(context).colorScheme.background,
-                            elevation: 5,
-                            content: const Text('Good job , you completed your task '),
-                            actions: <Widget>[
-                              TextButton(
-                                onPressed: () => Navigator.pop(context, 'OK'),
-                                child: const Text('OK'),
-                              ),
-                            ],
-                          ),
-                        ),
-                        child: Text('Complete',style: Theme.of(context)
-                            .textTheme
-                            .bodyLarge!
-                            .copyWith(
-                            color: Theme.of(context)
-                                .colorScheme
-                                .background,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18),),
-                      ),
-                    ),
-                  SizedBox(width: 10),
-                  if(_currentStep != 0)
-                     ElevatedButton(
-                       style: ButtonStyle(
-                         shape: MaterialStatePropertyAll(
-                             RoundedRectangleBorder(
-                                 borderRadius:
-                                 BorderRadius.circular(20))),
-                       ),
-                      onPressed: controlsDetails.onStepCancel,
-                      child: Text('Previous',style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                          color: Theme.of(context).colorScheme.onPrimaryContainer,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18),
-                      ),
-                     ),
-                ],
-              );
-            },
-            steps: widget.steps
-                .map(
-                  (step) => Step(
-                    isActive: _currentStep == int.parse(step['active']!),
-                    title: Text(step['title']!),
-                    content: Text(step['content']!),
-                  ),
-                )
-                .toList(),
-            margin: EdgeInsets.only(right:10),
+                  .toList(),
+              margin: EdgeInsets.only(right:10),
+            ),
           ),
         ],
       ),
