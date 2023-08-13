@@ -14,9 +14,9 @@ final caseStudyProvider=Provider((ref) {
 final knowMoreProvider=Provider((ref) {
   return knowMoreData;
 });
-final assignprojectdetailProvider=Provider((ref) {
-  return assignprojectdetails;
-});
+// final assignprojectdetailProvider=Provider((ref) {
+//   return assignprojectdetails;
+// });
 final assignedprojectsProvider=Provider((ref) {
   return assignedProjects;
 });
@@ -26,3 +26,16 @@ final assignedprojectsProvider=Provider((ref) {
 // final projectDetails=Provider((ref) {
 // return  ProjectDetail;
 // });
+
+
+class ProjectProvider extends StateNotifier<List<AssignedProject>> {
+  ProjectProvider(List<AssignedProject> state) : super(state);
+
+  void setAssignedProjects(List<AssignedProject> projects) {
+    state = projects;
+  }
+}
+
+final projectProvider = StateNotifierProvider<ProjectProvider, List<AssignedProject>>(
+      (ref) => ProjectProvider([]),
+);

@@ -18,9 +18,9 @@ class executive_details extends ConsumerStatefulWidget {
 
 class _executive_detailsState extends ConsumerState<executive_details> {
   @override
-  Widget build(BuildContext context,) {
+  Widget build(BuildContext context, ) {
     final ap = ref.watch(assignedprojectsProvider);
-
+    //final ap=ref.watch(projectProvider);
 
 // final apd=ref.watch(assignprojectdetailProvider);
 
@@ -53,8 +53,9 @@ class _executive_detailsState extends ConsumerState<executive_details> {
       ),
     );
     void selectpro(BuildContext context, AssignedProject ap, ) {
+      List<Map<String, String>> step=ap.details12;
       Navigator.of(context).push(
-        MaterialPageRoute(builder: (ctx) => assign_project_page(/*apd: ap,*/),),);
+        MaterialPageRoute(builder: (ctx) => assign_project_page(apd: ap,finalSteps: step,),),);
     }
 
     if (ap.isNotEmpty) {
@@ -164,16 +165,21 @@ class _executive_detailsState extends ConsumerState<executive_details> {
                       children: [
                         Container(
                           color: Colors.transparent,
-                          padding: EdgeInsets.only(left: 20, top: 20),
+                          padding: EdgeInsets.only(left: 20, top: 20,bottom: 5),
                           alignment: AlignmentDirectional.topStart,
                           child: Text("Assigned Projects : ",
                               style:
                                   TextStyle(color: Colors.white, fontSize: 25)),
                         ),
-                        Expanded(
-                          child: Container(
-                            color: Colors.transparent,
-                            child: content,
+
+                        MediaQuery.removePadding(
+                          context: context,
+                          removeTop: true,
+                          child: Expanded(
+                            child: Container(
+                              color: Colors.transparent,
+                              child: content,
+                            ),
                           ),
                         ),
                         // Padding(

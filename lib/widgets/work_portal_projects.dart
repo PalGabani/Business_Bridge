@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 import '../models/case_study.dart';
+import '../screens/assign_project_page.dart';
 
 class workProject extends ConsumerStatefulWidget {
   const workProject({
@@ -52,6 +53,9 @@ class _workProjectState extends ConsumerState<workProject> {
         onTap: () {
           onSelectA_projects(ap);
         },
+        // onTap: () {
+        //   onSelectA_projects(ap);
+        // },
         child: Card(
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),

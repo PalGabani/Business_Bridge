@@ -649,19 +649,14 @@ List<AssignedProject> assignedProjects = [
       description: 'Main Description 1',
       duedate: '2023-09-01',
     ),
-    details:
-      ProjectDetail( task1: 'Task 1 for Project 1',
-        task1detail: 'Task 1 detail for Project 1',
-        task2: 'Task 2 for Project 1',
-        task2detail: 'Task 2 detail for Project 1',
-        task3: 'Task 3 for Project 1',
-        task3detail: 'Task 3 detail for Project 1',),
+    details12:dummy_service_task
+
   ),
   // You can add more entries here with similar structure
 ];
 
 const dummy_service_task = [
-  {'title': 'Step 1', 'subtitle': 'Subtitle 1', 'content': 'Content 1','active':'0'},
+  {'title': 'Pal', 'subtitle': 'Subtitle 1', 'content': 'Content 1','active':'0'},
   {'title': 'Step 2', 'subtitle': 'Subtitle 2', 'content': 'Content 2','active':'1'},
   {'title': 'Step 3', 'subtitle': 'Subtitle 3', 'content': 'Content 3','active':'2'},
   {'title': 'Step 4', 'subtitle': 'Subtitle 4', 'content': 'Content 4','active':'3'},
@@ -674,3 +669,10 @@ const dummy_service_task = [
   {'title': 'Step 11', 'subtitle': 'Subtitle 11', 'content': 'Content 11','active':'10'},
   {'title': 'Step 12', 'subtitle': 'Subtitle 12', 'content': 'Content 12','active':'11'},
 ];
+
+// ProjectDetail( task1: 'Task 1 for Project 1',
+//   task1detail: 'Task 1 detail for Project 1',
+//   task2: 'Task 2 for Project 1',
+//   task2detail: 'Task 2 detail for Project 1',
+//   task3: 'Task 3 for Project 1',
+//   task3detail: 'Task 3 detail for Project 1',),

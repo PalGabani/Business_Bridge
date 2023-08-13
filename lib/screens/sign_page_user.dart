@@ -15,42 +15,62 @@ class _Signin_pageState extends State<Signin_page> {
 
   String? chooseItem;
   List listitem = [
-    "Afghanistan",
-    "Algeria",
-    "Angola",
-    "Argentina",
-    "Bangladesh",
-    "Brazil",
-    "Canada",
-    "China",
-    "Colombia",
-    "Congo",
-    "Egypt",
-    "Ethiopia",
-    "France",
-    "Germany",
-    "Ghana",
-    "India",
-    "Indonesia",
-    "Iran",
-    "Iraq",
-    "Italy",
-    "Japan",
-    "Kenya",
-    "Madagascar",
-    "Malaysia",
-    "Mexico",
-    "Morocco",
-    "Mozambique",
-    "Myanmar",
-    "Nepal",
-    "Nigeria",
-    "Pakistan"
+    " 🇦🇫  Afghanistan",
+    " 🇩🇿  Algeria",
+    " 🇦🇴  Angola",
+    " 🇦🇷  Argentina",
+    " 🇧🇩  Bangladesh",
+    " 🇧🇷  Brazil",
+    " 🇨🇦  Canada",
+    " 🇨🇳  China",
+    " 🇨🇴  Colombia",
+    " 🇨🇬  Congo",
+    " 🇪🇬  Egypt",
+    " 🏴󠁧󠁢󠁥󠁮󠁧󠁿  England",
+    " 🇪🇹 Ethiopia",
+    " 🇫🇷 France",
+    " 🇩🇪 Germany",
+    " 🇬🇭 Ghana",
+    " 🇮🇳 India",
+    " 🇮🇩 Indonesia",
+    " 🇮🇷 Iran",
+    " 🇮🇶 Iraq",
+    " 🇮🇹 Italy",
+    " 🇯🇵 Japan",
+    " 🇰🇪 Kenya",
+    " 🇲🇬 Madagascar",
+    " 🇲🇾 Malaysia",
+    " 🇲🇽 Mexico",
+    " 🇲🇦 Morocco",
+    " 🇲🇿 Mozambique",
+    " 🇲🇲 Myanmar",
+    " 🇳🇵 Nepal",
+    " 🇳🇿 New Zealand"
+    " 🇳🇬 Nigeria",
+    " 🇳🇴 Norway",
+    " 🇵🇰 Pakistan",
+    " 🇵🇭 Philippines",
+    " 🇵🇹 Portugal",
+    " 🇵🇱 Poland",
+    " 🇷🇺 Russia",
+    " 🇸🇦 Saudi Arabia",
+    " 🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland",
+    " 🇸🇬 Singapore",
+    " 🇿🇦 South Africa",
+    " 🇪🇸 Spain",
+    " 🇱🇰 Sri Lanka",
+    " 🇸🇪 Sweden",
+    " 🇸🇾 Syria",
+    " 🇺🇦 Ukraine",
+    " 🇦🇪 United Arab Emirates",
+    " 🇬🇧 United Kingdom",
+    " 🇺🇸 United States",
+    " 🇻🇳 Vietnam",
+    " 🇿🇲 Zambia",
+    " 🇿🇼 Zimbabwe",
   ];
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
   bool _obsecureText = true;
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -261,7 +281,6 @@ class _Signin_pageState extends State<Signin_page> {
                                           ],
                                         ),
                                         child: DropdownButtonFormField(
-
                                           decoration: InputDecoration(
                                             hintText: 'Choose Your Country',
                                             hintStyle: Theme.of(context)
@@ -269,6 +288,7 @@ class _Signin_pageState extends State<Signin_page> {
                                                 .titleMedium!
                                                 .copyWith(
                                               color: Theme.of(context).colorScheme.secondary,
+
                                             ),
                                             label: Text(
                                               'Country',
@@ -307,7 +327,6 @@ class _Signin_pageState extends State<Signin_page> {
                                               child: Text(valueItem),
                                             );
                                           }).toList(),
-
                                         ),
                                       ),
                                       SizedBox(

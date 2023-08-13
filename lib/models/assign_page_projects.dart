@@ -27,7 +27,7 @@ class AssignedProject {
   final String email;
   final int current_index;
   final MainDetails maindetails;
-  final ProjectDetail details;
+  final List<Map<String, String>> details12;
 
   AssignedProject({
     required this.id,
@@ -37,7 +37,7 @@ class AssignedProject {
     required this.email,
     required this.current_index,
     required this.maindetails,
-    required this.details,
+    required this.details12,
   });
 }
 
@@ -53,20 +53,20 @@ class MainDetails {
   });
 }
 
-class ProjectDetail {
-  final String task1;
-  final String task1detail;
-  final String task2;
-  final String task2detail;
-  final String task3;
-  final String task3detail;
-
-  ProjectDetail({
-    required this.task1,
-    required this.task1detail,
-    required this.task2,
-    required this.task2detail,
-    required this.task3,
-    required this.task3detail,
-  });
-}
+// class ProjectDetail {
+//   final String task1;
+//   final String task1detail;
+//   final String task2;
+//   final String task2detail;
+//   final String task3;
+//   final String task3detail;
+//
+//   ProjectDetail({
+//     required this.task1,
+//     required this.task1detail,
+//     required this.task2,
+//     required this.task2detail,
+//     required this.task3,
+//     required this.task3detail,
+//   });
+// }

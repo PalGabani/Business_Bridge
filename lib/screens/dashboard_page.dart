@@ -12,11 +12,16 @@ class dashboard_page extends StatefulWidget{
 class _dashboard_pageState extends State<dashboard_page> {
 
   int current_step = 1;
-  bool _stepervalue = false;
 
   final steps = [
-    {'title': 'Step 1', 'subtitle': 'Subtitle 1', 'content': 'Content 1','active':'0'},
-    {'title': 'Step 2', 'subtitle': 'Subtitle 2', 'content': 'Content 2','active':'1'},
+    {'title': 'Step 1',
+      'subtitle': 'Subtitle 1',
+      'content': 'An upscale business refers to a company that targets higher-end customers and offers products or services that are considered luxurious or exclusive. These businesses generally focus on providing a superior customer experience, premium quality products, and a prestigious brand image.',
+      'active':'0'},
+    {'title': 'Meet with the Client',
+      'subtitle': 'Subtitle 2',
+      'content': 'An upscale business refers to a company that targets higher-end customers and offers products or services that are considered luxurious or exclusive. These businesses generally focus on providing a superior customer experience, premium quality products, and a prestigious brand image.',
+      'active':'1'},
     {'title': 'Step 3', 'subtitle': 'Subtitle 3', 'content': 'Content 3','active':'2'},
     {'title': 'Step 1', 'subtitle': 'Subtitle 1', 'content': 'Content 4','active':'3'},
     {'title': 'Step 2', 'subtitle': 'Subtitle 2', 'content': 'Content 5','active':'4'},
@@ -25,7 +30,12 @@ class _dashboard_pageState extends State<dashboard_page> {
 
   @override
   Widget build(BuildContext context) {
-    return  TimelineStepper(steps: steps);
+    return  Scaffold(
+      appBar: AppBar(
+        title: Text('Dashboard '),
+      ),
+      body: TimelineStepper(steps: steps),
+    );
       // body: Column(
       //   children: [
       //     CasaVerticalStepperView(
