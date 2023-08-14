@@ -652,6 +652,11 @@ List<AssignedProject> assignedProjects = [
     details12:dummy_service_task
 
   ),
+
+
+
+
+
   // You can add more entries here with similar structure
 ];
 
