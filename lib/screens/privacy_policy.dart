@@ -15,6 +15,7 @@ class _privacy_policyState extends State<privacy_policy> {
       ),
       body: SingleChildScrollView(
         child: Column(
+
         ),
       ),
     );
