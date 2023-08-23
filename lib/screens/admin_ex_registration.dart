@@ -294,6 +294,7 @@ class _admin_ex_registrationState extends State<admin_ex_registration> {
                                             ),
                                           ),
                                         ),
+
                                         SizedBox(
                                           height: 15,
                                         ),
