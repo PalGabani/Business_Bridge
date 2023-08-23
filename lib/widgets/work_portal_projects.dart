@@ -53,9 +53,6 @@ class _workProjectState extends ConsumerState<workProject> {
         onTap: () {
           onSelectA_projects(ap);
         },
-        // onTap: () {
-        //   onSelectA_projects(ap);
-        // },
         child: Card(
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),

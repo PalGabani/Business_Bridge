@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'package:business_bridge/screens/about_us_page.dart';
+import 'package:business_bridge/screens/admin_login.dart';
 import 'package:business_bridge/screens/first_page_executive.dart';
+import 'package:business_bridge/screens/privacy_policy.dart';
 import 'package:business_bridge/screens/sign_page_user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +22,7 @@ class Popup extends StatefulWidget {
 }
 
 class _PopupState extends State<Popup> {
-  List<String> poplist = [ "User", "Executive","About us","Help"];
+  List<String> poplist = [ "Admin", "Executive","Privacy policy","About us","Help"];
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +37,7 @@ class _PopupState extends State<Popup> {
             context,
             MaterialPageRoute(
               builder: (context) {
-                return homepage();
+                return admin_login();
               },
             ),
            // (route)=>false
@@ -52,6 +54,19 @@ class _PopupState extends State<Popup> {
                 },
               ),
                  // (route)=>false
+          );
+        }
+        if(value=="Privacy policy"){
+          Navigator.push(
+            //Navigator.pushAndRemoveUntil(
+            //Navigator.pushanduntill
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return privacy_policy();
+              },
+            ),
+            // (route)=>false
           );
         }
         if(value=="Executive"){
