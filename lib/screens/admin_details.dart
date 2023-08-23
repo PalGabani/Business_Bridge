@@ -1,3 +1,4 @@
+import 'package:business_bridge/screens/admin_ex_registration.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +11,7 @@ class _admin_detailsState extends State<admin_details> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
         body: Container(
              height: double.infinity,
              width: double.infinity,
@@ -40,7 +42,18 @@ class _admin_detailsState extends State<admin_details> {
                             Padding(
                               padding: const EdgeInsets.only(left: 180),
                               child: IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) {
+                                        //return listdata();
+                                        return admin_ex_registration();
+                                      },
+                                    ),
+                                    //(route)=>false
+                                  );
+                                },
                                 icon: Icon(
                                   Icons.add,
                                   size: 40,
