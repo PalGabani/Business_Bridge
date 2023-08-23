@@ -15,6 +15,7 @@ class _privacy_policyState extends ConsumerState<privacy_policy> {
   Widget build(BuildContext context) {
     final policies = ref.watch(policyProvider);
 
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Privacy policy"),
