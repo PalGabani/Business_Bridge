@@ -1,6 +1,5 @@
 import 'package:business_bridge/data/dummy_data.dart';
 import 'package:business_bridge/models/assign_page_projects.dart';
-import 'package:business_bridge/models/policy.dart';
 import 'package:business_bridge/provider/casse_provider.dart';
 import 'package:riverpod/riverpod.dart';
 
@@ -16,9 +15,6 @@ final knowMoreProvider=Provider((ref) {
   return knowMoreData;
 });
 
-final policyProvider=Provider((ref) {
-  return p;
-});
 // final assignprojectdetailProvider=Provider((ref) {
 //   return assignprojectdetails;
 // });

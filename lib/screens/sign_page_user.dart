@@ -264,6 +264,164 @@ class _Signin_pageState extends State<Signin_page> {
                                       SizedBox(
                                         height: 15,
                                       ),
+
+                                      // ----------------- email ---------------------------//
+                                      Container(
+                                        height: 60,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(10),
+                                          color: Colors.white,
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Color(0xff232855)
+                                                  .withOpacity(0.3),
+                                              spreadRadius: 1,
+                                              blurRadius: 8,
+                                              offset: Offset(2, 7),
+                                            ),
+                                          ],
+                                        ),
+                                        child: TextFormField(
+                                          validator: (value) {
+                                            if (value!.isEmpty) {
+                                              return 'please Enter E-mail';
+                                            }
+                                            if (!RegExp(
+                                                "^[a-zA-z0-9+_.-]+@[gmail.com]")
+                                                .hasMatch(value)) {
+                                              return 'Enter valid E-mail';
+                                            }
+                                            return null;
+                                          },
+                                          //controller: emailController,
+                                          keyboardType:
+                                          TextInputType.emailAddress,
+                                          cursorColor: Theme.of(context)
+                                              .colorScheme
+                                              .secondary,
+                                          decoration: InputDecoration(
+                                            hintText: 'Enter Email ID:',
+                                            hintStyle: Theme.of(context)
+                                                .textTheme
+                                                .titleMedium!
+                                                .copyWith(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .secondary,
+                                            ),
+                                            label: Text(
+                                              'Email',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .titleMedium!
+                                                  .copyWith(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .secondary,
+                                              ),
+                                            ),
+                                            prefixIcon: Icon(
+                                              Icons.mail,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .secondary,
+                                            ),
+                                            enabledBorder: OutlineInputBorder(
+                                              borderRadius:
+                                              BorderRadius.circular(10),
+                                            ),
+                                            focusedBorder: OutlineInputBorder(
+                                              borderRadius:
+                                              BorderRadius.circular(10),
+                                              borderSide: BorderSide(
+                                                width: 2,
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .secondary,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 15,
+                                      ),
+
+                                      // ------------------- contact no ----------------------//
+                                      Container(
+                                        height: 60,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(10),
+                                          color: Colors.white,
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Color(0xff232855)
+                                                  .withOpacity(0.3),
+                                              spreadRadius: 1,
+                                              blurRadius: 8,
+                                              offset: Offset(2, 7),
+                                            ),
+                                          ],
+                                        ),
+                                        child: TextFormField(
+                                          validator: (value) {
+                                            if (value!.isEmpty) {
+                                              return 'Enter contact no.';
+                                            }
+                                            return null;
+                                          },
+                                          keyboardType: TextInputType.phone,
+                                          cursorColor: Theme.of(context)
+                                              .colorScheme
+                                              .secondary,
+                                          decoration: InputDecoration(
+                                            hintText: 'Enter Contact no :',
+                                            hintStyle: Theme.of(context)
+                                                .textTheme
+                                                .titleMedium!
+                                                .copyWith(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .secondary,
+                                            ),
+                                            label: Text(
+                                              'Contact no',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .titleMedium!
+                                                  .copyWith(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .secondary,
+                                              ),
+                                            ),
+                                            prefixIcon: Icon(
+                                              Icons.phone,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .secondary,
+                                            ),
+                                            enabledBorder: OutlineInputBorder(
+                                              borderRadius:
+                                              BorderRadius.circular(10),
+                                            ),
+                                            focusedBorder: OutlineInputBorder(
+                                              borderRadius:
+                                              BorderRadius.circular(10),
+                                              borderSide: BorderSide(
+                                                width: 2,
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .secondary,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 15,
+                                      ),
+
                                       //------------  Country  ---------------------------------//
                                       Container(
                                         height: 60,

@@ -136,7 +136,6 @@ class _case_study_pageState extends ConsumerState<case_study_page> {
 
     if (data_st.isNotEmpty) {
       content = ListView.builder(
-
         itemCount: data_st.length,
           itemBuilder: (ctx, index) => caseItem(
                 caseSt: data_st[index],

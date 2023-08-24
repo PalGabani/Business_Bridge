@@ -252,20 +252,23 @@ class _admin_loginState extends State<admin_login> {
                                   ),
                                 ),
 
-                                //------------  forgott password  ---------------------------------//
-                                Align(
-                                  alignment: Alignment.centerRight,
-                                  child: TextButton(
-                                      onPressed: () {},
-                                      child: Text(
-                                        "Forgot password?",
-                                        style: TextStyle(
-                                            fontSize: 15,
-                                            color: Color(0xff9DB2BF),
-                                            fontWeight: FontWeight
-                                                .bold // decoration: TextDecoration.underline,
-                                        ),
-                                      )),
+                                // //------------  forgott password  ---------------------------------//
+                                // Align(
+                                //   alignment: Alignment.centerRight,
+                                //   child: TextButton(
+                                //       onPressed: () {},
+                                //       child: Text(
+                                //         "Forgot password?",
+                                //         style: TextStyle(
+                                //             fontSize: 15,
+                                //             color: Color(0xff9DB2BF),
+                                //             fontWeight: FontWeight
+                                //                 .bold // decoration: TextDecoration.underline,
+                                //         ),
+                                //       )),
+                                // ),
+                                SizedBox(
+                                  height: 20,
                                 ),
                                 //-----------error msg show------------------------------///
                                 Container(
