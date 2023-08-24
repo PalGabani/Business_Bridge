@@ -9,8 +9,11 @@ class history_page extends StatefulWidget{
 class _history_pageState extends State<history_page> {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+
     return Scaffold(
+      appBar: AppBar(
+        title: Text("History"),
+      ),
       body: SingleChildScrollView(
 
       ),

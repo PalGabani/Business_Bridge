@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "199084249938",
+    "project_id": "business-bridge-3d941",
+    "storage_bucket": "business-bridge-3d941.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:199084249938:android:86b0ea539fd064f48d608b",
+        "android_client_info": {
+          "package_name": "com.example.business_bridge"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "199084249938-s366524iqgeoe9fjvr05mntt40knen4p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2920ClpaCNb3AdGWYRdwsvX2RTpSe-YM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "199084249938-s366524iqgeoe9fjvr05mntt40knen4p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

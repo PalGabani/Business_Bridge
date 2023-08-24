@@ -1,8 +1,10 @@
+import 'package:business_bridge/models/user_model.dart';
 import 'package:business_bridge/screens/homepage.dart';
 import 'package:business_bridge/screens/login_page_user.dart';
 import 'package:business_bridge/screens/sector_page.dart';
 
 import 'package:business_bridge/widgets/pop_up.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -12,8 +14,7 @@ class Signin_page extends StatefulWidget {
 }
 
 class _Signin_pageState extends State<Signin_page> {
-
-  String? chooseItem;
+  String? chooseItem = "";
   List listitem = [
     " 🇦🇫  Afghanistan",
     " 🇩🇿  Algeria",
@@ -46,7 +47,7 @@ class _Signin_pageState extends State<Signin_page> {
     " 🇲🇲 Myanmar",
     " 🇳🇵 Nepal",
     " 🇳🇿 New Zealand"
-    " 🇳🇬 Nigeria",
+        " 🇳🇬 Nigeria",
     " 🇳🇴 Norway",
     " 🇵🇰 Pakistan",
     " 🇵🇭 Philippines",
@@ -72,10 +73,35 @@ class _Signin_pageState extends State<Signin_page> {
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
   bool _obsecureText = true;
 
+  final TextEditingController idController = TextEditingController();
+  final TextEditingController businessNameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController contactNoController = TextEditingController();
+  final TextEditingController countryController = TextEditingController();
+  final TextEditingController licenseNoController = TextEditingController();
+  final TextEditingController userNameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     final keyBoardSpace = MediaQuery.of(context).viewInsets.bottom;
 
+    // final _db = FirebaseFirestore.instance;
+    // createUser(UserModel user) async {
+    //   await _db.collection("users").add(user.toJson());
+    // }
+
+    // final UserModel user = UserModel(
+    //   id: " ",
+    //   BusinessName: businessNameController.text.trim(),
+    //   email: emailController.text.trim(),
+    //   contact_no: contactNoController.text.trim(),
+    //
+    //   // country: chooseItem,
+    //   license_no: licenseNoController.text.trim(),
+    //   userName: userNameController.text.trim(),
+    //   password: passwordController.text.trim(),
+    // );
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
@@ -93,76 +119,78 @@ class _Signin_pageState extends State<Signin_page> {
                   //-------------------uper part ---------------------------------------------------//
                   Container(
                     //color: Colors.brown,
-                   color: Colors.transparent,
+                    color: Colors.transparent,
                     height: 220,
                     width: double.infinity,
-                   child: Column(
-                     mainAxisAlignment: MainAxisAlignment.end,
-                     crossAxisAlignment: CrossAxisAlignment.start,
-                     children: [
-                       Padding(
-                         padding: const EdgeInsets.fromLTRB(10,10,10,0),
-                         child: Container(
-                           color: Colors.transparent,
-                           height: 70,
-                           child: Row(
-                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                             crossAxisAlignment: CrossAxisAlignment.center,
-                             children: [
-
-                               IconButton(onPressed: (){
-
-                               },
-                               icon:  Icon(Icons.arrow_back,color: Colors.white,),
-                               ),
-                               Container(
-                                 // width: 30,
-                                 // height: 30,
-                                 color: Colors.transparent,
-                                 child: Popup(),
-                               )
-                             ],
-                           ),
-                         ),
-                       ),
-                       Padding(
-                         padding: const EdgeInsets.all(30),
-                         child: Container(
-                           // height: 80,
-                           //width: 250,
-                           color: Colors.transparent,
-                          // padding: EdgeInsets.all(30),
-                           child: Column(
-                             mainAxisAlignment: MainAxisAlignment.end,
-                             crossAxisAlignment: CrossAxisAlignment.start,
-                             children: [
-                               Text(
-                                 "Registration",
-                                 style: Theme.of(context)
-                                     .textTheme
-                                     .headlineLarge!
-                                     .copyWith(
-                                   color:
-                                   Theme.of(context).colorScheme.onTertiary,
-                                 ),
-                               ),
-                               Text(
-                                 "\"Dream big, act bold, achieve more.\"",
-
-                                 style: Theme.of(context)
-                                     .textTheme
-                                     .bodyLarge !
-                                     .copyWith(
-                                   color:
-                                   Theme.of(context).colorScheme.onTertiary,
-                                 ),
-                               ),
-                             ],
-                           ),
-                         ),
-                       )
-                     ],
-                   ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                          child: Container(
+                            color: Colors.transparent,
+                            height: 70,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(
+                                    Icons.arrow_back,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                Container(
+                                  // width: 30,
+                                  // height: 30,
+                                  color: Colors.transparent,
+                                  child: Popup(),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(30),
+                          child: Container(
+                            // height: 80,
+                            //width: 250,
+                            color: Colors.transparent,
+                            // padding: EdgeInsets.all(30),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Registration",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineLarge!
+                                      .copyWith(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onTertiary,
+                                      ),
+                                ),
+                                Text(
+                                  "\"Dream big, act bold, achieve more.\"",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge!
+                                      .copyWith(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onTertiary,
+                                      ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                   //--------------------------------main part--------------------------------------------//
                   Expanded(
@@ -186,9 +214,9 @@ class _Signin_pageState extends State<Signin_page> {
                       child: SingleChildScrollView(
                         physics: BouncingScrollPhysics(),
                         child: Container(
-                           child: Padding(
+                          child: Padding(
                             padding: EdgeInsets.fromLTRB(
-                            30, 30, 30, keyBoardSpace + 20),
+                                30, 30, 30, keyBoardSpace + 20),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               //  crossAxisAlignment: CrossAxisAlignment.center,
@@ -204,7 +232,8 @@ class _Signin_pageState extends State<Signin_page> {
                                       Container(
                                         height: 60,
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(10),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
                                           color: Colors.white,
                                           boxShadow: [
                                             BoxShadow(
@@ -223,39 +252,50 @@ class _Signin_pageState extends State<Signin_page> {
                                             }
                                             return null;
                                           },
-                                          //controller: ,
+                                          controller: businessNameController,
                                           keyboardType: TextInputType.name,
-                                          cursorColor: Theme.of(context).colorScheme.secondary,
+                                          cursorColor: Theme.of(context)
+                                              .colorScheme
+                                              .secondary,
                                           decoration: InputDecoration(
                                             hintText: 'Enter Business Name:',
                                             hintStyle: Theme.of(context)
                                                 .textTheme
                                                 .titleMedium!
                                                 .copyWith(
-                                              color: Theme.of(context).colorScheme.secondary,
-                                            ),
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .secondary,
+                                                ),
                                             label: Text(
                                               'Business Name',
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .titleMedium!
                                                   .copyWith(
-                                                color:
-                                                Theme.of(context).colorScheme.secondary,
-                                              ),
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .secondary,
+                                                  ),
                                             ),
                                             prefixIcon: Icon(
                                               Icons.work_sharp,
-                                              color: Theme.of(context).colorScheme.secondary,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .secondary,
                                             ),
                                             enabledBorder: OutlineInputBorder(
-                                              borderRadius: BorderRadius.circular(10),
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
                                             ),
                                             focusedBorder: OutlineInputBorder(
-                                              borderRadius: BorderRadius.circular(10),
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
                                               borderSide: BorderSide(
                                                 width: 2,
-                                                color: Theme.of(context).colorScheme.secondary,
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .secondary,
                                               ),
                                             ),
                                           ),
@@ -264,11 +304,13 @@ class _Signin_pageState extends State<Signin_page> {
                                       SizedBox(
                                         height: 15,
                                       ),
-                                      //------------  Country  ---------------------------------//
+
+                                      // ----------------- email ---------------------------//
                                       Container(
                                         height: 60,
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(10),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
                                           color: Colors.white,
                                           boxShadow: [
                                             BoxShadow(
@@ -280,55 +322,229 @@ class _Signin_pageState extends State<Signin_page> {
                                             ),
                                           ],
                                         ),
-                                        child: DropdownButtonFormField(
+                                        child: TextFormField(
+                                          validator: (value) {
+                                            if (value!.isEmpty) {
+                                              return 'please Enter E-mail';
+                                            }
+                                            if (!RegExp(
+                                                    "^[a-zA-z0-9+_.-]+@[gmail.com]")
+                                                .hasMatch(value)) {
+                                              return 'Enter valid E-mail';
+                                            }
+                                            return null;
+                                          },
+                                          controller: emailController,
+                                          keyboardType:
+                                              TextInputType.emailAddress,
+                                          cursorColor: Theme.of(context)
+                                              .colorScheme
+                                              .secondary,
                                           decoration: InputDecoration(
-                                            hintText: 'Choose Your Country',
+                                            hintText: 'Enter Email ID:',
                                             hintStyle: Theme.of(context)
                                                 .textTheme
                                                 .titleMedium!
                                                 .copyWith(
-                                              color: Theme.of(context).colorScheme.secondary,
-
-                                            ),
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .secondary,
+                                                ),
                                             label: Text(
-                                              'Country',
+                                              'Email',
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .titleMedium!
                                                   .copyWith(
-                                                color:
-                                                Theme.of(context).colorScheme.secondary,
-                                              ),
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .secondary,
+                                                  ),
                                             ),
                                             prefixIcon: Icon(
-                                              Icons.flag,
-                                              color: Theme.of(context).colorScheme.secondary,
+                                              Icons.mail,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .secondary,
                                             ),
                                             enabledBorder: OutlineInputBorder(
-                                              borderRadius: BorderRadius.circular(10),
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
                                             ),
                                             focusedBorder: OutlineInputBorder(
-                                              borderRadius: BorderRadius.circular(10),
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
                                               borderSide: BorderSide(
                                                 width: 2,
-                                                color: Theme.of(context).colorScheme.secondary,
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .secondary,
                                               ),
                                             ),
                                           ),
-                                          value: chooseItem,
-                                          onChanged: (newValue) {
-                                            setState(() {
-                                              chooseItem = newValue as String? ;
-                                            });
-                                          },
-                                          items: listitem.map((valueItem) {
-                                            return DropdownMenuItem(
-                                              value: valueItem,
-                                              child: Text(valueItem),
-                                            );
-                                          }).toList(),
                                         ),
                                       ),
+                                      SizedBox(
+                                        height: 15,
+                                      ),
+
+                                      // ------------------- contact no ----------------------//
+                                      Container(
+                                        height: 60,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          color: Colors.white,
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Color(0xff232855)
+                                                  .withOpacity(0.3),
+                                              spreadRadius: 1,
+                                              blurRadius: 8,
+                                              offset: Offset(2, 7),
+                                            ),
+                                          ],
+                                        ),
+                                        child: TextFormField(
+                                          validator: (value) {
+                                            if (value!.isEmpty) {
+                                              return 'Enter contact no.';
+                                            }
+                                            return null;
+                                          },
+                                          controller: contactNoController,
+                                          keyboardType: TextInputType.phone,
+                                          cursorColor: Theme.of(context)
+                                              .colorScheme
+                                              .secondary,
+                                          decoration: InputDecoration(
+                                            hintText: 'Enter Contact no :',
+                                            hintStyle: Theme.of(context)
+                                                .textTheme
+                                                .titleMedium!
+                                                .copyWith(
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .secondary,
+                                                ),
+                                            label: Text(
+                                              'Contact no',
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .titleMedium!
+                                                  .copyWith(
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .secondary,
+                                                  ),
+                                            ),
+                                            prefixIcon: Icon(
+                                              Icons.phone,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .secondary,
+                                            ),
+                                            enabledBorder: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
+                                            focusedBorder: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              borderSide: BorderSide(
+                                                width: 2,
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .secondary,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 15,
+                                      ),
+
+                                      //------------  Country  ---------------------------------//
+                                      // Container(
+                                      //   height: 60,
+                                      //   decoration: BoxDecoration(
+                                      //     borderRadius:
+                                      //         BorderRadius.circular(10),
+                                      //     color: Colors.white,
+                                      //     boxShadow: [
+                                      //       BoxShadow(
+                                      //         color: Color(0xff232855)
+                                      //             .withOpacity(0.3),
+                                      //         spreadRadius: 1,
+                                      //         blurRadius: 8,
+                                      //         offset: Offset(2, 7),
+                                      //       ),
+                                      //     ],
+                                      //   ),
+                                      //   child: DropdownButtonFormField(
+                                      //     decoration: InputDecoration(
+                                      //       hintText: 'Choose Your Country',
+                                      //       hintStyle: Theme.of(context)
+                                      //           .textTheme
+                                      //           .titleMedium!
+                                      //           .copyWith(
+                                      //             color: Theme.of(context)
+                                      //                 .colorScheme
+                                      //                 .secondary,
+                                      //           ),
+                                      //       label: Text(
+                                      //         'Country',
+                                      //         style: Theme.of(context)
+                                      //             .textTheme
+                                      //             .titleMedium!
+                                      //             .copyWith(
+                                      //               color: Theme.of(context)
+                                      //                   .colorScheme
+                                      //                   .secondary,
+                                      //             ),
+                                      //       ),
+                                      //       prefixIcon: Icon(
+                                      //         Icons.flag,
+                                      //         color: Theme.of(context)
+                                      //             .colorScheme
+                                      //             .secondary,
+                                      //       ),
+                                      //       enabledBorder: OutlineInputBorder(
+                                      //         borderRadius:
+                                      //             BorderRadius.circular(10),
+                                      //       ),
+                                      //       focusedBorder: OutlineInputBorder(
+                                      //         borderRadius:
+                                      //             BorderRadius.circular(10),
+                                      //         borderSide: BorderSide(
+                                      //           width: 2,
+                                      //           color: Theme.of(context)
+                                      //               .colorScheme
+                                      //               .secondary,
+                                      //         ),
+                                      //       ),
+                                      //     ),
+                                      //     value: chooseItem,
+                                      //     onChanged: (newValue) {
+                                      //       setState(() {
+                                      //         chooseItem = newValue as String?;
+                                      //       });
+                                      //     },
+                                      //      validator: (value) {
+                                      //        if (value == null) {
+                                      //          return 'Please select an item';
+                                      //        }
+                                      //        return null;
+                                      // },
+                                      //     items: listitem.map((valueItem) {
+                                      //       return DropdownMenuItem(
+                                      //         value: valueItem,
+                                      //         child: Text(valueItem),
+                                      //       );
+                                      //     }).toList(),
+                                      //   ),
+                                      // ),
                                       SizedBox(
                                         height: 15,
                                       ),
@@ -336,7 +552,8 @@ class _Signin_pageState extends State<Signin_page> {
                                       Container(
                                         height: 60,
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(10),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
                                           color: Colors.white,
                                           boxShadow: [
                                             BoxShadow(
@@ -356,38 +573,52 @@ class _Signin_pageState extends State<Signin_page> {
                                             return null;
                                           },
                                           //controller: ,
-                                          keyboardType: TextInputType.emailAddress,
-                                          cursorColor: Theme.of(context).colorScheme.secondary,
+                                          keyboardType:
+                                              TextInputType.emailAddress,
+                                          cursorColor: Theme.of(context)
+                                              .colorScheme
+                                              .secondary,
+                                          controller: licenseNoController,
                                           decoration: InputDecoration(
-                                            hintText: 'Enter License no./Gst no.:',
+                                            hintText:
+                                                'Enter License no./Gst no.:',
                                             hintStyle: Theme.of(context)
                                                 .textTheme
                                                 .titleMedium!
                                                 .copyWith(
-                                              color: Theme.of(context).colorScheme.secondary,
-                                            ),
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .secondary,
+                                                ),
                                             label: Text(
                                               'License no./Gst no.',
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .titleMedium!
                                                   .copyWith(
-                                                color:
-                                                Theme.of(context).colorScheme.secondary,
-                                              ),
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .secondary,
+                                                  ),
                                             ),
                                             prefixIcon: Icon(
                                               Icons.insert_page_break_sharp,
-                                              color: Theme.of(context).colorScheme.secondary,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .secondary,
                                             ),
                                             enabledBorder: OutlineInputBorder(
-                                              borderRadius: BorderRadius.circular(10),
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
                                             ),
                                             focusedBorder: OutlineInputBorder(
-                                              borderRadius: BorderRadius.circular(10),
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
                                               borderSide: BorderSide(
                                                 width: 2,
-                                                color: Theme.of(context).colorScheme.secondary,
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .secondary,
                                               ),
                                             ),
                                           ),
@@ -400,7 +631,8 @@ class _Signin_pageState extends State<Signin_page> {
                                       Container(
                                         height: 60,
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(10),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
                                           color: Colors.white,
                                           boxShadow: [
                                             BoxShadow(
@@ -419,39 +651,51 @@ class _Signin_pageState extends State<Signin_page> {
                                             }
                                             return null;
                                           },
-                                          //controller: ,
-                                          keyboardType: TextInputType.emailAddress,
-                                          cursorColor: Theme.of(context).colorScheme.secondary,
+                                          controller: userNameController,
+                                          keyboardType:
+                                              TextInputType.emailAddress,
+                                          cursorColor: Theme.of(context)
+                                              .colorScheme
+                                              .secondary,
                                           decoration: InputDecoration(
                                             hintText: 'Enter User Name:',
                                             hintStyle: Theme.of(context)
                                                 .textTheme
                                                 .titleMedium!
                                                 .copyWith(
-                                              color: Theme.of(context).colorScheme.secondary,
-                                            ),
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .secondary,
+                                                ),
                                             label: Text(
                                               'Set User Name',
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .titleMedium!
                                                   .copyWith(
-                                                color:
-                                                Theme.of(context).colorScheme.secondary,
-                                              ),
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .secondary,
+                                                  ),
                                             ),
                                             prefixIcon: Icon(
                                               Icons.perm_identity_sharp,
-                                              color: Theme.of(context).colorScheme.secondary,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .secondary,
                                             ),
                                             enabledBorder: OutlineInputBorder(
-                                              borderRadius: BorderRadius.circular(10),
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
                                             ),
                                             focusedBorder: OutlineInputBorder(
-                                              borderRadius: BorderRadius.circular(10),
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
                                               borderSide: BorderSide(
                                                 width: 2,
-                                                color: Theme.of(context).colorScheme.secondary,
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .secondary,
                                               ),
                                             ),
                                           ),
@@ -465,7 +709,8 @@ class _Signin_pageState extends State<Signin_page> {
                                       Container(
                                         height: 60,
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(10),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
                                           color: Colors.white,
                                           boxShadow: [
                                             BoxShadow(
@@ -478,7 +723,8 @@ class _Signin_pageState extends State<Signin_page> {
                                           ],
                                         ),
                                         child: TextFormField(
-                                          keyboardType: TextInputType.visiblePassword,
+                                          keyboardType:
+                                              TextInputType.visiblePassword,
                                           validator: (value) {
                                             if (value!.isEmpty) {
                                               return "Please Enter Password";
@@ -488,8 +734,10 @@ class _Signin_pageState extends State<Signin_page> {
                                             }
                                             return null;
                                           },
-                                          // controller: passController,
-                                          cursorColor: Theme.of(context).colorScheme.secondary,
+                                          controller: passwordController,
+                                          cursorColor: Theme.of(context)
+                                              .colorScheme
+                                              .secondary,
                                           obscureText: _obsecureText,
                                           decoration: InputDecoration(
                                             hintText: 'Enter Password:',
@@ -497,21 +745,26 @@ class _Signin_pageState extends State<Signin_page> {
                                                 .textTheme
                                                 .titleMedium!
                                                 .copyWith(
-                                              color: Theme.of(context).colorScheme.secondary,
-                                            ),
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .secondary,
+                                                ),
                                             label: Text(
                                               'Set Password',
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .titleMedium!
                                                   .copyWith(
-                                                color:
-                                                Theme.of(context).colorScheme.secondary,
-                                              ),
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .secondary,
+                                                  ),
                                             ),
                                             prefixIcon: Icon(
                                               Icons.lock_outline_sharp,
-                                              color: Theme.of(context).colorScheme.secondary,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .secondary,
                                             ),
                                             suffixIcon: GestureDetector(
                                               onTap: () {
@@ -522,23 +775,28 @@ class _Signin_pageState extends State<Signin_page> {
                                                 _obsecureText
                                                     ? Icons.visibility
                                                     : Icons.visibility_off,
-                                                color: Theme.of(context).colorScheme.secondary,
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .secondary,
                                               ),
                                             ),
                                             enabledBorder: OutlineInputBorder(
-                                              borderRadius: BorderRadius.circular(10),
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
                                             ),
                                             focusedBorder: OutlineInputBorder(
-                                              borderRadius: BorderRadius.circular(10),
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
                                               borderSide: BorderSide(
                                                 width: 2,
-                                                color: Theme.of(context).colorScheme.secondary,
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .secondary,
                                               ),
                                             ),
                                           ),
                                         ),
                                       ),
-
 
                                       SizedBox(
                                         height: 25,
@@ -552,7 +810,7 @@ class _Signin_pageState extends State<Signin_page> {
                                             context,
                                             MaterialPageRoute(
                                               builder: (context) {
-                                                return sector_page() ;
+                                                return sector_page();
                                               },
                                             ),
                                             //(route)=>false
@@ -563,7 +821,7 @@ class _Signin_pageState extends State<Signin_page> {
                                           height: 60,
                                           decoration: BoxDecoration(
                                             borderRadius:
-                                            BorderRadius.circular(10),
+                                                BorderRadius.circular(10),
                                             color: Color(0xff9DB2BF),
                                             boxShadow: [
                                               BoxShadow(
@@ -592,21 +850,25 @@ class _Signin_pageState extends State<Signin_page> {
                                       ),
                                       //------------  Login in goto  ---------------------------------//
                                       Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
                                         children: [
                                           Text(
                                             'Already Have an Account?',
                                             style: TextStyle(
                                               fontSize: 15,
-                                              color: Theme.of(context).colorScheme.secondary,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .secondary,
                                             ),
                                           ),
                                           TextButton(
                                               onPressed: () {
                                                 Navigator.push(context,
-                                                    MaterialPageRoute(builder: (context) {
-                                                      return Login_page();
-                                                    }));
+                                                    MaterialPageRoute(
+                                                        builder: (context) {
+                                                  return Login_page();
+                                                }));
                                               },
                                               child: Text(
                                                 "Log IN ",
@@ -623,8 +885,6 @@ class _Signin_pageState extends State<Signin_page> {
                                       SizedBox(
                                         height: 30,
                                       ),
-
-
                                     ],
                                   ),
                                 ),

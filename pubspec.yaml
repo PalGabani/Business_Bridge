@@ -42,6 +42,12 @@ dependencies:
   timelines:
   casa_vertical_stepper: ^0.0.5
   flutter_staggered_grid_view: ^0.7.0
+  firebase_core: ^2.15.1
+  firebase_storage: ^11.2.6
+  firebase_auth: ^4.9.0
+  cloud_firestore: ^4.9.1
+  fluttertoast: ^8.2.2
+
 
 
 dev_dependencies:

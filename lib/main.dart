@@ -1,11 +1,13 @@
 
 import 'package:business_bridge/screens/login_page_user.dart';
 import 'package:business_bridge/screens/first_page_executive.dart';
+import 'package:business_bridge/screens/splash_screen.dart';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/services.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 final _theme = ThemeData(
   useMaterial3: true,
@@ -16,8 +18,9 @@ final _theme = ThemeData(
   textTheme:GoogleFonts.latoTextTheme()
 );
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown
@@ -41,7 +44,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: _theme,
-      home: Login_page(),
+      home: SplashScreen(),
     );
   }
 }
