@@ -1,6 +1,5 @@
 
-import 'package:business_bridge/screens/login_page_user.dart';
-import 'package:business_bridge/screens/first_page_executive.dart';
+
 import 'package:business_bridge/screens/splash_screen.dart';
 
 import 'package:flutter/material.dart';
