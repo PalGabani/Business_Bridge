@@ -1,4 +1,5 @@
 import 'package:business_bridge/screens/edit_profile_page.dart';
+import 'package:business_bridge/screens/login_page_user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -17,28 +18,51 @@ class _profile_pageState extends State<profile_page> {
         title: Container(
           width: double.infinity,
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            //crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text("Profile"),
               SizedBox(
-                width: 100,
+                //width: 100,
               ),
               TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => edit_profile_page(),
-                        ));
-                  },
-                  style: ButtonStyle(
-                      backgroundColor: MaterialStatePropertyAll(
-                        Theme.of(context).colorScheme.secondary,
-                      ),
-                      elevation: MaterialStatePropertyAll(5)),
-                  child: Text(
-                    "Edit Profile",
-                    style: TextStyle(fontSize: 18, color: Colors.white),
-                  ))
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => edit_profile_page(),
+                      ));
+                },
+                style: ButtonStyle(
+                    backgroundColor: MaterialStatePropertyAll(
+                      Theme.of(context).colorScheme.secondary,
+                    ),
+                    elevation: MaterialStatePropertyAll(5)),
+                child: Text(
+                  "Edit Profile",
+                  style: TextStyle(fontSize: 18, color: Colors.white),
+                ),
+              ),
+
+              //logout button......................................
+              TextButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Login_page(),
+                      ));
+                },
+                style: ButtonStyle(
+                    backgroundColor: MaterialStatePropertyAll(
+                      Theme.of(context).colorScheme.secondary,
+                    ),
+                    elevation: MaterialStatePropertyAll(5)),
+                child: Text(
+                  "Logout",
+                  style: TextStyle(fontSize: 18, color: Colors.white),
+                ),
+              ),
             ],
           ),
         ),

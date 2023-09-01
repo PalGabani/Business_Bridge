@@ -18,7 +18,7 @@ class Signin_page extends StatefulWidget {
 
 class _Signin_pageState extends State<Signin_page> {
 
-  String? chooseItem = "";
+  String? chooseItem;
   List listitem = [
     " 🇦🇫  Afghanistan",
     " 🇩🇿  Algeria",
@@ -88,47 +88,67 @@ bool loading =false;
   final TextEditingController passwordController = TextEditingController();
 FirebaseAuth _auth=FirebaseAuth.instance;
 
-void Signup(){
-  setState(() {
-    loading = true;
-  });
-  _auth
-      .createUserWithEmailAndPassword(
-      email: emailController.text.toString(),
-      password: passwordController.text.toString())
-      .then((value) {
-    // Handle successful sign up here
-  }).onError((error, stackTrace) {
-    Utiles().toastmessege("Email Already Used!");
-  }).whenComplete(() {
+  Future<void> Signup() async {
     setState(() {
-      loading = false;
+      loading = true;
     });
-  });
 
-}
+    try {
+      final userCredential = await _auth.createUserWithEmailAndPassword(
+        email: emailController.text.toString(),
+        password: passwordController.text.toString(),
+      );
+
+      // User has been successfully created here, and you can access userCredential.user
+
+      // Store user data in Firestore
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userCredential.user!.uid)
+          .set({
+        "id":"",
+        "bname":businessNameController.text.trim(),
+        "email":emailController.text.trim(),
+        "contact": contactNoController.text.trim(),
+        "country":chooseItem,
+        "license":licenseNoController.text.trim(),
+        "username":userNameController.text.trim(),
+        "password":passwordController.text.trim(),
+      });
+
+      // Handle successful sign up here
+
+    } catch (error) {
+      // Handle errors here
+      Utiles().toastmessege("Email Already Used!");
+    } finally {
+      setState(() {
+        loading = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final keyBoardSpace = MediaQuery.of(context).viewInsets.bottom;
 
-    final _db = FirebaseFirestore.instance;
+    // final _db = FirebaseFirestore.instance;
+    //
+    // createUser(UserModel user) async {
+    //   await _db.collection("users").add(user.toJson());
+    // }
 
-    createUser(UserModel user) async {
-      await _db.collection("users").add(user.toJson());
-    }
-
-    final UserModel user = UserModel(
-      id: " ",
-      BusinessName: businessNameController.text.trim(),
-      email: emailController.text.trim(),
-      contact_no: contactNoController.text.trim(),
-
-      // country: chooseItem,
-      license_no: licenseNoController.text.trim(),
-      userName: userNameController.text.trim(),
-      password: passwordController.text.trim(),
-    );
+    // final UserModel user = UserModel(
+    //   id: " ",
+    //   BusinessName: businessNameController.text.trim(),
+    //   email: emailController.text.trim(),
+    //   contact_no: contactNoController.text.trim(),
+    //
+    //   // country: chooseItem,
+    //   license_no: licenseNoController.text.trim(),
+    //   userName: userNameController.text.trim(),
+    //   password: passwordController.text.trim(),
+    // );
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
@@ -438,8 +458,12 @@ void Signup(){
                                             validator: (value) {
                                               if (value!.isEmpty) {
                                                 return 'Enter contact no.';
+                                              } else if (value.length != 10) {
+                                                return 'Contact no. must be 10 characters long.';
+                                              } else {
+                                                return null;
                                               }
-                                              return null;
+
                                             },
                                             controller: contactNoController,
                                             keyboardType: TextInputType.phone,
@@ -495,85 +519,85 @@ void Signup(){
                                         ),
 
                                         //------------  Country  ---------------------------------//
-                                        // Container(
-                                        //   height: 60,
-                                        //   decoration: BoxDecoration(
-                                        //     borderRadius:
-                                        //         BorderRadius.circular(10),
-                                        //     color: Colors.white,
-                                        //     boxShadow: [
-                                        //       BoxShadow(
-                                        //         color: Color(0xff232855)
-                                        //             .withOpacity(0.3),
-                                        //         spreadRadius: 1,
-                                        //         blurRadius: 8,
-                                        //         offset: Offset(2, 7),
-                                        //       ),
-                                        //     ],
-                                        //   ),
-                                        //   child: DropdownButtonFormField(
-                                        //     decoration: InputDecoration(
-                                        //       hintText: 'Choose Your Country',
-                                        //       hintStyle: Theme.of(context)
-                                        //           .textTheme
-                                        //           .titleMedium!
-                                        //           .copyWith(
-                                        //             color: Theme.of(context)
-                                        //                 .colorScheme
-                                        //                 .secondary,
-                                        //           ),
-                                        //       label: Text(
-                                        //         'Country',
-                                        //         style: Theme.of(context)
-                                        //             .textTheme
-                                        //             .titleMedium!
-                                        //             .copyWith(
-                                        //               color: Theme.of(context)
-                                        //                   .colorScheme
-                                        //                   .secondary,
-                                        //             ),
-                                        //       ),
-                                        //       prefixIcon: Icon(
-                                        //         Icons.flag,
-                                        //         color: Theme.of(context)
-                                        //             .colorScheme
-                                        //             .secondary,
-                                        //       ),
-                                        //       enabledBorder: OutlineInputBorder(
-                                        //         borderRadius:
-                                        //             BorderRadius.circular(10),
-                                        //       ),
-                                        //       focusedBorder: OutlineInputBorder(
-                                        //         borderRadius:
-                                        //             BorderRadius.circular(10),
-                                        //         borderSide: BorderSide(
-                                        //           width: 2,
-                                        //           color: Theme.of(context)
-                                        //               .colorScheme
-                                        //               .secondary,
-                                        //         ),
-                                        //       ),
-                                        //     ),
-                                        //     value: chooseItem,
-                                        //     onChanged: (newValue) {
-                                        //       setState(() {
-                                        //         chooseItem = newValue as String?;
-                                        //       });
-                                        //     },
-                                        //      validator: (value) {
-                                        //        if (value == null) {
-                                        //          return 'Please select an item';
-                                        //        }
-                                        //        return null;
-                                        // },
-                                        //     items: listitem.map((valueItem) {
-                                        //       return DropdownMenuItem(
-                                        //         value: valueItem,
-                                        //         child: Text(valueItem),
-                                        //       );
-                                        //     }).toList(),
-                                        //   ),
-                                        // ),
+                                        Container(
+                                          height: 60,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            color: Colors.white,
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Color(0xff232855)
+                                                    .withOpacity(0.3),
+                                                spreadRadius: 1,
+                                                blurRadius: 8,
+                                                offset: Offset(2, 7),
+                                              ),
+                                            ],
+                                          ),
+                                          child: DropdownButtonFormField(
+                                            decoration: InputDecoration(
+                                              hintText: 'Choose Your Country',
+                                              hintStyle: Theme.of(context)
+                                                  .textTheme
+                                                  .titleMedium!
+                                                  .copyWith(
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .secondary,
+                                                  ),
+                                              label: Text(
+                                                'Country',
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .titleMedium!
+                                                    .copyWith(
+                                                      color: Theme.of(context)
+                                                          .colorScheme
+                                                          .secondary,
+                                                    ),
+                                              ),
+                                              prefixIcon: Icon(
+                                                Icons.flag,
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .secondary,
+                                              ),
+                                              enabledBorder: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                              ),
+                                              focusedBorder: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                borderSide: BorderSide(
+                                                  width: 2,
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .secondary,
+                                                ),
+                                              ),
+                                            ),
+                                            value: chooseItem,
+                                            onChanged: (newValue) {
+                                              setState(() {
+                                                chooseItem = newValue as String?;
+                                              });
+                                            },
+                                             validator: (value) {
+                                               if (value == null) {
+                                                 return 'Please select an item';
+                                               }
+                                               return null;
+                                        },
+                                            items: listitem.map((valueItem) {
+                                              return DropdownMenuItem(
+                                                value: valueItem,
+                                                child: Text(valueItem),
+                                              );
+                                            }).toList(),
+                                          ),
+                                        ),
                                         SizedBox(
                                           height: 15,
                                         ),

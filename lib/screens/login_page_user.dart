@@ -2,10 +2,12 @@ import 'package:business_bridge/screens/forget_password_user.dart';
 import 'package:business_bridge/screens/homepage.dart';
 
 import 'package:business_bridge/screens/sign_page_user.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../utils/utility.dart';
 import '../widgets/pop_up.dart';
 
 class Login_page extends StatefulWidget {
@@ -16,59 +18,48 @@ class Login_page extends StatefulWidget {
 class _Login_pageState extends State<Login_page> {
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
 
-  TextEditingController emailController =  TextEditingController();
-  TextEditingController passController =  TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passController = TextEditingController();
   int e = 0;
   bool _obsecureText = true;
+  FirebaseAuth _auth = FirebaseAuth.instance;
+  bool loading = false;
 
-  // FirebaseDatabase database = FirebaseDatabase.instance;
-
-  // void _verifydata() async {
-  //   DatabaseReference ref = FirebaseDatabase.instance.ref("User");
-  //   DatabaseEvent d = await ref.once();
-  //   Map temp = d.snapshot.value as Map;
-  //   setState(() {});
-  //   print("---- $temp");
-  //   print(passController.text);
-  //   temp.forEach((key, value) {
-  //     if (temp[key]["email"] == emailController.text &&
-  //         temp[key]["pass"] == passController.text) {
-  //       print(temp[key]["email"] +
-  //           temp[key]["pass"] +
-  //           emailController.text +
-  //           passController.text);
-  //       Navigator.push(
-  //           context, MaterialPageRoute(builder: (context) => final_page()));
-  //       e = 1;
-  //       if (formkey.currentState!.validate()) {
-  //         Navigator.push(
-  //             context, MaterialPageRoute(builder: (context) => final_page()));
-  //       } else {
-  //         print("not valid");
-  //       }
-  //
-  //     } else {
-  //       e = 2;
-  //     }
-  //     // print(temp[key]["password"]);
-  //   });
-  // }
-  final _form=GlobalKey<FormState>();
-  var _isLogin=true;
-
-  void _submit(){
-    final isvalid=_form.currentState!.validate();
-    if(isvalid){
-_form.currentState!.save();
-    }
+  void login() {
+    setState(() {
+      loading = true;
+    });
+    _auth
+        .signInWithEmailAndPassword(
+            email: emailController.text.toString(),
+            password: passController.text.toString())
+        .then((value) {
+         // Utiles().toastmessege(value.user!.email.toString());
+      Utiles().toastmessege("Login SucessFul!");
+      setState(() {
+        loading = false;
+      });
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return homepage();
+      }));
+    }).onError((error, stackTrace) {
+      debugPrint(error.toString());
+      Utiles().toastmessege(error.toString());
+      setState(() {
+        loading = false;
+      });
+    });
   }
+
+  final _form = GlobalKey<FormState>();
+  var _isLogin = true;
 
   @override
   Widget build(BuildContext context) {
     final keyBoardSpace = MediaQuery.of(context).viewInsets.bottom;
 
     return WillPopScope(
-      onWillPop: ()async {
+      onWillPop: () async {
         SystemNavigator.pop();
         return true;
       },
@@ -101,7 +92,7 @@ _form.currentState!.save();
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.fromLTRB(10,0,10,0),
+                            padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                             child: Container(
                               color: Colors.transparent,
                               height: 110,
@@ -109,7 +100,6 @@ _form.currentState!.save();
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-
                                   Container(
                                     // width: 30,
                                     // height: 30,
@@ -137,19 +127,21 @@ _form.currentState!.save();
                                         .textTheme
                                         .headlineLarge!
                                         .copyWith(
-                                      color:
-                                      Theme.of(context).colorScheme.onTertiary,
-                                    ),
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onTertiary,
+                                        ),
                                   ),
                                   Text(
                                     "\"Welcome Back\"",
                                     style: Theme.of(context)
                                         .textTheme
-                                        .bodyLarge !
+                                        .bodyLarge!
                                         .copyWith(
-                                      color:
-                                      Theme.of(context).colorScheme.onTertiary,
-                                    ),
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onTertiary,
+                                        ),
                                   ),
                                 ],
                               ),
@@ -188,18 +180,16 @@ _form.currentState!.save();
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 //  crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-
-
                                   // ------------------ another components ---------------------//
                                   Container(
                                     decoration: BoxDecoration(),
                                     child: Column(
                                       children: [
-
                                         Container(
                                           height: 60,
                                           decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(10),
+                                            borderRadius:
+                                                BorderRadius.circular(10),
                                             color: Colors.white,
                                             boxShadow: [
                                               BoxShadow(
@@ -223,10 +213,8 @@ _form.currentState!.save();
                                                 return 'Enter valid E-mail';
                                               }
                                               return null;
-
                                             },
-                                            onSaved: (value){},
-
+                                            onSaved: (value) {},
                                             keyboardType:
                                                 TextInputType.emailAddress,
                                             cursorColor: Theme.of(context)
@@ -285,7 +273,8 @@ _form.currentState!.save();
                                         Container(
                                           height: 060,
                                           decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(10),
+                                            borderRadius:
+                                                BorderRadius.circular(10),
                                             color: Colors.white,
                                             boxShadow: [
                                               BoxShadow(
@@ -343,7 +332,8 @@ _form.currentState!.save();
                                               ),
                                               suffixIcon: GestureDetector(
                                                 onTap: () {
-                                                  _obsecureText = !_obsecureText;
+                                                  _obsecureText =
+                                                      !_obsecureText;
                                                   setState(() {});
                                                 },
                                                 child: Icon(
@@ -381,8 +371,8 @@ _form.currentState!.save();
                                                 Navigator.push(context,
                                                     MaterialPageRoute(
                                                         builder: (context) {
-                                                          return forget_password_user();
-                                                        }));
+                                                  return forget_password_user();
+                                                }));
                                               },
                                               child: Text(
                                                 "Forgot password?",
@@ -396,7 +386,8 @@ _form.currentState!.save();
                                         ),
                                         //-----------error msg show------------------------------///
                                         Container(
-                                          alignment: AlignmentDirectional.center,
+                                          alignment:
+                                              AlignmentDirectional.center,
                                           //margin: EdgeInsets.only(top: 00),
                                           padding: EdgeInsets.only(bottom: 10),
                                           child: Text(
@@ -404,51 +395,61 @@ _form.currentState!.save();
                                                 ? "Please,Enter valid Username and Password !"
                                                 : " ",
                                             style: TextStyle(
-                                                color: Colors.red, fontSize: 13),
+                                                color: Colors.red,
+                                                fontSize: 13),
                                           ),
                                         ),
 
                                         //--------button-------///
                                         GestureDetector(
                                           onTap: () {
-                                            Navigator.push(
-                                              //Navigator.pushanduntill
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) {
-                                                  return homepage();
-                                                },
-                                              ),
-                                                //(route)=>false
-                                            );
+                                            if (_form.currentState!
+                                                .validate()) {
+                                              login();
+                                            }
                                           },
-                                          child: Container(
-                                            width: double.infinity,
-                                            height: 60,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              color: Color(0xff9DB2BF),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Color(0xff232855)
-                                                      .withOpacity(0.3),
-                                                  spreadRadius: 1,
-                                                  blurRadius: 8,
-                                                  offset: Offset(2, 7),
+                                          child: Stack(
+                                            children: [
+                                              Container(
+                                                width: double.infinity,
+                                                height: 60,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  color: Color(0xff9DB2BF),
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Color(0xff232855)
+                                                          .withOpacity(0.3),
+                                                      spreadRadius: 1,
+                                                      blurRadius: 8,
+                                                      offset: Offset(2, 7),
+                                                    ),
+                                                  ],
                                                 ),
-                                              ],
-                                            ),
-                                            child: Center(
-                                              child: Text(
-                                                'Login',
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 20,
+                                                child: Center(
+                                                  child: Text(
+                                                    'Login',
+                                                    style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 20,
+                                                    ),
+                                                  ),
                                                 ),
                                               ),
-                                            ),
+                                              if (loading) // Show CircularProgressIndicator when loading is true
+                                                Positioned.fill(
+                                                  child: Container(
+
+                                                    color: Colors.white.withOpacity(0.5),
+                                                    child: Center(
+                                                      child: CircularProgressIndicator(color: Colors.blueGrey,),
+                                                    ),
+                                                  ),
+                                                ),
+                                            ],
                                           ),
                                         ),
                                         SizedBox(
@@ -486,9 +487,10 @@ _form.currentState!.save();
                                                       .textTheme
                                                       .bodyMedium!
                                                       .copyWith(
-                                                          color: Theme.of(context)
-                                                              .colorScheme
-                                                              .onBackground,
+                                                          color:
+                                                              Theme.of(context)
+                                                                  .colorScheme
+                                                                  .onBackground,
                                                           fontWeight:
                                                               FontWeight.bold),
                                                 ),
@@ -509,7 +511,8 @@ _form.currentState!.save();
                                             ),
                                             Row(
                                               mainAxisAlignment:
-                                                  MainAxisAlignment.spaceBetween,
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
                                                 //google
                                                 GestureDetector(
@@ -519,15 +522,16 @@ _form.currentState!.save();
                                                     height: 50,
                                                     decoration: BoxDecoration(
                                                         borderRadius:
-                                                            BorderRadius.circular(
-                                                                10),
+                                                            BorderRadius
+                                                                .circular(10),
                                                         border: Border.all(),
                                                         color: Colors.white54),
                                                     child: Center(
                                                       child: Padding(
-                                                        padding: const EdgeInsets
-                                                                .fromLTRB(
-                                                            15, 10, 15, 10),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .fromLTRB(
+                                                                15, 10, 15, 10),
                                                         child: Row(
                                                           mainAxisAlignment:
                                                               MainAxisAlignment
@@ -548,9 +552,11 @@ _form.currentState!.save();
                                                             Text(
                                                               'Google',
                                                               style: TextStyle(
-                                                                color: Colors.black,
+                                                                color: Colors
+                                                                    .black,
                                                                 fontWeight:
-                                                                    FontWeight.w500,
+                                                                    FontWeight
+                                                                        .w500,
                                                                 fontSize: 15,
                                                               ),
                                                             ),
@@ -568,15 +574,16 @@ _form.currentState!.save();
                                                     height: 50,
                                                     decoration: BoxDecoration(
                                                         borderRadius:
-                                                            BorderRadius.circular(
-                                                                10),
+                                                            BorderRadius
+                                                                .circular(10),
                                                         border: Border.all(),
                                                         color: Colors.white54),
                                                     child: Center(
                                                       child: Padding(
-                                                        padding: const EdgeInsets
-                                                                .fromLTRB(
-                                                            15, 10, 15, 10),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .fromLTRB(
+                                                                15, 10, 15, 10),
                                                         child: Row(
                                                           mainAxisAlignment:
                                                               MainAxisAlignment
@@ -597,7 +604,8 @@ _form.currentState!.save();
                                                             Text(
                                                               'LinkedIn',
                                                               style: TextStyle(
-                                                                color: Colors.black,
+                                                                color: Colors
+                                                                    .black,
                                                                 // fontWeight: FontWeight.bold,
                                                                 fontSize: 15,
                                                               ),
@@ -643,8 +651,9 @@ _form.currentState!.save();
                                                   style: TextStyle(
                                                       fontSize: 15,
                                                       color: Color(0xff9DB2BF),
-                                                     // color: Color(0xffbadb6e),
-                                                      fontWeight: FontWeight.bold),
+                                                      // color: Color(0xffbadb6e),
+                                                      fontWeight:
+                                                          FontWeight.bold),
                                                 )),
                                           ],
                                         ),
