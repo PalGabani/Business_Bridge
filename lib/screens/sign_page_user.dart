@@ -77,6 +77,9 @@ class _Signin_pageState extends State<Signin_page> {
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
   bool _obsecureText = true;
 bool loading =false;
+ final fireStore= FirebaseFirestore.instance
+      .collection('users');
+
 
   final TextEditingController idController = TextEditingController();
   final TextEditingController businessNameController = TextEditingController();
@@ -100,13 +103,14 @@ FirebaseAuth _auth=FirebaseAuth.instance;
       );
 
       // User has been successfully created here, and you can access userCredential.user
-
+      final fuid=FirebaseFirestore.instance
+          .collection('users').doc(userCredential.user!.uid);
       // Store user data in Firestore
-      await FirebaseFirestore.instance
-          .collection('users')
+      await fireStore
           .doc(userCredential.user!.uid)
           .set({
-        "id":"",
+        "id":fuid.toString().trim(),
+        "image":"",
         "bname":businessNameController.text.trim(),
         "email":emailController.text.trim(),
         "contact": contactNoController.text.trim(),
@@ -117,7 +121,7 @@ FirebaseAuth _auth=FirebaseAuth.instance;
       });
 
       // Handle successful sign up here
-
+      Utiles().toastmessege("Sign up sucessful");
     } catch (error) {
       // Handle errors here
       Utiles().toastmessege("Email Already Used!");

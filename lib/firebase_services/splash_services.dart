@@ -13,8 +13,6 @@ class Splashservices {
   void isLogin(BuildContext context) {
 
     FirebaseAuth auth=FirebaseAuth.instance;
-
-
     final user=auth.currentUser;
     if(user!=null){
       Timer(
@@ -36,3 +34,5 @@ class Splashservices {
 
   }
 }
+
+

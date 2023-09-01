@@ -186,7 +186,7 @@ class _Login_pageState extends State<Login_page> {
                                     child: Column(
                                       children: [
                                         Container(
-                                          height: 60,
+                                         // height: 60,
                                           decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(10),
@@ -201,67 +201,73 @@ class _Login_pageState extends State<Login_page> {
                                               ),
                                             ],
                                           ),
-                                          child: TextFormField(
-                                            controller: emailController,
-                                            validator: (value) {
-                                              if (value!.isEmpty) {
-                                                return 'please Enter E-mail';
-                                              }
-                                              if (!RegExp(
-                                                      "^[a-zA-z0-9+_.-]+@[gmail.com]")
-                                                  .hasMatch(value)) {
-                                                return 'Enter valid E-mail';
-                                              }
-                                              return null;
-                                            },
-                                            onSaved: (value) {},
-                                            keyboardType:
-                                                TextInputType.emailAddress,
-                                            cursorColor: Theme.of(context)
-                                                .colorScheme
-                                                .secondary,
-                                            decoration: InputDecoration(
-                                              hintText: 'Enter Email ID:',
-                                              hintStyle: Theme.of(context)
-                                                  .textTheme
-                                                  .titleMedium!
-                                                  .copyWith(
+                                          child: Column(
+                                            children: [
+                                              TextFormField(
+                                                controller: emailController,
+                                                validator: (value) {
+                                                  if (value!.isEmpty) {
+                                                    return 'please Enter E-mail';
+                                                  }
+                                                  if (!RegExp(
+                                                          "^[a-zA-z0-9+_.-]+@[gmail.com]")
+                                                      .hasMatch(value)) {
+                                                    return 'Enter valid E-mail';
+                                                  }
+                                                  return null;
+                                                },
+                                                onSaved: (value) {},
+                                                keyboardType:
+                                                    TextInputType.emailAddress,
+                                                cursorColor: Theme.of(context)
+                                                    .colorScheme
+                                                    .secondary,
+                                                decoration: InputDecoration(
+                                                  hintText: 'Enter Email ID:',
+                                                  hintStyle: Theme.of(context)
+                                                      .textTheme
+                                                      .titleMedium!
+                                                      .copyWith(
+                                                        color: Theme.of(context)
+                                                            .colorScheme
+                                                            .secondary,
+                                                      ),
+                                                  label: Text(
+                                                    'Email',
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .titleMedium!
+                                                        .copyWith(
+                                                          color: Theme.of(context)
+                                                              .colorScheme
+                                                              .secondary,
+                                                        ),
+                                                  ),
+                                                  prefixIcon: Icon(
+                                                    Icons.mail,
                                                     color: Theme.of(context)
                                                         .colorScheme
                                                         .secondary,
                                                   ),
-                                              label: Text(
-                                                'Email',
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .titleMedium!
-                                                    .copyWith(
+                                                  enabledBorder: OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(10),
+                                                  ),
+
+
+                                                  focusedBorder: OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(10),
+                                                    borderSide: BorderSide(
+                                                      width: 2,
                                                       color: Theme.of(context)
                                                           .colorScheme
                                                           .secondary,
                                                     ),
-                                              ),
-                                              prefixIcon: Icon(
-                                                Icons.mail,
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .secondary,
-                                              ),
-                                              enabledBorder: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                              ),
-                                              focusedBorder: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                borderSide: BorderSide(
-                                                  width: 2,
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .secondary,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
+                                            ],
                                           ),
                                         ),
                                         SizedBox(
@@ -271,7 +277,7 @@ class _Login_pageState extends State<Login_page> {
                                         //------------  PassWord  ---------------------------------//
 
                                         Container(
-                                          height: 060,
+                                         // height: 060,
                                           decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(10),
@@ -286,80 +292,84 @@ class _Login_pageState extends State<Login_page> {
                                               ),
                                             ],
                                           ),
-                                          child: TextFormField(
-                                            keyboardType:
-                                                TextInputType.visiblePassword,
-                                            validator: (value) {
-                                              if (value!.isEmpty) {
-                                                return "Please Enter Password";
-                                              }
-                                              if (value.trim().length < 8) {
-                                                return 'Password should be in 8 characters in length';
-                                              }
-                                              return null;
-                                            },
-                                            controller: passController,
-                                            cursorColor: Theme.of(context)
-                                                .colorScheme
-                                                .secondary,
-                                            obscureText: _obsecureText,
-                                            decoration: InputDecoration(
-                                              hintText: 'Enter Password:',
-                                              hintStyle: Theme.of(context)
-                                                  .textTheme
-                                                  .titleMedium!
-                                                  .copyWith(
+                                          child: Column(
+                                            children: [
+                                              TextFormField(
+                                                keyboardType:
+                                                    TextInputType.visiblePassword,
+                                                validator: (value) {
+                                                  if (value!.isEmpty) {
+                                                    return "Please Enter Password";
+                                                  }
+                                                  if (value.trim().length < 8) {
+                                                    return 'Password should be in 8 characters in length';
+                                                  }
+                                                  return null;
+                                                },
+                                                controller: passController,
+                                                cursorColor: Theme.of(context)
+                                                    .colorScheme
+                                                    .secondary,
+                                                obscureText: _obsecureText,
+                                                decoration: InputDecoration(
+                                                  hintText: 'Enter Password:',
+                                                  hintStyle: Theme.of(context)
+                                                      .textTheme
+                                                      .titleMedium!
+                                                      .copyWith(
+                                                        color: Theme.of(context)
+                                                            .colorScheme
+                                                            .secondary,
+                                                      ),
+                                                  label: Text(
+                                                    'Password',
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .titleMedium!
+                                                        .copyWith(
+                                                          color: Theme.of(context)
+                                                              .colorScheme
+                                                              .secondary,
+                                                        ),
+                                                  ),
+                                                  prefixIcon: Icon(
+                                                    Icons.lock_outline_sharp,
                                                     color: Theme.of(context)
                                                         .colorScheme
                                                         .secondary,
                                                   ),
-                                              label: Text(
-                                                'Password',
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .titleMedium!
-                                                    .copyWith(
+                                                  suffixIcon: GestureDetector(
+                                                    onTap: () {
+                                                      _obsecureText =
+                                                          !_obsecureText;
+                                                      setState(() {});
+                                                    },
+                                                    child: Icon(
+                                                      _obsecureText
+                                                          ? Icons.visibility
+                                                          : Icons.visibility_off,
                                                       color: Theme.of(context)
                                                           .colorScheme
                                                           .secondary,
                                                     ),
-                                              ),
-                                              prefixIcon: Icon(
-                                                Icons.lock_outline_sharp,
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .secondary,
-                                              ),
-                                              suffixIcon: GestureDetector(
-                                                onTap: () {
-                                                  _obsecureText =
-                                                      !_obsecureText;
-                                                  setState(() {});
-                                                },
-                                                child: Icon(
-                                                  _obsecureText
-                                                      ? Icons.visibility
-                                                      : Icons.visibility_off,
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .secondary,
+                                                  ),
+                                                  enabledBorder: OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(10),
+                                                  ),
+                                                  focusedBorder: OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(10),
+                                                    borderSide: BorderSide(
+                                                      width: 2,
+                                                      color: Theme.of(context)
+                                                          .colorScheme
+                                                          .secondary,
+                                                    ),
+                                                  ),
                                                 ),
                                               ),
-                                              enabledBorder: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                              ),
-                                              focusedBorder: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                borderSide: BorderSide(
-                                                  width: 2,
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .secondary,
-                                                ),
-                                              ),
-                                            ),
+                                            ],
                                           ),
                                         ),
 
