@@ -1,4 +1,3 @@
-
 import 'package:business_bridge/models/user_model.dart';
 import 'package:business_bridge/screens/homepage.dart';
 import 'package:business_bridge/screens/login_page_user.dart';
@@ -12,11 +11,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Signin_page extends StatefulWidget {
+  Signin_page({
+    required this.sector,
+  });
+
+  final String sector;
+
   @override
-  State<Signin_page> createState() => _Signin_pageState();
+  State<Signin_page> createState() => _Signin_pageState(sector: sector);
 }
 
 class _Signin_pageState extends State<Signin_page> {
+  _Signin_pageState({required this.sector,});
+final String sector;
 
   String? chooseItem;
   List listitem = [
@@ -76,10 +83,8 @@ class _Signin_pageState extends State<Signin_page> {
   ];
   GlobalKey<FormState> formkey = GlobalKey<FormState>();
   bool _obsecureText = true;
-bool loading =false;
- final fireStore= FirebaseFirestore.instance
-      .collection('users');
-
+  bool loading = false;
+  final fireStore = FirebaseFirestore.instance.collection('users');
 
   final TextEditingController idController = TextEditingController();
   final TextEditingController businessNameController = TextEditingController();
@@ -89,7 +94,7 @@ bool loading =false;
   final TextEditingController licenseNoController = TextEditingController();
   final TextEditingController userNameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-FirebaseAuth _auth=FirebaseAuth.instance;
+  FirebaseAuth _auth = FirebaseAuth.instance;
 
   Future<void> Signup() async {
     setState(() {
@@ -103,25 +108,27 @@ FirebaseAuth _auth=FirebaseAuth.instance;
       );
 
       // User has been successfully created here, and you can access userCredential.user
-      final fuid=FirebaseFirestore.instance
-          .collection('users').doc(userCredential.user!.uid);
+      final fuid = FirebaseFirestore.instance
+          .collection('users')
+          .doc(userCredential.user!.uid);
       // Store user data in Firestore
-      await fireStore
-          .doc(userCredential.user!.uid)
-          .set({
-        "id":fuid.toString().trim(),
-        "image":"",
-        "bname":businessNameController.text.trim(),
-        "email":emailController.text.trim(),
+      await fireStore.doc(userCredential.user!.uid).set({
+        "id": fuid.toString().trim(),
+        "image": "",
+        "bname": businessNameController.text.trim(),
+        "sector":sector.toString().trim(),
+        "email": emailController.text.trim(),
         "contact": contactNoController.text.trim(),
-        "country":chooseItem,
-        "license":licenseNoController.text.trim(),
-        "username":userNameController.text.trim(),
-        "password":passwordController.text.trim(),
+        "country": chooseItem,
+        "license": licenseNoController.text.trim(),
+        "username": userNameController.text.trim(),
+        "password": passwordController.text.trim(),
       });
-
+Navigator.push(context, MaterialPageRoute(builder: (contex){return Login_page();}));
       // Handle successful sign up here
       Utiles().toastmessege("Sign up sucessful");
+
+
     } catch (error) {
       // Handle errors here
       Utiles().toastmessege("Email Already Used!");
@@ -467,7 +474,6 @@ FirebaseAuth _auth=FirebaseAuth.instance;
                                               } else {
                                                 return null;
                                               }
-
                                             },
                                             controller: contactNoController,
                                             keyboardType: TextInputType.phone,
@@ -585,15 +591,16 @@ FirebaseAuth _auth=FirebaseAuth.instance;
                                             value: chooseItem,
                                             onChanged: (newValue) {
                                               setState(() {
-                                                chooseItem = newValue as String?;
+                                                chooseItem =
+                                                    newValue as String?;
                                               });
                                             },
-                                             validator: (value) {
-                                               if (value == null) {
-                                                 return 'Please select an item';
-                                               }
-                                               return null;
-                                        },
+                                            validator: (value) {
+                                              if (value == null) {
+                                                return 'Please select an item';
+                                              }
+                                              return null;
+                                            },
                                             items: listitem.map((valueItem) {
                                               return DropdownMenuItem(
                                                 value: valueItem,
@@ -825,7 +832,8 @@ FirebaseAuth _auth=FirebaseAuth.instance;
                                               ),
                                               suffixIcon: GestureDetector(
                                                 onTap: () {
-                                                  _obsecureText = !_obsecureText;
+                                                  _obsecureText =
+                                                      !_obsecureText;
                                                   setState(() {});
                                                 },
                                                 child: Icon(
@@ -862,8 +870,9 @@ FirebaseAuth _auth=FirebaseAuth.instance;
                                         //--------button-------///
                                         GestureDetector(
                                           onTap: () {
-                                            if (formkey.currentState!.validate()) {
-                                             Signup();
+                                            if (formkey.currentState!
+                                                .validate()) {
+                                              Signup();
                                             }
                                           },
                                           child: Stack(
@@ -872,11 +881,13 @@ FirebaseAuth _auth=FirebaseAuth.instance;
                                                 width: double.infinity,
                                                 height: 60,
                                                 decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(10),
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
                                                   color: Color(0xff9DB2BF),
                                                   boxShadow: [
                                                     BoxShadow(
-                                                      color: Color(0xff232855).withOpacity(0.3),
+                                                      color: Color(0xff232855)
+                                                          .withOpacity(0.3),
                                                       spreadRadius: 1,
                                                       blurRadius: 8,
                                                       offset: Offset(2, 7),
@@ -888,7 +899,8 @@ FirebaseAuth _auth=FirebaseAuth.instance;
                                                     'Sign UP',
                                                     style: TextStyle(
                                                       color: Colors.black,
-                                                      fontWeight: FontWeight.bold,
+                                                      fontWeight:
+                                                          FontWeight.bold,
                                                       fontSize: 20,
                                                     ),
                                                   ),
@@ -897,10 +909,13 @@ FirebaseAuth _auth=FirebaseAuth.instance;
                                               if (loading)
                                                 Positioned.fill(
                                                   child: Container(
-
-                                                    color: Colors.white.withOpacity(0.5),
+                                                    color: Colors.white
+                                                        .withOpacity(0.5),
                                                     child: Center(
-                                                      child: CircularProgressIndicator(color: Colors.blueGrey,),
+                                                      child:
+                                                          CircularProgressIndicator(
+                                                        color: Colors.blueGrey,
+                                                      ),
                                                     ),
                                                   ),
                                                 ),

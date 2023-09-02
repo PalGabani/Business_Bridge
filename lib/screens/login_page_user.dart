@@ -1,7 +1,9 @@
 import 'package:business_bridge/screens/forget_password_user.dart';
 import 'package:business_bridge/screens/homepage.dart';
+import 'package:business_bridge/screens/sector_page.dart';
 
 import 'package:business_bridge/screens/sign_page_user.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -25,29 +27,88 @@ class _Login_pageState extends State<Login_page> {
   FirebaseAuth _auth = FirebaseAuth.instance;
   bool loading = false;
 
+  // void login() {
+  //   setState(() {
+  //     loading = true;
+  //   });
+  //   _auth
+  //       .signInWithEmailAndPassword(
+  //           email: emailController.text.toString(),
+  //           password: passController.text.toString())
+  //       .then((value) {
+  //        // Utiles().toastmessege(value.user!.email.toString());
+  //     Utiles().toastmessege("Login SucessFul!");
+  //     setState(() {
+  //       loading = false;
+  //     });
+  //     Navigator.push(context, MaterialPageRoute(builder: (context) {
+  //       return homepage();
+  //     }));
+  //   }).onError((error, stackTrace) {
+  //     debugPrint(error.toString());
+  //     Utiles().toastmessege(error.toString());
+  //     setState(() {
+  //       loading = false;
+  //     });
+  //   });
+  // }
   void login() {
     setState(() {
       loading = true;
     });
-    _auth
-        .signInWithEmailAndPassword(
-            email: emailController.text.toString(),
-            password: passController.text.toString())
-        .then((value) {
-         // Utiles().toastmessege(value.user!.email.toString());
-      Utiles().toastmessege("Login SucessFul!");
-      setState(() {
-        loading = false;
-      });
-      Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return homepage();
-      }));
-    }).onError((error, stackTrace) {
-      debugPrint(error.toString());
-      Utiles().toastmessege(error.toString());
-      setState(() {
-        loading = false;
-      });
+
+    String email = emailController.text.toString();
+    String password = passController.text.toString();
+
+    // Check if the user exists in the 'users' collection
+    FirebaseFirestore.instance
+        .collection('users')
+        .where('email', isEqualTo: email)
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      if (querySnapshot.docs.isNotEmpty) {
+        _auth
+            .signInWithEmailAndPassword(email: email, password: password)
+            .then((value) {
+          Utiles().toastmessege("Login Successful!");
+          setState(() {
+            loading = false;
+          });
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return homepage();
+          }));
+        }).onError((error, stackTrace) {
+          debugPrint(error.toString());
+          Utiles().toastmessege(error.toString());
+          setState(() {
+            loading = false;
+          });
+        });
+      } else {
+        // Check if the user exists in the 'executive' collection
+        FirebaseFirestore.instance
+            .collection('executive')
+            .where('email', isEqualTo: email)
+            .get()
+            .then((QuerySnapshot executiveSnapshot) {
+          if (executiveSnapshot.docs.isNotEmpty) {
+            // User is in the 'executive' collection, perform executive login logic here
+            // For example:
+            // _auth.signInWithEmailAndPassword(...);
+            // Navigate to executive page...
+            Utiles().toastmessege("User not found.");
+            setState(() {
+              loading = false;
+            });
+          } else {
+            // User not found in either collection
+            Utiles().toastmessege("User not found.");
+            setState(() {
+              loading = false;
+            });
+          }
+        });
+      }
     });
   }
 
@@ -653,7 +714,7 @@ class _Login_pageState extends State<Login_page> {
                                                   Navigator.push(context,
                                                       MaterialPageRoute(
                                                           builder: (context) {
-                                                    return Signin_page();
+                                                    return sector_page();
                                                   }));
                                                 },
                                                 child: Text(

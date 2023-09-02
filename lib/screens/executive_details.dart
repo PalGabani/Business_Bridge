@@ -2,6 +2,8 @@ import 'package:business_bridge/models/assign_page_projects.dart';
 import 'package:business_bridge/models/assign_project_details.dart';
 import 'package:business_bridge/screens/assign_project_page.dart';
 import 'package:business_bridge/widgets/work_portal_projects.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -17,12 +19,23 @@ class executive_details extends ConsumerStatefulWidget {
 }
 
 class _executive_detailsState extends ConsumerState<executive_details> {
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  late User _user; // To store the current user
+
+  @override
+  void initState() {
+    super.initState();
+    _user = _auth.currentUser!;
+    // Get the current user
+  }
+
+
   @override
   Widget build(BuildContext context, ) {
-    final ap = ref.watch(assignedprojectsProvider);
-    //final ap=ref.watch(projectProvider);
+    final DocumentReference executiveRef = FirebaseFirestore.instance.collection('executive').doc('abhishek'); // Replace 'abhishek' with the actual document ID
 
-// final apd=ref.watch(assignprojectdetailProvider);
+    final ap = ref.watch(assignedprojectsProvider);
 
     Widget content = Container(
       // height: 100,
@@ -109,53 +122,92 @@ class _executive_detailsState extends ConsumerState<executive_details> {
                     height: 110,
                   ),
 
-                  Padding(
-                    padding: EdgeInsets.only(left: 20, right: 20, bottom: 20),
-                    child: Container(
-                      height: 140,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.grey.withOpacity(0.35),
-                      ),
-                      child: Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 20),
+
+                  Column(
+                    children: [
+                      StreamBuilder<DocumentSnapshot>(
+                        stream: FirebaseFirestore.instance
+                            .collection('executive')
+                            .doc(_user.uid) // Use the UID of the current user
+                            .snapshots(),
+                        builder: (context, snapshot) {
+                          if (!snapshot.hasData) {
+                            return CircularProgressIndicator(); // Show a loading indicator while data is being fetched
+                          }
+
+                          if (snapshot.hasError) {
+                            return Text('Error: ${snapshot.error}');
+                          }
+
+                          final userData = snapshot.data!.data() as Map<String, dynamic>;
+
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
                             child: Container(
-                              height: 100,
-                              width: 100,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(100),
-                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.blueGrey.withOpacity(0.7),
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+
+                                  Container(
+                                    height: 140,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Colors.grey.withOpacity(0.35),
+
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 20),
+                                          child: Container(
+                                            height: 100,
+                                            width: 100,
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(100),
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 20, top: 20),
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text(userData['exname'],
+                                                  style: TextStyle(
+                                                      color: Colors.white, fontSize: 20)),
+                                              Text(userData['country'],
+                                                  style: TextStyle(
+                                                      color: Colors.white, fontSize: 15)),
+                                              Text(userData['contact'],
+                                                  style: TextStyle(
+                                                      color: Colors.white, fontSize: 15)),
+                                              Text(userData['email'],
+                                                  maxLines: 2,
+                                                  style: TextStyle(
+                                                      color: Colors.white, fontSize: 17)),
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+
+                                  //-------------------------------projects assign part------------------//
+
+                                  //Add similar rows for other user data here
+                                ],
                               ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 20, top: 20),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Abhishek Malhan",
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 20)),
-                                Text("India",
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 15)),
-                                Text("+91 9865328754",
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 15)),
-                                Text("abhishek113@gmail.com",
-                                    maxLines: 2,
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 17)),
-                              ],
-                            ),
-                          )
-                        ],
+                          );
+                        },
                       ),
-                    ),
+                    ],
                   ),
-                  //-------------------------------projects assign part------------------//
                   Expanded(
                       child: Container(
                     width: double.infinity,

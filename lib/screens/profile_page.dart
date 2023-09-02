@@ -352,6 +352,18 @@ class _profile_pageState extends State<profile_page> {
                             Row(
                               children: [
                                 Text(
+                                  "Sector Name : ",
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                                Text(
+                                  userData['sector'] ?? 'N/A',
+                                  style: TextStyle(fontSize: 20),
+                                )
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Text(
                                   "User Name : ",
                                   style: TextStyle(fontSize: 20),
                                 ),

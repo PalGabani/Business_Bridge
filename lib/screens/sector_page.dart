@@ -1,4 +1,5 @@
 import 'package:business_bridge/screens/login_page_user.dart';
+import 'package:business_bridge/screens/sign_page_user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -66,6 +67,11 @@ class _sector_pageState extends State<sector_page> {
                       setState(() {
                         selected_inx = index;
                         print(categories[index]["title"]);
+                        Navigator.push(context,
+                            MaterialPageRoute(
+                                builder: (context) {
+                                  return Signin_page(sector:categories[index]["title"] ,);
+                                }));
                       });
                     },
                   ),
