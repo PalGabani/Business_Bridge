@@ -36,7 +36,9 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      body: Container(
+        height: double.infinity,
+        width: double.infinity,
         child: _controller.value.isInitialized
             ? AspectRatio(
           aspectRatio: _controller.value.aspectRatio,

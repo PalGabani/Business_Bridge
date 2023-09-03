@@ -67,11 +67,11 @@ class _sector_pageState extends State<sector_page> {
                       setState(() {
                         selected_inx = index;
                         print(categories[index]["title"]);
-                        Navigator.push(context,
-                            MaterialPageRoute(
-                                builder: (context) {
-                                  return Signin_page(sector:categories[index]["title"] ,);
-                                }));
+                        // Navigator.push(context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) {
+                        //           return Signin_page(sector:categories[index]["title"] ,);
+                        //         }));
                       });
                     },
                   ),
@@ -95,12 +95,15 @@ class _sector_pageState extends State<sector_page> {
                       Color(0xff303845)
                     )),
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) {
-                        return Login_page();
-                      })
-                  );
+                  setState(() {
+                    //selected_inx = index;
+                   // print(categories[index]["title"]);
+                    Navigator.push(context,
+                        MaterialPageRoute(
+                            builder: (context) {
+                              return Signin_page(sector:categories[selected_inx]["title"] ,);
+                            }));
+                  });
                 },
                 child: Text('Next', style: TextStyle(color: Colors.white,fontSize: 28),
                 ),

@@ -24,30 +24,38 @@ class _profile_pageState extends State<profile_page> {
     // Get the current user
   }
 // Function to delete user data
-  Future<void> deleteUserAccount() async {
+
+  Future<void> deleteUserAccount(BuildContext context) async {
     final user = FirebaseAuth.instance.currentUser;
-    final CollectionReference usersCollection = FirebaseFirestore.instance.collection('users');
+    final CollectionReference usersCollection =
+    FirebaseFirestore.instance.collection('users');
 
     if (user != null) {
-      try {
-        // Delete data in Firestore
 
+      try {
+
+        // Delete data in Firestore
+        await usersCollection.doc(user.uid).delete();
 
         // Delete the user account in Firebase Authentication
-
-        Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => Login_page(),
-        ));
-        await usersCollection.doc(user.uid).delete();
         await user.delete();
+
+        // Show a toast message or navigate to the login page
         Utiles().toastmessege("Account Deleted!");
+
+
+        ///_user = _auth.
       } catch (error) {
+        // Handle errors
         Utiles().toastmessege("Error Fetch on Deleting Account!");
-        // Handle errors, such as insufficient permissions or network issues
         print('Error deleting user data: $error');
       }
+    } else {
+     
+      print('User is null');
     }
   }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -105,9 +113,9 @@ class _profile_pageState extends State<profile_page> {
             ListTile(
               title: Text('Profile'),
               enableFeedback: true,
-              splashColor: Colors.cyanAccent,
+              splashColor: Colors.grey,
               enabled: true,
-              focusColor: Colors.teal,
+              focusColor: Colors.blueGrey,
 
               onTap: () {
                 Navigator.push(
@@ -151,10 +159,13 @@ class _profile_pageState extends State<profile_page> {
                           child: Text('Delete'),
                           onPressed: () {
                             // Call the function to delete the user's account and data
-                            deleteUserAccount();
+                            deleteUserAccount(context);
 
                             // Close the dialog
                             Navigator.of(context).pop();
+                            Navigator.of(context).push(MaterialPageRoute(builder: (context){
+                              return Login_page();
+                            }));
                           },
                         ),
                       ],
@@ -197,124 +208,24 @@ class _profile_pageState extends State<profile_page> {
           padding: const EdgeInsets.only(left: 20),
           child: Column(
             children: [
-              // SizedBox(
-              //   height: 50,
-              // ),
-              // Row(
-              //   crossAxisAlignment: CrossAxisAlignment.center,
-              //   mainAxisAlignment: MainAxisAlignment.center,
-              //   children: [
-              //     Container(
-              //       width: 120,
-              //       height: 120,
-              //       decoration: BoxDecoration(
-              //           color: Colors.grey,
-              //           borderRadius: BorderRadius.circular(60)),
-              //     )
-              //   ],
-              // ),
-              // SizedBox(
-              //   height: 40,
-              // ),
-              // Row(
-              //   children: [
-              //     Text(
-              //     //  DocumentSnapshot.
-              //       "Business Name : ",
-              //       style: TextStyle(fontSize: 20),
-              //     ),
-              //     Text(
-              //       "data",
-              //       style: TextStyle(fontSize: 20),
-              //     )
-              //   ],
-              // ),
-              // Row(
-              //   children: [
-              //     Text(
-              //       "Business id : ",
-              //       style: TextStyle(fontSize: 20),
-              //     ),
-              //     Text(
-              //       "data",
-              //       style: TextStyle(fontSize: 20),
-              //     )
-              //   ],
-              // ),
-              // Row(
-              //   children: [
-              //     Text(
-              //       "User name : ",
-              //       style: TextStyle(fontSize: 20),
-              //     ),
-              //     Text(
-              //       "data",
-              //       style: TextStyle(fontSize: 20),
-              //     )
-              //   ],
-              // ),
-              // Row(
-              //   children: [
-              //     Text(
-              //       "Email : ",
-              //       style: TextStyle(fontSize: 20),
-              //     ),
-              //     Wrap(
-              //       children: [
-              //         Text(
-              //           "data",
-              //           style: TextStyle(fontSize: 20),
-              //         ),
-              //       ],
-              //     )
-              //   ],
-              // ),
-              // Row(
-              //   children: [
-              //     Text(
-              //       "Contact no : ",
-              //       style: TextStyle(fontSize: 20),
-              //     ),
-              //     Wrap(
-              //       children: [
-              //         Text(
-              //           "data",
-              //           style: TextStyle(fontSize: 20),
-              //         ),
-              //       ],
-              //     )
-              //   ],
-              // ),
-              // Row(
-              //   children: [
-              //     Text(
-              //       "License no. : ",
-              //       style: TextStyle(fontSize: 20),
-              //     ),
-              //     Text(
-              //       "data",
-              //       style: TextStyle(fontSize: 20),
-              //     )
-              //   ],
-              // ),
-              // Row(
-              //   children: [
-              //     Text(
-              //       "Country : ",
-              //       style: TextStyle(fontSize: 20),
-              //     ),
-              //     Text(
-              //       "data",
-              //       style: TextStyle(fontSize: 20),
-              //     )
-              //   ],
-              // ),
+
               StreamBuilder<DocumentSnapshot>(
                 stream: FirebaseFirestore.instance
                     .collection('users')
-                    .doc(_user.uid) // Use the UID of the current user
+                    .doc(_user?.uid) // Use the UID of the current user
                     .snapshots(),
                 builder: (context, snapshot) {
+
+                  if (_user == null) {
+                    // If the user is null, navigate to the login page
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context) => Login_page(),
+                      ));
+                    });
+                    return CircularProgressIndicator();
+                  }
+
                   if (!snapshot.hasData) {
                     return CircularProgressIndicator(); // Show a loading indicator while data is being fetched
                   }
@@ -323,7 +234,12 @@ class _profile_pageState extends State<profile_page> {
                     return Text('Error: ${snapshot.error}');
                   }
 
-                  final userData = snapshot.data!.data() as Map<String, dynamic>;
+                  final userData = snapshot.data?.data() as Map<String, dynamic>?;
+
+                  if (userData == null) {
+                    // Handle the case where the document doesn't exist or is null
+                    return Text('User data not found');
+                  }
 
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
