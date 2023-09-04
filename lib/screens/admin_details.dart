@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:business_bridge/screens/admin_ex_registration.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class admin_details extends StatefulWidget {
   @override
@@ -8,6 +11,9 @@ class admin_details extends StatefulWidget {
 }
 
 class _admin_detailsState extends State<admin_details> {
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,38 +80,44 @@ class _admin_detailsState extends State<admin_details> {
                                   elevation: 3,
                                   clipBehavior: Clip.hardEdge,
                                   color: Colors.grey.withOpacity(0.35),
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(left: 10, top: 20, bottom: 20),
-                                    child: Row(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                          height: 80,
-                                          width: 80,
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(100),
-                                            color: Colors.white,
-                                          ),
+                                  child: Column(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 10, top: 20, bottom: 20),
+                                        child: Row(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                              height: 80,
+                                              width: 80,
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(100),
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(left: 20),
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  Text("Executive name ",
+                                                      style: TextStyle(color: Colors.white, fontSize: 15)),
+                                                  Text("Executive id",
+                                                      style: TextStyle(color: Colors.white, fontSize: 15)),
+                                                  Text("Executive country",
+                                                      style: TextStyle(color: Colors.white, fontSize: 15)),
+                                                  Text("Executive email",
+                                                      //maxLines: 2,
+                                                      style: TextStyle(color: Colors.white, fontSize: 15)),
+                                                ],
+                                              ),
+                                            ),
+
+                                          ],
                                         ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(left: 20),
-                                          child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              Text("Executive name ",
-                                                  style: TextStyle(color: Colors.white, fontSize: 15)),
-                                              Text("Executive id",
-                                                  style: TextStyle(color: Colors.white, fontSize: 15)),
-                                              Text("Executive country",
-                                                  style: TextStyle(color: Colors.white, fontSize: 15)),
-                                              Text("Executive email",
-                                                  //maxLines: 2,
-                                                  style: TextStyle(color: Colors.white, fontSize: 15)),
-                                            ],
-                                          ),
-                                        )
-                                      ],
-                                    ),
+                                      ),
+
+                                    ],
                                   ),
                                 ),
                               ),

@@ -1,8 +1,13 @@
+import 'dart:io';
 import 'package:business_bridge/screens/profile_page.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class edit_profile_page extends StatefulWidget {
 
@@ -13,6 +18,7 @@ class edit_profile_page extends StatefulWidget {
 
 class _edit_profile_pageState extends State<edit_profile_page> {
   String? chooseItem;
+
   List listitem = [
     " 🇦🇫  Afghanistan",
     " 🇩🇿  Algeria",
@@ -75,6 +81,7 @@ class _edit_profile_pageState extends State<edit_profile_page> {
   TextEditingController businessIdController = TextEditingController();
   TextEditingController userNameController = TextEditingController();
   TextEditingController licenseNoController = TextEditingController();
+
 late User _user;
   FirebaseAuth _auth=FirebaseAuth.instance;
   // Fetch data from Firestore when the page is initialized
@@ -103,6 +110,7 @@ late User _user;
           userNameController.text = doc['username'];
           licenseNoController.text = doc['license'];
           chooseItem = doc['country'];
+          File imgg=doc['image'];
         });
       }
     }).catchError((error) {
@@ -110,7 +118,7 @@ late User _user;
       print(error);
     });
   }
-
+var img;
   // Function to update data in Firestore
   void updateDataInFirestore() {
     FirebaseFirestore.instance
@@ -118,13 +126,14 @@ late User _user;
         .doc(_user.uid)
         .update({
       //"id":fuid.toString().trim(),
-      "image":"",
+      "image":img.toString() ,
       "bname":businessNameController.text.trim(),
       "email":uemailController.text.trim(),
       "contact": contactNoController.text.trim(),
       "country":chooseItem,
       "license":licenseNoController.text.trim(),
       "username":userNameController.text.trim(),
+
     //  "password":passwordController.text.trim(),
     }).then((_) {
       // Data updated successfully
@@ -133,6 +142,51 @@ late User _user;
       print(error);
     });
   }
+
+firebase_storage.FirebaseStorage  storage=firebase_storage.FirebaseStorage.instance;
+  //final firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance.ref('users');
+
+
+  Future<String> uploadImageToFirestore(File imageFile) async {
+    try {
+       firebase_storage.Reference ref = FirebaseStorage.instance.ref('/profile_images/');
+      firebase_storage.UploadTask uploadtask=ref.putFile(_imageFile!.absolute);
+      await Future.value(uploadtask);
+      var newurl=await ref.getDownloadURL();
+
+      img=newurl;
+
+       print('Image uploaded and URL set in Firestore: $newurl');
+
+      return newurl;
+    } catch (e) {
+      print('Error uploading image: $e');
+      print(e);
+      return "null";
+    }
+  }
+
+  File? _imageFile;
+final picker=ImagePicker();
+  // Function to open the image picker dialog
+  Future<void> _pickImage() async {
+    final pickedImage = await picker.pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      if (pickedImage != null) {
+        _imageFile = File(pickedImage!.path);
+        print("PAth"+pickedImage.path);
+
+        uploadImageToFirestore(_imageFile!);
+      } else {
+        print('No image selected.');
+      }
+    });
+  }
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -158,17 +212,38 @@ late User _user;
                     child: Column(
                       children: [
                         Container(
-                          height: 120,
-                          width: 120,
+                          width: 100,
+                          height: 100,
                           decoration: BoxDecoration(
-                              color: Colors.grey,
-                              borderRadius: BorderRadius.circular(60)),
-                        ),
-                        Text("Choose profile photo",
-                          style: TextStyle(
-                              color: Colors.blue,
-                              fontSize: 16
+                            color: Colors.grey,
+                            shape: BoxShape.circle,
+                            border: Border.all(width: 2, color: Colors.grey),
                           ),
+                          child: _imageFile != null
+                              ? ClipOval(
+                            child: Image.file(
+                             _imageFile!.absolute,
+                              width: 100, // Adjust the width and height as needed
+                              height: 100,
+                              fit: BoxFit.cover,
+                            ),
+                          )
+                              : Center(
+                            child: IconButton(
+                              icon: Icon(
+                                Icons.camera_alt,
+                                size: 50,
+                                color: Colors.white,
+                              ),
+                              onPressed: _pickImage,
+                            ),
+                          ),
+                        )
+                        ,
+                        SizedBox(height: 5),
+                        TextButton(
+                          onPressed: _pickImage,
+                          child: Text('Add Image'),
                         ),
                       ],
                     ),
@@ -181,7 +256,7 @@ late User _user;
                   style: TextStyle(fontSize: 20),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 5,
                 ),
                 Container(
                   height: 60,
@@ -213,12 +288,12 @@ late User _user;
                           Theme.of(context).textTheme.titleMedium!.copyWith(
                                 color: Theme.of(context).colorScheme.secondary,
                               ),
-                      label: Text(
-                        'Business Name',
-                        style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                              color: Theme.of(context).colorScheme.secondary,
-                            ),
-                      ),
+                      // label: Text(
+                      //   'Business Name',
+                      //   style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                      //         color: Theme.of(context).colorScheme.secondary,
+                      //       ),
+                      // ),
                       prefixIcon: Icon(
                         Icons.work_sharp,
                         color: Theme.of(context).colorScheme.secondary,
@@ -237,7 +312,7 @@ late User _user;
                   ),
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 10,
                 ),
 
                 // ------------------------ email ------------------------
@@ -246,7 +321,7 @@ late User _user;
                   style: TextStyle(fontSize: 20),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 5,
                 ),
                 Container(
                   height: 60,
@@ -292,17 +367,17 @@ late User _user;
                             .colorScheme
                             .secondary,
                       ),
-                      label: Text(
-                        'Email',
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleMedium!
-                            .copyWith(
-                          color: Theme.of(context)
-                              .colorScheme
-                              .secondary,
-                        ),
-                      ),
+                      // label: Text(
+                      //   'Email',
+                      //   style: Theme.of(context)
+                      //       .textTheme
+                      //       .titleMedium!
+                      //       .copyWith(
+                      //     color: Theme.of(context)
+                      //         .colorScheme
+                      //         .secondary,
+                      //   ),
+                      // ),
                       prefixIcon: Icon(
                         Icons.mail,
                         color: Theme.of(context)
@@ -327,7 +402,7 @@ late User _user;
                   ),
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 10,
                 ),
 
                 // ------------------------ contact no ---------------------------
@@ -336,7 +411,7 @@ late User _user;
                   style: TextStyle(fontSize: 20),
                 ),
                 SizedBox(
-                  height: 15,
+                  height: 5,
                 ),
                 Container(
                   height: 60,
@@ -375,17 +450,17 @@ late User _user;
                             .colorScheme
                             .secondary,
                       ),
-                      label: Text(
-                        'Contact no',
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleMedium!
-                            .copyWith(
-                          color: Theme.of(context)
-                              .colorScheme
-                              .secondary,
-                        ),
-                      ),
+                      // label: Text(
+                      //   'Contact no',
+                      //   style: Theme.of(context)
+                      //       .textTheme
+                      //       .titleMedium!
+                      //       .copyWith(
+                      //     color: Theme.of(context)
+                      //         .colorScheme
+                      //         .secondary,
+                      //   ),
+                      // ),
                       prefixIcon: Icon(
                         Icons.phone,
                         color: Theme.of(context)
@@ -410,74 +485,9 @@ late User _user;
                   ),
                 ),
                 SizedBox(
-                  height: 15,
+                  height: 10,
                 ),
-                // ------------------------ business id --------------------------
-                // Text(
-                //   "Business id : ",
-                //   style: TextStyle(fontSize: 20),
-                // ),
-                // SizedBox(
-                //   height: 15,
-                // ),
-                // Container(
-                //   height: 60,
-                //   decoration: BoxDecoration(
-                //     borderRadius: BorderRadius.circular(10),
-                //     color: Colors.white,
-                //     boxShadow: [
-                //       BoxShadow(
-                //         color: Color(0xff232855).withOpacity(0.3),
-                //         spreadRadius: 0,
-                //         blurRadius: 4,
-                //         offset: Offset(2, 3),
-                //       ),
-                //     ],
-                //   ),
-                //   child: TextFormField(
-                //     validator: (value) {
-                //       if (value!.isEmpty) {
-                //         return 'please Enter business id no';
-                //       }
-                //       return null;
-                //     },
-                //     controller:businessIdController ,
-                //     keyboardType: TextInputType.name,
-                //     cursorColor: Theme.of(context).colorScheme.secondary,
-                //     decoration: InputDecoration(
-                //       hintText: 'Enter Business id no:',
-                //       hintStyle:
-                //           Theme.of(context).textTheme.titleMedium!.copyWith(
-                //                 color: Theme.of(context).colorScheme.secondary,
-                //               ),
-                //       label: Text(
-                //         'Business id',
-                //         style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                //               color: Theme.of(context).colorScheme.secondary,
-                //             ),
-                //       ),
-                //       prefixIcon: Icon(
-                //         Icons.work_sharp,
-                //         color: Theme.of(context).colorScheme.secondary,
-                //       ),
-                //       enabledBorder: OutlineInputBorder(
-                //         borderRadius: BorderRadius.circular(10),
-                //       ),
-                //       focusedBorder: OutlineInputBorder(
-                //         borderRadius: BorderRadius.circular(10),
-                //         borderSide: BorderSide(
-                //           width: 2,
-                //           color: Theme.of(context).colorScheme.secondary,
-                //         ),
-                //       ),
-                //     ),
-                //   ),
-                // ),
-                // SizedBox(
-                //   height: 30,
-                // ),
 
-                // ------------------------ user name -------------------------
                 Text(
                   "User Name : ",
                   style: TextStyle(fontSize: 20),
@@ -515,12 +525,12 @@ late User _user;
                           Theme.of(context).textTheme.titleMedium!.copyWith(
                                 color: Theme.of(context).colorScheme.secondary,
                               ),
-                      label: Text(
-                        'Set User Name',
-                        style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                              color: Theme.of(context).colorScheme.secondary,
-                            ),
-                      ),
+                      // label: Text(
+                      //   'Set User Name',
+                      //   style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                      //         color: Theme.of(context).colorScheme.secondary,
+                      //       ),
+                      // ),
                       prefixIcon: Icon(
                         Icons.perm_identity_sharp,
                         color: Theme.of(context).colorScheme.secondary,
@@ -539,7 +549,7 @@ late User _user;
                   ),
                 ),
                 SizedBox(
-                  height: 30,
+                  height: 10,
                 ),
 
                 // ------------------------ licence no--------------------------
@@ -548,7 +558,7 @@ late User _user;
                   style: TextStyle(fontSize: 20),
                 ),
                 SizedBox(
-                  height: 15,
+                  height: 5,
                 ),
                 Container(
                   height: 60,
@@ -580,12 +590,12 @@ late User _user;
                           Theme.of(context).textTheme.titleMedium!.copyWith(
                                 color: Theme.of(context).colorScheme.secondary,
                               ),
-                      label: Text(
-                        'License no./Gst no.',
-                        style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                              color: Theme.of(context).colorScheme.secondary,
-                            ),
-                      ),
+                      // label: Text(
+                      //   'License no./Gst no.',
+                      //   style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                      //         color: Theme.of(context).colorScheme.secondary,
+                      //       ),
+                      // ),
                       prefixIcon: Icon(
                         Icons.insert_page_break_sharp,
                         color: Theme.of(context).colorScheme.secondary,
@@ -604,7 +614,7 @@ late User _user;
                   ),
                 ),
                 SizedBox(
-                  height: 30,
+                  height: 10,
                 ),
 
                 // ------------------------ country ----------------------------
@@ -613,7 +623,7 @@ late User _user;
                   style: TextStyle(fontSize: 20),
                 ),
                 SizedBox(
-                  height: 15,
+                  height: 5,
                 ),
                 Container(
                   height: 60,
@@ -636,12 +646,12 @@ late User _user;
                           Theme.of(context).textTheme.titleMedium!.copyWith(
                                 color: Theme.of(context).colorScheme.secondary,
                               ),
-                      label: Text(
-                        'Country',
-                        style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                              color: Theme.of(context).colorScheme.secondary,
-                            ),
-                      ),
+                      // label: Text(
+                      //   'Country',
+                      //   style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                      //         color: Theme.of(context).colorScheme.secondary,
+                      //       ),
+                      // ),
                       prefixIcon: Icon(
                         Icons.flag,
                         color: Theme.of(context).colorScheme.secondary,

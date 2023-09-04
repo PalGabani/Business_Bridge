@@ -242,6 +242,7 @@ class _profile_pageState extends State<profile_page> {
                   }
 
                   return Padding(
+
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
                       decoration: BoxDecoration(
@@ -253,6 +254,13 @@ class _profile_pageState extends State<profile_page> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
+                          CircleAvatar(
+                          radius: 50, // Adjust the radius as needed
+                          backgroundColor: Colors.grey, // Background color if the image is not loaded
+                          backgroundImage: NetworkImage(userData['image']),
+                        ),
+
+
                             Row(
                               children: [
                                 Text(
