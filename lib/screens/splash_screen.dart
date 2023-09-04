@@ -4,15 +4,13 @@ import 'package:video_player/video_player.dart';
 
 import '../firebase_services/splash_services.dart';
 
-
 class SplashScreen extends StatefulWidget {
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
-  Splashservices splashservices=Splashservices() ;
+  Splashservices splashservices = Splashservices();
 
   late VideoPlayerController _controller;
 
@@ -33,6 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.dispose();
     _controller.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,12 +40,14 @@ class _SplashScreenState extends State<SplashScreen> {
         width: double.infinity,
         child: _controller.value.isInitialized
             ? AspectRatio(
-          aspectRatio: _controller.value.aspectRatio,
-          child: VideoPlayer(_controller),
-        )
-            : CircularProgressIndicator(),
+                aspectRatio: _controller.value.aspectRatio,
+                child: VideoPlayer(_controller),
+              )
+            : Center(child: Container(
+          height: 100,
+            width: 100,
+            child: CircularProgressIndicator())),
       ),
     );
   }
-  }
-
+}

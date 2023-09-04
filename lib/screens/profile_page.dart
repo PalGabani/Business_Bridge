@@ -23,7 +23,10 @@ class _profile_pageState extends State<profile_page> {
     _user = _auth.currentUser!;
     // Get the current user
   }
-// Function to delete user data
+
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+
 
   Future<void> deleteUserAccount(BuildContext context) async {
     final user = FirebaseAuth.instance.currentUser;
@@ -60,32 +63,7 @@ class _profile_pageState extends State<profile_page> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        title: Container(
-          width: double.infinity,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            //crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Text("Profile"),
-              // TextButton(
-              //   child: Text('Delete'),
-              //   onPressed: () {
-              //     // Call the function to delete the user's account and data
-              //     Navigator.of(context).pushReplacement(MaterialPageRoute(
-              //       builder: (context) => Login_page(),
-              //     ));
-              //   },
-              // ),
-              SizedBox(
-                //width: 100,
-              ),
-
-            ],
-          ),
-        ),
-      ),
+key: _scaffoldKey,
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -98,16 +76,7 @@ class _profile_pageState extends State<profile_page> {
                   fit: BoxFit.fill, // You can choose the BoxFit that suits your design
                 ),
               ),
-              // child: Padding(
-              //   padding: const EdgeInsets.fromLTRB(25.0,25,0,0),
-              //   child: Text(
-              //     'Menu',
-              //     style: TextStyle(
-              //       color: Colors.blueGrey,
-              //       fontSize: 24,
-              //     ),
-              //   ),
-              // ),
+
             ),
 
             ListTile(
@@ -203,163 +172,294 @@ class _profile_pageState extends State<profile_page> {
           ],
         ),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.only(left: 20),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(
+              'assets/images/workportal/workportalbg2.png',
+            ),
+            fit: BoxFit.fill,
+            colorFilter: ColorFilter.mode(
+                Colors.black.withOpacity(0.5), BlendMode.saturation),
+          ),
+        ),
+        child: Stack(
+          children: [
+            Container(
+          color: Colors.transparent,
           child: Column(
-            children: [
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
 
-              StreamBuilder<DocumentSnapshot>(
-                stream: FirebaseFirestore.instance
-                    .collection('users')
-                    .doc(_user?.uid) // Use the UID of the current user
-                    .snapshots(),
-                builder: (context, snapshot) {
+          Container(
+          padding: EdgeInsets.only(top: 40, left: 10, right: 10),
+          height: 80, // Adjust the height as needed
+          color: Colors.transparent, // Background color for the app bar
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              IconButton(
+                icon: Icon(
+                  Icons.menu,
+                  color: Colors.white,
+                  size: 25,
+                ),
+                onPressed: () {
+                  _scaffoldKey.currentState?.openDrawer();
+                  // Add your menu button functionality here
 
-                  if (_user == null) {
-                    // If the user is null, navigate to the login page
-                    WidgetsBinding.instance.addPostFrameCallback((_) {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context) => Login_page(),
-                      ));
-                    });
-                    return CircularProgressIndicator();
-                  }
-
-                  if (!snapshot.hasData) {
-                    return CircularProgressIndicator(); // Show a loading indicator while data is being fetched
-                  }
-
-                  if (snapshot.hasError) {
-                    return Text('Error: ${snapshot.error}');
-                  }
-
-                  final userData = snapshot.data?.data() as Map<String, dynamic>?;
-
-                  if (userData == null) {
-                    // Handle the case where the document doesn't exist or is null
-                    return Text('User data not found');
-                  }
-
-                  return Padding(
-
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                        color: Colors.blueGrey.withOpacity(0.5),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                          CircleAvatar(
-                          radius: 50, // Adjust the radius as needed
-                          backgroundColor: Colors.grey, // Background color if the image is not loaded
-                          backgroundImage: NetworkImage(userData['image']),
-                        ),
-
-
-                            Row(
-                              children: [
-                                Text(
-                                  "Business Name : ",
-                                  style: TextStyle(fontSize: 20),
-                                ),
-                                Text(
-                                  userData['bname'] ?? 'N/A',
-                                  style: TextStyle(fontSize: 20),
-                                )
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  "Sector Name : ",
-                                  style: TextStyle(fontSize: 20),
-                                ),
-                                Text(
-                                  userData['sector'] ?? 'N/A',
-                                  style: TextStyle(fontSize: 20),
-                                )
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  "User Name : ",
-                                  style: TextStyle(fontSize: 20),
-                                ),
-                                Text(
-                                  userData['username'] ?? 'N/A',
-                                  style: TextStyle(fontSize: 20),
-                                )
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  "Contact no : ",
-                                  style: TextStyle(fontSize: 20),
-                                ),
-                                Text(
-                                  userData['contact'] ?? 'N/A',
-                                  style: TextStyle(fontSize: 20),
-                                )
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  "Email Id: ",
-                                  style: TextStyle(fontSize: 20),
-                                ),
-                                Text(
-                                  userData['email'] ?? 'N/A',
-                                  style: TextStyle(fontSize: 20),
-                                )
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  "Country : ",
-                                  style: TextStyle(fontSize: 20),
-                                ),
-                                Text(
-                                  userData['country'] ?? 'N/A',
-                                  style: TextStyle(fontSize: 20),
-                                )
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  "License No/Gst no: ",
-                                  style: TextStyle(fontSize: 20),
-                                ),
-                                Text(
-                                  userData['license'] ?? 'N/A',
-                                  style: TextStyle(fontSize: 20),
-                                )
-                              ],
-                            ),
-
-
-
-                            // Add similar rows for other user data here
-                          ],
-                        ),
-                      ),
-                    ),
-                  );
                 },
               ),
+
+              Align(
+                alignment: Alignment.center,
+                child: Text(
+                  'Profile',
+                  style: TextStyle(
+                    fontSize: 24,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+
             ],
           ),
         ),
+                Column(
+                  children: [
+
+                    StreamBuilder<DocumentSnapshot>(
+                      stream: FirebaseFirestore.instance
+                          .collection('users')
+                          .doc(_user?.uid) // Use the UID of the current user
+                          .snapshots(),
+                      builder: (context, snapshot) {
+
+                        if (_user == null) {
+                          // If the user is null, navigate to the login page
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                            Navigator.of(context).pushReplacement(MaterialPageRoute(
+                              builder: (context) => Login_page(),
+                            ));
+                          });
+                          return CircularProgressIndicator();
+                        }
+
+                        if (!snapshot.hasData) {
+                          return CircularProgressIndicator(); // Show a loading indicator while data is being fetched
+                        }
+
+                        if (snapshot.hasError) {
+                          return Text('Error: ${snapshot.error}');
+                        }
+
+                        final userData = snapshot.data?.data() as Map<String, dynamic>?;
+
+                        if (userData == null) {
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //     builder: (context) => Login_page(),
+                          //   ),
+                          // );
+                          // Handle the case where the document doesn't exist or is null
+                          return Center(child: Column(
+                            children: [
+                              Text('User data not found! Login Again ,Goto Login'),
+                              ElevatedButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => Login_page()),
+                                  );
+                                },
+                                child: Text('Go to HomePage'),
+                              ),
+                            ],
+                          ));
+
+
+                        }
+
+                        return Center(
+                          child: Padding(
+                            //full content padding container main.........
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+//color: Colors.red,
+                              //height: double.infinity,
+                              width: double.infinity,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  //image part.....
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 10.0),
+                                    child: CircleAvatar(
+
+                                      radius: 60, // Adjust the radius as needed
+                                      backgroundColor: Colors.grey, // Background color if the image is not loaded
+                                      backgroundImage: NetworkImage(userData['image']),
+                                    ),
+                                  ),
+                                  SizedBox(height: 8,),
+                                  Text(
+
+                                    userData['bname'] ?? 'N/A',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineMedium!
+                                        .copyWith(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onTertiary,
+                                    ),
+                                  ),
+                                  SizedBox(height: 8,),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 15.0),
+                                    child: Align(
+                                      alignment: Alignment.topLeft,
+                                      child: Container(
+                                        child: Text(
+
+                                          "Details:",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headlineSmall!
+                                              .copyWith(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onTertiary,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 15.0,right: 15,top:  10),
+                                    child: Container(
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: Colors.grey.withOpacity(0.35),
+
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(left: 15.0),
+                                        child: Container(
+                                        //  color: Colors.blue,
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Column(
+                                              mainAxisAlignment: MainAxisAlignment.start,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  "Business Name:",
+                                                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                                    color:Colors.grey,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  userData['bname'] ?? 'N/A',
+                                                  style: TextStyle(fontSize: 20,color:Colors.white.withOpacity(0.9),),
+                                                ),
+                                                SizedBox(height: 10,),
+                                                Text(
+                                                  "Sector Name:",
+                                                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                                    color:Colors.grey,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  userData['sector'] ?? 'N/A',
+                                                  style: TextStyle(fontSize: 20,color: Colors.white.withOpacity(0.9)),
+                                                ),
+                                                SizedBox(height: 10,),
+                                                Text(
+                                                  "User Name:",
+                                                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                                    color:Colors.grey,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  userData['username'] ?? 'N/A',
+                                                  style: TextStyle(fontSize: 20,color:Colors.white.withOpacity(0.9),),
+                                                ),
+                                                SizedBox(height: 10,),
+                                                Text(
+                                                  "Contact No.:",
+                                                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                                    color:Colors.grey,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  userData['contact'] ?? 'N/A',
+                                                  style: TextStyle(fontSize: 20,color:Colors.white.withOpacity(0.9),),
+                                                ),
+                                                SizedBox(height: 10,),
+                                                Text(
+                                                  "Email ID:",
+                                                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                                    color:Colors.grey,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  userData['email'] ?? 'N/A',
+                                                  style: TextStyle(fontSize: 20,color:Colors.white.withOpacity(0.9),),
+                                                ),
+                                                SizedBox(height: 10,),
+                                                Text(
+                                                  "Country Name:",
+                                                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                                    color:Colors.grey,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  userData['country'] ?? 'N/A',
+                                                  style: TextStyle(fontSize: 20,color:Colors.white.withOpacity(0.9),),
+                                                ),
+                                                SizedBox(height: 10,),
+                                                Text(
+                                                  "License No.:",
+                                                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                                    color:Colors.grey,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  userData['license'] ?? 'N/A',
+                                                  style: TextStyle(fontSize: 20,color:Colors.white.withOpacity(0.9),),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ],
+
+            ),
+            ),
+          ],
+
+        ),
+
       ),
+
     );
   }
 }
