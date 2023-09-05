@@ -178,6 +178,9 @@ class _executive_detailsState extends ConsumerState<executive_details> {
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Text(userData['exname'],
+                                                  maxLines: 2,
+                                                  overflow: TextOverflow.ellipsis,
+                                                  softWrap: true,
                                                   style: TextStyle(
                                                       color: Colors.white, fontSize: 20)),
                                               Text(userData['country'],
@@ -188,6 +191,9 @@ class _executive_detailsState extends ConsumerState<executive_details> {
                                                       color: Colors.white, fontSize: 15)),
                                               Text(userData['email'],
                                                   maxLines: 2,
+                                                  overflow: TextOverflow.ellipsis,
+                                                  softWrap: true,
+
                                                   style: TextStyle(
                                                       color: Colors.white, fontSize: 17)),
                                             ],
@@ -219,7 +225,7 @@ class _executive_detailsState extends ConsumerState<executive_details> {
                           color: Colors.transparent,
                           padding: EdgeInsets.only(left: 20, top: 20,bottom: 5),
                           alignment: AlignmentDirectional.topStart,
-                          child: Text("Assigned Projects : ",
+                          child: Text("Assigned Projects sdfg: ",
                               style:
                                   TextStyle(color: Colors.white, fontSize: 25)),
                         ),

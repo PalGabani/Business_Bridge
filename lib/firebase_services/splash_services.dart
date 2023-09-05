@@ -17,7 +17,7 @@ class Splashservices {
     final user = auth.currentUser;
     if (user != null) {
       Timer(
-        Duration(seconds: 2),
+        Duration(seconds: 6),
             () =>
             Navigator.push(
               context,
@@ -26,7 +26,7 @@ class Splashservices {
       );
     } else {
       Timer(
-        Duration(seconds: 2),
+        Duration(seconds: 6),
             () =>
             Navigator.push(
               context,

@@ -1,10 +1,11 @@
 import 'dart:io';
+import 'dart:math';
 import 'package:business_bridge/screens/profile_page.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -83,6 +84,8 @@ class _edit_profile_pageState extends State<edit_profile_page> {
   TextEditingController licenseNoController = TextEditingController();
 
 late User _user;
+  bool _isLoadingImage = false;
+
   FirebaseAuth _auth=FirebaseAuth.instance;
   // Fetch data from Firestore when the page is initialized
   @override
@@ -110,7 +113,7 @@ late User _user;
           userNameController.text = doc['username'];
           licenseNoController.text = doc['license'];
           chooseItem = doc['country'];
-          File imgg=doc['image'];
+          img=doc['image'];
         });
       }
     }).catchError((error) {
@@ -118,6 +121,8 @@ late User _user;
       print(error);
     });
   }
+
+
 var img;
   // Function to update data in Firestore
   void updateDataInFirestore() {
@@ -126,7 +131,7 @@ var img;
         .doc(_user.uid)
         .update({
       //"id":fuid.toString().trim(),
-      "image":img.toString() ,
+     // "image":img.toString() ,
       "bname":businessNameController.text.trim(),
       "email":uemailController.text.trim(),
       "contact": contactNoController.text.trim(),
@@ -144,45 +149,146 @@ var img;
   }
 
 firebase_storage.FirebaseStorage  storage=firebase_storage.FirebaseStorage.instance;
-  //final firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance.ref('users');
 
 
-  Future<String> uploadImageToFirestore(File imageFile) async {
+//
+//   Future<String> uploadImageToFirestore(File imageFile) async {
+//     try {
+//       String uniqueName = "${DateTime.now().millisecondsSinceEpoch}_${Random().nextInt(10000)}";
+//       firebase_storage.Reference ref = FirebaseStorage.instance.ref('img_profile/$uniqueName');
+//       firebase_storage.UploadTask uploadtask = ref.putFile(imageFile);
+//
+//       // Wait for the upload task to complete
+//       await uploadtask.whenComplete(() {});
+//
+//       var newurl = await ref.getDownloadURL();
+//       String imgUrl = newurl.toString();
+//
+//       print('Image uploaded and URL set in Firestore: $imgUrl');
+//
+//       return imgUrl; // Return the image URL
+//     } catch (e) {
+//       print('Error uploading image: $e');
+//       return "null";
+//     }
+//   }
+//
+//
+//
+//   File? _imageFile;
+// final picker=ImagePicker();
+//
+//
+//
+//   Future<void> _pickImage() async {
+//     final pickedImage = await picker.pickImage(source: ImageSource.gallery);
+//
+//     setState(() async {
+//       if (pickedImage != null) {
+//         _imageFile = File(pickedImage.path);
+//         print("Path: ${pickedImage.path}");
+//
+//         String imageUrl = await uploadImageToFirestore(_imageFile!);
+//
+//         if (imageUrl != "null") {
+//           setState(() {
+//             img = imageUrl;
+//             uploadImageToFirestore(_imageFile!.absolute);// Set the img variable with the image URL
+//           });
+//         } else {
+//           print('Image upload failed.');
+//         }
+//       } else {
+//         print('No image selected.');
+//       }
+//     });
+//   }
+
+
+
+
+
+
+
+
+  Future<void> uploadAndSetImage(File imageFile) async {
     try {
-       firebase_storage.Reference ref = FirebaseStorage.instance.ref('/profile_images/');
-      firebase_storage.UploadTask uploadtask=ref.putFile(_imageFile!.absolute);
-      await Future.value(uploadtask);
-      var newurl=await ref.getDownloadURL();
+      final user = _auth.currentUser;
+      if (user != null) {
+        // Generate a unique name for the image
+        String uniqueName =
+            "${DateTime.now().millisecondsSinceEpoch}_${user.uid}";
 
-      img=newurl;
+        // Upload the image to Firebase Storage
+        firebase_storage.Reference ref =
+        firebase_storage.FirebaseStorage.instance.ref('img_profile/$uniqueName');
+        await ref.putFile(imageFile);
 
-       print('Image uploaded and URL set in Firestore: $newurl');
+        // Get the download URL of the uploaded image
+        String imageUrl = await ref.getDownloadURL();
 
-      return newurl;
+        // Update the user's document in Firestore with the image URL
+        await FirebaseFirestore.instance.collection('users').doc(user.uid).update({
+          "image": imageUrl,
+        });
+
+        print('Image uploaded and URL set in Firestore: $imageUrl');
+      } else {
+        print('User not logged in.');
+      }
     } catch (e) {
       print('Error uploading image: $e');
-      print(e);
-      return "null";
     }
   }
 
   File? _imageFile;
-final picker=ImagePicker();
-  // Function to open the image picker dialog
+  final picker=ImagePicker();
   Future<void> _pickImage() async {
+    setState(() {
+      _isLoadingImage = true;
+    });
     final pickedImage = await picker.pickImage(source: ImageSource.gallery);
 
-    setState(() {
+     setState(() async {
+     // Image loading is done
       if (pickedImage != null) {
-        _imageFile = File(pickedImage!.path);
-        print("PAth"+pickedImage.path);
+        _isLoadingImage = false;
+        _imageFile = File(pickedImage.path);
+        print("Path: ${pickedImage.path}");
 
-        uploadImageToFirestore(_imageFile!);
+        await uploadAndSetImage(_imageFile!.absolute);
       } else {
         print('No image selected.');
       }
-    });
+     });
   }
+
+
+// ...
+
+  // Future<void> _pickImage() async {
+  //   final imagePicker = ImagePicker();
+  //   final galleryImage = await imagePicker.pickImage(source: ImageSource.gallery);
+  //   final cameraImage = await imagePicker.pickImage(source: ImageSource.camera);
+  //
+  //   setState(() async {
+  //     if (galleryImage != null || cameraImage != null) {
+  //       if (galleryImage != null) {
+  //         _imageFile = File(galleryImage.path);
+  //         print("Gallery Image Path: ${galleryImage.path}");
+  //       } else {
+  //         _imageFile = File(cameraImage!.path);
+  //         print("Camera Image Path: ${cameraImage?.path}");
+  //       }
+  //
+  //       await uploadAndSetImage(_imageFile!.absolute);
+  //     } else {
+  //       print('No image selected.');
+  //     }
+  //   });
+  // }
+
+
 
 
 
@@ -193,536 +299,547 @@ final picker=ImagePicker();
 
       appBar: AppBar(
         scrolledUnderElevation: 0,
-        backgroundColor: Colors.transparent,
+
+        backgroundColor: Colors.grey.withOpacity(0.5),
         title: Text("Edit profile"),
       ),
 
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.only(left: 20, right: 20),
-          child: Form(
-            key: formkey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Align(
-                  alignment: Alignment.center,
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 20,bottom: 20),
-                    child: Column(
-                      children: [
-                        Container(
-                          width: 100,
-                          height: 100,
-                          decoration: BoxDecoration(
-                            color: Colors.grey,
-                            shape: BoxShape.circle,
-                            border: Border.all(width: 2, color: Colors.grey),
-                          ),
-                          child: _imageFile != null
-                              ? ClipOval(
-                            child: Image.file(
-                             _imageFile!.absolute,
-                              width: 100, // Adjust the width and height as needed
+      body: Container(
+        color: Colors.grey.withOpacity(0.5),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.only(left: 20, right: 20),
+            child: Form(
+              key: formkey,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 10.0,right: 10,bottom: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Align(
+                      alignment: Alignment.center,
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 20, bottom: 0),
+                        child: Column(
+                          children: [
+                            Container(
+                              width: 100,
                               height: 100,
-                              fit: BoxFit.cover,
-                            ),
-                          )
-                              : Center(
-                            child: IconButton(
-                              icon: Icon(
-                                Icons.camera_alt,
-                                size: 50,
-                                color: Colors.white,
+                              decoration: BoxDecoration(
+                                color: Colors.grey,
+                                shape: BoxShape.circle,
+                                border: Border.all(width: 2, color: Colors.grey),
                               ),
+                              child: _isLoadingImage
+                                  ? CircularProgressIndicator()
+                                  : _imageFile != null
+                                  ? ClipOval(
+                                child: Image.file(
+                                  _imageFile!.absolute,
+                                  width: 100, // Adjust the width and height as needed
+                                  height: 100,
+                                  fit: BoxFit.cover,
+                                ),
+                              )
+                                  : Center(
+                                child: IconButton(
+                                  icon: Icon(
+                                    Icons.camera_alt,
+                                    size: 50,
+                                    color: Colors.white,
+                                  ),
+                                  onPressed: _pickImage,
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 5),
+                            TextButton(
                               onPressed: _pickImage,
+                              child: Text('Add Image'),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+
+
+
+                    // ------------------------ business name ----------------------
+                    Text(
+                      "Business Name : ",
+                      style: TextStyle(fontSize: 17),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Container(
+                      height: 60,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color(0xff232855).withOpacity(0.3),
+                            spreadRadius: 0,
+                            blurRadius: 4,
+                            offset: Offset(2, 3),
+                          ),
+                        ],
+                      ),
+                      child: TextFormField(
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'please Enter business name';
+                          }
+                          return null;
+                        },
+                        controller:businessNameController ,
+                        keyboardType: TextInputType.name,
+                        cursorColor: Theme.of(context).colorScheme.secondary,
+                        decoration: InputDecoration(
+                          hintText: 'Enter Business Name:',
+                          hintStyle:
+                              Theme.of(context).textTheme.titleMedium!.copyWith(
+                                    color: Theme.of(context).colorScheme.secondary,
+                                  ),
+                          // label: Text(
+                          //   'Business Name',
+                          //   style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                          //         color: Theme.of(context).colorScheme.secondary,
+                          //       ),
+                          // ),
+                          prefixIcon: Icon(
+                            Icons.work_sharp,
+                            color: Theme.of(context).colorScheme.secondary,
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide(
+                              width: 2,
+                              color: Theme.of(context).colorScheme.secondary,
                             ),
                           ),
-                        )
-                        ,
-                        SizedBox(height: 5),
-                        TextButton(
-                          onPressed: _pickImage,
-                          child: Text('Add Image'),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-
-                 // ------------------------ business name ----------------------
-                Text(
-                  "Business Name : ",
-                  style: TextStyle(fontSize: 20),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Container(
-                  height: 60,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Color(0xff232855).withOpacity(0.3),
-                        spreadRadius: 0,
-                        blurRadius: 4,
-                        offset: Offset(2, 3),
-                      ),
-                    ],
-                  ),
-                  child: TextFormField(
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'please Enter business name';
-                      }
-                      return null;
-                    },
-                    controller:businessNameController ,
-                    keyboardType: TextInputType.name,
-                    cursorColor: Theme.of(context).colorScheme.secondary,
-                    decoration: InputDecoration(
-                      hintText: 'Enter Business Name:',
-                      hintStyle:
-                          Theme.of(context).textTheme.titleMedium!.copyWith(
-                                color: Theme.of(context).colorScheme.secondary,
-                              ),
-                      // label: Text(
-                      //   'Business Name',
-                      //   style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                      //         color: Theme.of(context).colorScheme.secondary,
-                      //       ),
-                      // ),
-                      prefixIcon: Icon(
-                        Icons.work_sharp,
-                        color: Theme.of(context).colorScheme.secondary,
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                          width: 2,
-                          color: Theme.of(context).colorScheme.secondary,
                         ),
                       ),
                     ),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
+                    SizedBox(
+                      height: 10,
+                    ),
 
-                // ------------------------ email ------------------------
-                Text(
-                  "Email id : ",
-                  style: TextStyle(fontSize: 20),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Container(
-                  height: 60,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Color(0xff232855)
-                            .withOpacity(0.3),
-                        spreadRadius: 1,
-                        blurRadius: 8,
-                        offset: Offset(2, 7),
+                    // ------------------------ email ------------------------
+                    Text(
+                      "Email id : ",
+                      style: TextStyle(fontSize: 17),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Container(
+                      height: 60,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color(0xff232855)
+                                .withOpacity(0.3),
+                            spreadRadius: 1,
+                            blurRadius: 8,
+                            offset: Offset(2, 7),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                  child: TextFormField(
-                    controller: uemailController,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'please Enter E-mail';
-                      }
-                      if (!RegExp(
-                          "^[a-zA-z0-9+_.-]+@[gmail.com]")
-                          .hasMatch(value)) {
-                        return 'Enter valid E-mail';
-                      }
-                      return null;
-                    },
+                      child: TextFormField(
+                        controller: uemailController,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'please Enter E-mail';
+                          }
+                          if (!RegExp(
+                              "^[a-zA-z0-9+_.-]+@[gmail.com]")
+                              .hasMatch(value)) {
+                            return 'Enter valid E-mail';
+                          }
+                          return null;
+                        },
 
-                    keyboardType:
-                    TextInputType.emailAddress,
-                    cursorColor: Theme.of(context)
-                        .colorScheme
-                        .secondary,
-                    decoration: InputDecoration(
-                      hintText: 'Enter Email ID:',
-                      hintStyle: Theme.of(context)
-                          .textTheme
-                          .titleMedium!
-                          .copyWith(
-                        color: Theme.of(context)
+                        keyboardType:
+                        TextInputType.emailAddress,
+                        cursorColor: Theme.of(context)
                             .colorScheme
                             .secondary,
+                        decoration: InputDecoration(
+                          hintText: 'Enter Email ID:',
+                          hintStyle: Theme.of(context)
+                              .textTheme
+                              .titleMedium!
+                              .copyWith(
+                            color: Theme.of(context)
+                                .colorScheme
+                                .secondary,
+                          ),
+                          // label: Text(
+                          //   'Email',
+                          //   style: Theme.of(context)
+                          //       .textTheme
+                          //       .titleMedium!
+                          //       .copyWith(
+                          //     color: Theme.of(context)
+                          //         .colorScheme
+                          //         .secondary,
+                          //   ),
+                          // ),
+                          prefixIcon: Icon(
+                            Icons.mail,
+                            color: Theme.of(context)
+                                .colorScheme
+                                .secondary,
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius:
+                            BorderRadius.circular(10),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius:
+                            BorderRadius.circular(10),
+                            borderSide: BorderSide(
+                              width: 2,
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .secondary,
+                            ),
+                          ),
+                        ),
                       ),
-                      // label: Text(
-                      //   'Email',
-                      //   style: Theme.of(context)
-                      //       .textTheme
-                      //       .titleMedium!
-                      //       .copyWith(
-                      //     color: Theme.of(context)
-                      //         .colorScheme
-                      //         .secondary,
-                      //   ),
-                      // ),
-                      prefixIcon: Icon(
-                        Icons.mail,
-                        color: Theme.of(context)
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+
+                    // ------------------------ contact no ---------------------------
+                    Text(
+                      "Contact no : ",
+                      style: TextStyle(fontSize: 17),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Container(
+                      height: 60,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color(0xff232855)
+                                .withOpacity(0.3),
+                            spreadRadius: 1,
+                            blurRadius: 8,
+                            offset: Offset(2, 7),
+                          ),
+                        ],
+                      ),
+                      child: TextFormField(
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Enter contact no.';
+                          }
+                          return null;
+                        },
+                        controller: contactNoController,
+                        keyboardType: TextInputType.phone,
+                        cursorColor: Theme.of(context)
                             .colorScheme
                             .secondary,
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius:
-                        BorderRadius.circular(10),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius:
-                        BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                          width: 2,
-                          color: Theme.of(context)
-                              .colorScheme
-                              .secondary,
+                        decoration: InputDecoration(
+                          hintText: 'Enter Contact no :',
+                          hintStyle: Theme.of(context)
+                              .textTheme
+                              .titleMedium!
+                              .copyWith(
+                            color: Theme.of(context)
+                                .colorScheme
+                                .secondary,
+                          ),
+                          // label: Text(
+                          //   'Contact no',
+                          //   style: Theme.of(context)
+                          //       .textTheme
+                          //       .titleMedium!
+                          //       .copyWith(
+                          //     color: Theme.of(context)
+                          //         .colorScheme
+                          //         .secondary,
+                          //   ),
+                          // ),
+                          prefixIcon: Icon(
+                            Icons.phone,
+                            color: Theme.of(context)
+                                .colorScheme
+                                .secondary,
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius:
+                            BorderRadius.circular(10),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius:
+                            BorderRadius.circular(10),
+                            borderSide: BorderSide(
+                              width: 2,
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .secondary,
+                            ),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
+                    SizedBox(
+                      height: 10,
+                    ),
 
-                // ------------------------ contact no ---------------------------
-                Text(
-                  "Contact no : ",
-                  style: TextStyle(fontSize: 20),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Container(
-                  height: 60,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Color(0xff232855)
-                            .withOpacity(0.3),
-                        spreadRadius: 1,
-                        blurRadius: 8,
-                        offset: Offset(2, 7),
+                    Text(
+                      "User Name : ",
+                      style: TextStyle(fontSize: 17),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Container(
+                      height: 60,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color(0xff232855).withOpacity(0.3),
+                            spreadRadius: 0,
+                            blurRadius: 4,
+                            offset: Offset(2, 3),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                  child: TextFormField(
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Enter contact no.';
-                      }
-                      return null;
-                    },
-                    controller: contactNoController,
-                    keyboardType: TextInputType.phone,
-                    cursorColor: Theme.of(context)
-                        .colorScheme
-                        .secondary,
-                    decoration: InputDecoration(
-                      hintText: 'Enter Contact no :',
-                      hintStyle: Theme.of(context)
-                          .textTheme
-                          .titleMedium!
-                          .copyWith(
-                        color: Theme.of(context)
-                            .colorScheme
-                            .secondary,
-                      ),
-                      // label: Text(
-                      //   'Contact no',
-                      //   style: Theme.of(context)
-                      //       .textTheme
-                      //       .titleMedium!
-                      //       .copyWith(
-                      //     color: Theme.of(context)
-                      //         .colorScheme
-                      //         .secondary,
-                      //   ),
-                      // ),
-                      prefixIcon: Icon(
-                        Icons.phone,
-                        color: Theme.of(context)
-                            .colorScheme
-                            .secondary,
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius:
-                        BorderRadius.circular(10),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius:
-                        BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                          width: 2,
-                          color: Theme.of(context)
-                              .colorScheme
-                              .secondary,
+                      child: TextFormField(
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'please Enter User name';
+                          }
+                          return null;
+                        },
+                        controller:userNameController ,
+                        keyboardType: TextInputType.emailAddress,
+                        cursorColor: Theme.of(context).colorScheme.secondary,
+                        decoration: InputDecoration(
+                          hintText: 'Enter User Name:',
+                          hintStyle:
+                              Theme.of(context).textTheme.titleMedium!.copyWith(
+                                    color: Theme.of(context).colorScheme.secondary,
+                                  ),
+                          // label: Text(
+                          //   'Set User Name',
+                          //   style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                          //         color: Theme.of(context).colorScheme.secondary,
+                          //       ),
+                          // ),
+                          prefixIcon: Icon(
+                            Icons.perm_identity_sharp,
+                            color: Theme.of(context).colorScheme.secondary,
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide(
+                              width: 2,
+                              color: Theme.of(context).colorScheme.secondary,
+                            ),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
+                    SizedBox(
+                      height: 10,
+                    ),
 
-                Text(
-                  "User Name : ",
-                  style: TextStyle(fontSize: 20),
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                Container(
-                  height: 60,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Color(0xff232855).withOpacity(0.3),
-                        spreadRadius: 0,
-                        blurRadius: 4,
-                        offset: Offset(2, 3),
-                      ),
-                    ],
-                  ),
-                  child: TextFormField(
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'please Enter User name';
-                      }
-                      return null;
-                    },
-                    controller:userNameController ,
-                    keyboardType: TextInputType.emailAddress,
-                    cursorColor: Theme.of(context).colorScheme.secondary,
-                    decoration: InputDecoration(
-                      hintText: 'Enter User Name:',
-                      hintStyle:
-                          Theme.of(context).textTheme.titleMedium!.copyWith(
-                                color: Theme.of(context).colorScheme.secondary,
-                              ),
-                      // label: Text(
-                      //   'Set User Name',
-                      //   style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                      //         color: Theme.of(context).colorScheme.secondary,
-                      //       ),
-                      // ),
-                      prefixIcon: Icon(
-                        Icons.perm_identity_sharp,
-                        color: Theme.of(context).colorScheme.secondary,
-                      ),
-                      enabledBorder: OutlineInputBorder(
+                    // ------------------------ licence no--------------------------
+                    Text(
+                      "Licence no. : ",
+                      style: TextStyle(fontSize: 17),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Container(
+                      height: 60,
+                      decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color(0xff232855).withOpacity(0.3),
+                            spreadRadius: 0,
+                            blurRadius: 4,
+                            offset: Offset(2, 3),
+                          ),
+                        ],
                       ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                          width: 2,
-                          color: Theme.of(context).colorScheme.secondary,
+                      child: TextFormField(
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'please Enter License no./Gst no.';
+                          }
+                          return null;
+                        },
+                        controller:licenseNoController ,
+                        keyboardType: TextInputType.emailAddress,
+                        cursorColor: Theme.of(context).colorScheme.secondary,
+                        decoration: InputDecoration(
+                          hintText: 'Enter License no./Gst no.:',
+                          hintStyle:
+                              Theme.of(context).textTheme.titleMedium!.copyWith(
+                                    color: Theme.of(context).colorScheme.secondary,
+                                  ),
+                          // label: Text(
+                          //   'License no./Gst no.',
+                          //   style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                          //         color: Theme.of(context).colorScheme.secondary,
+                          //       ),
+                          // ),
+                          prefixIcon: Icon(
+                            Icons.insert_page_break_sharp,
+                            color: Theme.of(context).colorScheme.secondary,
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide(
+                              width: 2,
+                              color: Theme.of(context).colorScheme.secondary,
+                            ),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
+                    SizedBox(
+                      height: 10,
+                    ),
 
-                // ------------------------ licence no--------------------------
-                Text(
-                  "Licence no. : ",
-                  style: TextStyle(fontSize: 20),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Container(
-                  height: 60,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Color(0xff232855).withOpacity(0.3),
-                        spreadRadius: 0,
-                        blurRadius: 4,
-                        offset: Offset(2, 3),
-                      ),
-                    ],
-                  ),
-                  child: TextFormField(
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'please Enter License no./Gst no.';
-                      }
-                      return null;
-                    },
-                    controller:licenseNoController ,
-                    keyboardType: TextInputType.emailAddress,
-                    cursorColor: Theme.of(context).colorScheme.secondary,
-                    decoration: InputDecoration(
-                      hintText: 'Enter License no./Gst no.:',
-                      hintStyle:
-                          Theme.of(context).textTheme.titleMedium!.copyWith(
-                                color: Theme.of(context).colorScheme.secondary,
-                              ),
-                      // label: Text(
-                      //   'License no./Gst no.',
-                      //   style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                      //         color: Theme.of(context).colorScheme.secondary,
-                      //       ),
-                      // ),
-                      prefixIcon: Icon(
-                        Icons.insert_page_break_sharp,
-                        color: Theme.of(context).colorScheme.secondary,
-                      ),
-                      enabledBorder: OutlineInputBorder(
+                    // ------------------------ country ----------------------------
+                    Text(
+                      "Country : ",
+                      style: TextStyle(fontSize: 17),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Container(
+                      height: 60,
+                      decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color(0xff232855).withOpacity(0.3),
+                            spreadRadius: 0,
+                            blurRadius: 4,
+                            offset: Offset(2, 3),
+                          ),
+                        ],
                       ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                          width: 2,
-                          color: Theme.of(context).colorScheme.secondary,
+                      child: DropdownButtonFormField(
+                        decoration: InputDecoration(
+                          hintText: 'Choose Your Country',
+                          hintStyle:
+                              Theme.of(context).textTheme.titleMedium!.copyWith(
+                                    color: Theme.of(context).colorScheme.secondary,
+                                  ),
+                          // label: Text(
+                          //   'Country',
+                          //   style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                          //         color: Theme.of(context).colorScheme.secondary,
+                          //       ),
+                          // ),
+                          prefixIcon: Icon(
+                            Icons.flag,
+                            color: Theme.of(context).colorScheme.secondary,
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide(
+                              width: 2,
+                              color: Theme.of(context).colorScheme.secondary,
+                            ),
+                          ),
+                        ),
+                        value: chooseItem,
+                        onChanged: (newValue) {
+                          setState(() {
+                            chooseItem = newValue as String?;
+                          });
+                        },
+                        items: listitem.map((valueItem) {
+                          return DropdownMenuItem(
+                            value: valueItem,
+                            child: Text(valueItem),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+
+                    // -------------------- submit -------------------------
+                    // Submit button to update data in Firestore
+                    Container(
+                      padding: EdgeInsets.only(left: 30, right: 30),
+                      width: double.infinity,
+                      height: 60,
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          shape: MaterialStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                          backgroundColor: MaterialStateProperty.all(
+                            Theme.of(context).colorScheme.secondary,
+                          ),
+                        ),
+                        onPressed: () {
+                          if (formkey.currentState!.validate()) {
+                            updateDataInFirestore();
+                           // uploadImageToFirestore(img);
+                            Navigator.pop(context);
+                          }
+                        },
+                        child: Text(
+                          'Submit',
+                          style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                            color: Theme.of(context).colorScheme.background,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 25,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
 
-                // ------------------------ country ----------------------------
-                Text(
-                  "Country : ",
-                  style: TextStyle(fontSize: 20),
+                    SizedBox(
+                      height: 50,
+                    )
+                  ],
                 ),
-                SizedBox(
-                  height: 5,
-                ),
-                Container(
-                  height: 60,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Color(0xff232855).withOpacity(0.3),
-                        spreadRadius: 0,
-                        blurRadius: 4,
-                        offset: Offset(2, 3),
-                      ),
-                    ],
-                  ),
-                  child: DropdownButtonFormField(
-                    decoration: InputDecoration(
-                      hintText: 'Choose Your Country',
-                      hintStyle:
-                          Theme.of(context).textTheme.titleMedium!.copyWith(
-                                color: Theme.of(context).colorScheme.secondary,
-                              ),
-                      // label: Text(
-                      //   'Country',
-                      //   style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                      //         color: Theme.of(context).colorScheme.secondary,
-                      //       ),
-                      // ),
-                      prefixIcon: Icon(
-                        Icons.flag,
-                        color: Theme.of(context).colorScheme.secondary,
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                          width: 2,
-                          color: Theme.of(context).colorScheme.secondary,
-                        ),
-                      ),
-                    ),
-                    value: chooseItem,
-                    onChanged: (newValue) {
-                      setState(() {
-                        chooseItem = newValue as String?;
-                      });
-                    },
-                    items: listitem.map((valueItem) {
-                      return DropdownMenuItem(
-                        value: valueItem,
-                        child: Text(valueItem),
-                      );
-                    }).toList(),
-                  ),
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-
-                // -------------------- submit -------------------------
-                // Submit button to update data in Firestore
-                Container(
-                  padding: EdgeInsets.only(left: 30, right: 30),
-                  width: double.infinity,
-                  height: 60,
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      shape: MaterialStateProperty.all(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      backgroundColor: MaterialStateProperty.all(
-                        Theme.of(context).colorScheme.secondary,
-                      ),
-                    ),
-                    onPressed: () {
-                      if (formkey.currentState!.validate()) {
-                        updateDataInFirestore();
-                        Navigator.pop(context);
-                      }
-                    },
-                    child: Text(
-                      'Submit',
-                      style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                        color: Theme.of(context).colorScheme.background,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 25,
-                      ),
-                    ),
-                  ),
-                ),
-
-                SizedBox(
-                  height: 50,
-                )
-              ],
+              ),
             ),
           ),
         ),
