@@ -273,43 +273,47 @@ class _admin_loginState extends State<admin_login> {
                                 //-----------error msg show------------------------------///
                                 Container(
                                   alignment: AlignmentDirectional.center,
-                                  //margin: EdgeInsets.only(top: 00),
-                                  padding: EdgeInsets.only(bottom: 10),
+                                  padding: EdgeInsets.only(top: 10),
                                   child: Text(
                                     e == 2
-                                        ? "Please,Enter valid Login id and Password !"
+                                        ? "Please, Enter valid Login id and Password!"
                                         : " ",
                                     style: TextStyle(
-                                        color: Colors.red, fontSize: 13),
+                                      color: Colors.red,
+                                      fontSize: 13,
+                                    ),
                                   ),
                                 ),
-
+                                Text("adminpsj   49504950"),
                                 //--------button-------///
                                 GestureDetector(
                                   onTap: () {
-                                    Navigator.push(
-                                      //Navigator.pushanduntill
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) {
-                                          //return listdata();
-                                          return admin_details();
-                                        },
-                                      ),
-                                      //(route)=>false
-                                    );
+                                    final enteredId = loginidController.text;
+                                    final enteredPassword = passController.text;
+                                    if (enteredId == "adminpsj" && enteredPassword == "49504950") {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) {
+                                            return admin_details();
+                                          },
+                                        ),
+                                      );
+                                    } else {
+                                      setState(() {
+                                        e = 2;
+                                      });
+                                    }
                                   },
                                   child: Container(
                                     width: double.infinity,
                                     height: 60,
                                     decoration: BoxDecoration(
-                                      borderRadius:
-                                      BorderRadius.circular(10),
+                                      borderRadius: BorderRadius.circular(10),
                                       color: Color(0xff9DB2BF),
                                       boxShadow: [
                                         BoxShadow(
-                                          color: Color(0xff232855)
-                                              .withOpacity(0.3),
+                                          color: Color(0xff232855).withOpacity(0.3),
                                           spreadRadius: 1,
                                           blurRadius: 8,
                                           offset: Offset(2, 7),
@@ -328,6 +332,9 @@ class _admin_loginState extends State<admin_login> {
                                     ),
                                   ),
                                 ),
+
+
+
                               ],
                             ),
                           ),

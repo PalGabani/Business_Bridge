@@ -204,7 +204,27 @@ firebase_storage.FirebaseStorage  storage=firebase_storage.FirebaseStorage.insta
 //     });
 //   }
 
+  File? _imageFile;
+  final picker=ImagePicker();
+  Future<void> _pickImage() async {
+    setState(() {
+      _isLoadingImage = true;
+    });
+    final pickedImage = await picker.pickImage(source: ImageSource.gallery);
 
+    setState(() async {
+      // Image loading is done
+      if (pickedImage != null) {
+        _isLoadingImage = false;
+        _imageFile = File(pickedImage.path);
+        print("Path: ${pickedImage.path}");
+
+        await uploadAndSetImage(_imageFile!.absolute);
+      } else {
+        print('No image selected.');
+      }
+    });
+  }
 
 
 
@@ -241,27 +261,7 @@ firebase_storage.FirebaseStorage  storage=firebase_storage.FirebaseStorage.insta
     }
   }
 
-  File? _imageFile;
-  final picker=ImagePicker();
-  Future<void> _pickImage() async {
-    setState(() {
-      _isLoadingImage = true;
-    });
-    final pickedImage = await picker.pickImage(source: ImageSource.gallery);
 
-     setState(() async {
-     // Image loading is done
-      if (pickedImage != null) {
-        _isLoadingImage = false;
-        _imageFile = File(pickedImage.path);
-        print("Path: ${pickedImage.path}");
-
-        await uploadAndSetImage(_imageFile!.absolute);
-      } else {
-        print('No image selected.');
-      }
-     });
-  }
 
 
 // ...
