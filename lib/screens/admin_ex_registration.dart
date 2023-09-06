@@ -87,7 +87,6 @@ class _admin_ex_registrationState extends State<admin_ex_registration> {
 
   File? _imageFile;
   final picker = ImagePicker();
-
   Future<void> _pickImage() async {
     final pickedImage = await picker.pickImage(source: ImageSource.camera);
 
@@ -100,10 +99,6 @@ class _admin_ex_registrationState extends State<admin_ex_registration> {
         print('No image selected.');
       }
     });
-
-    if (_imageFile != null) {
-      _uploadImageToFirebaseStorage(_imageFile!);
-    }
   }
 
   Future<String> _uploadImageToFirebaseStorage(File imageFile) async {
@@ -813,19 +808,29 @@ class _admin_ex_registrationState extends State<admin_ex_registration> {
 
                                       // ----------------------- submit ---------------------
                                       GestureDetector(
-                                        onTap: () {
-                                          if (formkey.currentState!
-                                              .validate()) {
-                                            // Call Registration function here with the image URL
-                                            if (_imageFile != null) {
-                                              _uploadImageToFirebaseStorage(
-                                                      _imageFile!)
-                                                  .then((imageUrl) {
-                                                Registration(imageUrl);
+                                        onTap: () async {
+                                          if (formkey.currentState!.validate()) {
+                                            // Set loading to true immediately when the button is tapped
+                                            setState(() {
+                                              loading = true;
+                                            });
+
+                                            try {
+                                              if (_imageFile != null) {
+                                                final imageUrl = await _uploadImageToFirebaseStorage(_imageFile!);
+                                                await Registration(imageUrl);
+                                              } else {
+                                                Utiles().toastmessege("No image selected.");
+                                              }
+                                            } catch (error) {
+                                              // Handle any errors here
+                                              print('Error during registration: $error');
+                                              Utiles().toastmessege("Registration failed");
+                                            } finally {
+                                              // Set loading back to false when the asynchronous operations are complete
+                                              setState(() {
+                                                loading = false;
                                               });
-                                            } else {
-                                              Utiles().toastmessege(
-                                                  "No image selected.");
                                             }
                                           }
                                         },
@@ -835,13 +840,11 @@ class _admin_ex_registrationState extends State<admin_ex_registration> {
                                               width: double.infinity,
                                               height: 60,
                                               decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
+                                                borderRadius: BorderRadius.circular(10),
                                                 color: Color(0xff9DB2BF),
                                                 boxShadow: [
                                                   BoxShadow(
-                                                    color: Color(0xff232855)
-                                                        .withOpacity(0.3),
+                                                    color: Color(0xff232855).withOpacity(0.3),
                                                     spreadRadius: 1,
                                                     blurRadius: 8,
                                                     offset: Offset(2, 7),
@@ -862,11 +865,9 @@ class _admin_ex_registrationState extends State<admin_ex_registration> {
                                             if (loading)
                                               Positioned.fill(
                                                 child: Container(
-                                                  color: Colors.white
-                                                      .withOpacity(0.5),
+                                                  color: Colors.white.withOpacity(0.5),
                                                   child: Center(
-                                                    child:
-                                                        CircularProgressIndicator(
+                                                    child: CircularProgressIndicator(
                                                       color: Colors.blueGrey,
                                                     ),
                                                   ),
@@ -875,6 +876,7 @@ class _admin_ex_registrationState extends State<admin_ex_registration> {
                                           ],
                                         ),
                                       ),
+
                                       SizedBox(
                                         height: 20,
                                       ),

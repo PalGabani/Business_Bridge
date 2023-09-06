@@ -718,7 +718,7 @@ class _Login_pageState extends State<Login_page> {
                                                   }));
                                                 },
                                                 child: Text(
-                                                  "Sign IN ",
+                                                  "Sign UP ",
                                                   style: TextStyle(
                                                       fontSize: 15,
                                                       color: Color(0xff9DB2BF),

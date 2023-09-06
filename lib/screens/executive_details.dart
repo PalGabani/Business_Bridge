@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../provider/data_provider.dart';
@@ -86,68 +87,68 @@ class _executive_detailsState extends ConsumerState<executive_details> {
     }
 
     // TODO: implement build
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        title: Text("Work Portal",
-            style: TextStyle(
-              color: Colors.white,
-            )),
-        iconTheme: IconThemeData(color: Colors.white),
-      ),
-      body: Container(
-        // height: double.infinity,
-        // width: double.infinity,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(
-              'assets/images/workportal/workportalbg2.png',
-            ),
-            fit: BoxFit.fill,
-            colorFilter: ColorFilter.mode(
-                Colors.black.withOpacity(0.5), BlendMode.saturation),
-          ),
+    return WillPopScope(
+      onWillPop: () async {
+        SystemNavigator.pop();
+        return true;
+      },
+      child: Scaffold(
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          title: Text("Work Portal",
+              style: TextStyle(
+                color: Colors.white,
+              )),
+          iconTheme: IconThemeData(color: Colors.white),
         ),
-        child: Stack(
-          children: [
-            Container(
-              color: Colors.transparent,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  //----------------------------------name upper part ------------------------//
-                  SizedBox(
-                    height: 110,
-                  ),
+        body: Container(
+          // height: double.infinity,
+          // width: double.infinity,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(
+                'assets/images/workportal/workportalbg2.png',
+              ),
+              fit: BoxFit.fill,
+              colorFilter: ColorFilter.mode(
+                  Colors.black.withOpacity(0.5), BlendMode.saturation),
+            ),
+          ),
+          child: Stack(
+            children: [
+              Container(
+                color: Colors.transparent,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    //----------------------------------name upper part ------------------------//
+                    SizedBox(
+                      height: 110,
+                    ),
 
 
-                  Column(
-                    children: [
-                      StreamBuilder<DocumentSnapshot>(
-                        stream: FirebaseFirestore.instance
-                            .collection('executive')
-                            .doc(_user.uid) // Use the UID of the current user
-                            .snapshots(),
-                        builder: (context, snapshot) {
-                          if (!snapshot.hasData) {
-                            return CircularProgressIndicator(); // Show a loading indicator while data is being fetched
-                          }
+                    Column(
+                      children: [
+                        StreamBuilder<DocumentSnapshot>(
+                          stream: FirebaseFirestore.instance
+                              .collection('executive')
+                              .doc(_user.uid) // Use the UID of the current user
+                              .snapshots(),
+                          builder: (context, snapshot) {
+                            if (!snapshot.hasData) {
+                              return CircularProgressIndicator(); // Show a loading indicator while data is being fetched
+                            }
 
-                          if (snapshot.hasError) {
-                            return Text('Error: ${snapshot.error}');
-                          }
+                            if (snapshot.hasError) {
+                              return Text('Error: ${snapshot.error}');
+                            }
 
-                          final userData = snapshot.data!.data() as Map<String, dynamic>;
+                            final userData = snapshot.data!.data() as Map<String, dynamic>;
 
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.blueGrey.withOpacity(0.7),
-                              ),
+                            return Padding(
+                              padding: const EdgeInsets.only(top: 0.0,left: 20,right: 20,),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -163,14 +164,26 @@ class _executive_detailsState extends ConsumerState<executive_details> {
                                       children: [
                                         Padding(
                                           padding: const EdgeInsets.only(left: 20),
-                                          child: Container(
+                                          child:  Container(
                                             height: 100,
                                             width: 100,
                                             decoration: BoxDecoration(
                                               borderRadius: BorderRadius.circular(100),
                                               color: Colors.white,
+                                              image: DecorationImage(
+                                                image: NetworkImage(userData['img_url'] ?? ''),
+                                                fit: BoxFit.cover,
+                                              ),
                                             ),
                                           ),
+                                          // child: Container(
+                                          //   height: 100,
+                                          //   width: 100,
+                                          //   decoration: BoxDecoration(
+                                          //     borderRadius: BorderRadius.circular(100),
+                                          //     color: Colors.white,
+                                          //   ),
+                                          // ),
                                         ),
                                         Padding(
                                           padding: const EdgeInsets.only(left: 20, top: 20),
@@ -208,55 +221,55 @@ class _executive_detailsState extends ConsumerState<executive_details> {
                                   //Add similar rows for other user data here
                                 ],
                               ),
-                            ),
-                          );
-                        },
-                      ),
-                    ],
-                  ),
-                  Expanded(
-                      child: Container(
-                    width: double.infinity,
-                    color: Colors.transparent,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                          color: Colors.transparent,
-                          padding: EdgeInsets.only(left: 20, top: 20,bottom: 5),
-                          alignment: AlignmentDirectional.topStart,
-                          child: Text("Assigned Projects sdfg: ",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 25)),
+                            );
+                          },
                         ),
-
-                        MediaQuery.removePadding(
-                          context: context,
-                          removeTop: true,
-                          child: Expanded(
-                            child: Container(
-                              color: Colors.transparent,
-                              child: content,
-                            ),
-                          ),
-                        ),
-                        // Padding(
-                        //   padding: const EdgeInsets.only(left: 20,right: 20),
-                        //   child: Expanded(
-                        //     child: Container(
-                        //         color: Colors.blueGrey,
-                        //         // height: 460,
-                        //
-                        //         child: content),
-                        //   ),
-                        // ),
                       ],
                     ),
-                  )),
-                ],
+                    Expanded(
+                        child: Container(
+                      width: double.infinity,
+                      color: Colors.transparent,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Container(
+                            color: Colors.transparent,
+                            padding: EdgeInsets.only(left: 20, top: 20,bottom: 5),
+                            alignment: AlignmentDirectional.topStart,
+                            child: Text("Assigned Projects: ",
+                                style:
+                                    TextStyle(color: Colors.white, fontSize: 25)),
+                          ),
+
+                          MediaQuery.removePadding(
+                            context: context,
+                            removeTop: true,
+                            child: Expanded(
+                              child: Container(
+                                color: Colors.transparent,
+                                child: content,
+                              ),
+                            ),
+                          ),
+                          // Padding(
+                          //   padding: const EdgeInsets.only(left: 20,right: 20),
+                          //   child: Expanded(
+                          //     child: Container(
+                          //         color: Colors.blueGrey,
+                          //         // height: 460,
+                          //
+                          //         child: content),
+                          //   ),
+                          // ),
+                        ],
+                      ),
+                    )),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

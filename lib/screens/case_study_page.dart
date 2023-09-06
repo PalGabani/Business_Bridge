@@ -4,6 +4,7 @@ import 'package:business_bridge/screens/case_study_details_page.dart';
 import 'package:business_bridge/widgets/case_study.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod/riverpod.dart';
 
@@ -154,17 +155,23 @@ class _case_study_pageState extends ConsumerState<case_study_page> {
     // if(title==null){
     //   return content;
     // }
-    return Scaffold(
+    return WillPopScope(
+      onWillPop: () async {
+        SystemNavigator.pop();
+        return true;
+      },
+      child: Scaffold(
 
-      appBar: AppBar(
+        appBar: AppBar(
 
-        title: Text("Our Journey", style: Theme.of(context)
-            .textTheme
-            .bodyLarge!
-            .copyWith(color: Theme.of(context).colorScheme.onBackground,fontSize: 20),),
-        scrolledUnderElevation: 0,
+          title: Text("Our Journey", style: Theme.of(context)
+              .textTheme
+              .bodyLarge!
+              .copyWith(color: Theme.of(context).colorScheme.onBackground,fontSize: 20),),
+          scrolledUnderElevation: 0,
+        ),
+        body: content,
       ),
-      body: content,
     );
   }
 }

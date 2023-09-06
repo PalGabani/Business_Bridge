@@ -1,4 +1,5 @@
 import 'package:business_bridge/screens/edit_profile_page.dart';
+import 'package:business_bridge/screens/homepage.dart';
 import 'package:business_bridge/screens/login_page_user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -80,13 +81,16 @@ class _profile_pageState extends State<profile_page> {
               enabled: true,
               focusColor: Colors.blueGrey,
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => profile_page(),
-                  ),
-                );
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) => homepage(),
+                //   ),
+                // );
+                Navigator.pop(context);
+               // Navigator.popUntil(context, ModalRoute.withName('/profile_page'));
               },
+
             ),
             Divider(
               height: 3,

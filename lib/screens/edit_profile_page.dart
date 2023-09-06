@@ -2,7 +2,7 @@ import 'dart:io';
 import 'dart:math';
 import 'package:business_bridge/screens/profile_page.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
-import 'package:firebase_core/firebase_core.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -151,75 +151,20 @@ var img;
 firebase_storage.FirebaseStorage  storage=firebase_storage.FirebaseStorage.instance;
 
 
-//
-//   Future<String> uploadImageToFirestore(File imageFile) async {
-//     try {
-//       String uniqueName = "${DateTime.now().millisecondsSinceEpoch}_${Random().nextInt(10000)}";
-//       firebase_storage.Reference ref = FirebaseStorage.instance.ref('img_profile/$uniqueName');
-//       firebase_storage.UploadTask uploadtask = ref.putFile(imageFile);
-//
-//       // Wait for the upload task to complete
-//       await uploadtask.whenComplete(() {});
-//
-//       var newurl = await ref.getDownloadURL();
-//       String imgUrl = newurl.toString();
-//
-//       print('Image uploaded and URL set in Firestore: $imgUrl');
-//
-//       return imgUrl; // Return the image URL
-//     } catch (e) {
-//       print('Error uploading image: $e');
-//       return "null";
-//     }
-//   }
-//
-//
-//
-//   File? _imageFile;
-// final picker=ImagePicker();
-//
-//
-//
-//   Future<void> _pickImage() async {
-//     final pickedImage = await picker.pickImage(source: ImageSource.gallery);
-//
-//     setState(() async {
-//       if (pickedImage != null) {
-//         _imageFile = File(pickedImage.path);
-//         print("Path: ${pickedImage.path}");
-//
-//         String imageUrl = await uploadImageToFirestore(_imageFile!);
-//
-//         if (imageUrl != "null") {
-//           setState(() {
-//             img = imageUrl;
-//             uploadImageToFirestore(_imageFile!.absolute);// Set the img variable with the image URL
-//           });
-//         } else {
-//           print('Image upload failed.');
-//         }
-//       } else {
-//         print('No image selected.');
-//       }
-//     });
-//   }
+
 
   File? _imageFile;
   final picker=ImagePicker();
+
   Future<void> _pickImage() async {
-    setState(() {
-      _isLoadingImage = true;
-    });
     final pickedImage = await picker.pickImage(source: ImageSource.gallery);
 
-    setState(() async {
+    setState(() {
       // Image loading is done
       if (pickedImage != null) {
-        _isLoadingImage = false;
         _imageFile = File(pickedImage.path);
         print("Path: ${pickedImage.path}");
-
-        await uploadAndSetImage(_imageFile!.absolute);
+         uploadAndSetImage(_imageFile!.absolute);
       } else {
         print('No image selected.');
       }
@@ -821,6 +766,7 @@ firebase_storage.FirebaseStorage  storage=firebase_storage.FirebaseStorage.insta
                             updateDataInFirestore();
                            // uploadImageToFirestore(img);
                             Navigator.pop(context);
+                           // Navigator.popUntil(context, ModalRoute.withName('profile_page'));
                           }
                         },
                         child: Text(
