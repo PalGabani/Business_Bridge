@@ -372,9 +372,7 @@ class _profile_pageState extends State<profile_page> {
                                             .textTheme
                                             .headlineSmall!
                                             .copyWith(
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .onTertiary,
+                                              color: Colors.grey,
                                             ),
                                       ),
                                     ),

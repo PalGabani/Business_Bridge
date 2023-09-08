@@ -54,7 +54,7 @@ Future<void> showNoInternetDialog(BuildContext context) async {
 }
 
 
-
+//-----------original first simple---------//
 // void main() async {
 //   WidgetsFlutterBinding.ensureInitialized();
 //   await Firebase.initializeApp();
@@ -71,6 +71,9 @@ Future<void> showNoInternetDialog(BuildContext context) async {
 //     ),
 //   );
 // }
+
+
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
