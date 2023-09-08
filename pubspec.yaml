@@ -49,6 +49,7 @@ dependencies:
   fluttertoast: ^8.2.2
   video_player: ^2.7.1
   image_picker: ^1.0.4
+  connectivity_plus: ^4.0.2
 
 
 
@@ -59,7 +60,8 @@ dev_dependencies:
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/images/Group50.png"
+  web: true
+  image_path: "assets/icon_img/logo_img.png"
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -90,6 +92,7 @@ flutter:
     - assets/icon_img/
     - assets/icon_img/icon_app.jpeg
     - assets/video/splash.mp4
+    - assets/icon_img/logo_img.png
 #    - assets/images/case_study/case_goverment.jpg
 #    - assets/images/case_study/case_pharm.jpg
 #    - assets/images/case_study/case_private_foundation.jpg
