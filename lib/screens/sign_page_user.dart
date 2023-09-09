@@ -57,7 +57,7 @@ final String sector;
     " 🇲🇿 Mozambique",
     " 🇲🇲 Myanmar",
     " 🇳🇵 Nepal",
-    " 🇳🇿 New Zealand"
+    " 🇳🇿 New Zealand",
         " 🇳🇬 Nigeria",
     " 🇳🇴 Norway",
     " 🇵🇰 Pakistan",

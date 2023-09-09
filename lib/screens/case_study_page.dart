@@ -2,6 +2,7 @@ import 'package:business_bridge/models/case_study.dart';
 import 'package:business_bridge/provider/data_provider.dart';
 import 'package:business_bridge/screens/case_study_details_page.dart';
 import 'package:business_bridge/widgets/case_study.dart';
+import 'package:business_bridge/widgets/exit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -157,8 +158,14 @@ class _case_study_pageState extends ConsumerState<case_study_page> {
     // }
     return WillPopScope(
       onWillPop: () async {
-        SystemNavigator.pop();
-        return true;
+        bool exitConfirmed = await showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return ExitConfirmationDialog(context: context);
+          },
+        );
+
+        return exitConfirmed;
       },
       child: Scaffold(
 

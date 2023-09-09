@@ -15,6 +15,7 @@ class Splashservices {
   void isLogin(BuildContext context) {
     FirebaseAuth auth = FirebaseAuth.instance;
     final user = auth.currentUser;
+
     if (user != null) {
       Timer(
         Duration(seconds: 6),
@@ -85,5 +86,52 @@ class Splashservices {
     //
     // }
   }
+
+
+
+
+
+
+  // void isLogin(BuildContext context) {
+  //   FirebaseAuth auth = FirebaseAuth.instance;
+  //   final user = auth.currentUser;
+  //   if (user != null) {
+  //     FirebaseFirestore.instance
+  //         .collection('users') // Assuming your user data is stored in a 'users' collection
+  //         .doc(user.uid) // Assuming you use the user's UID as the document ID
+  //         .get()
+  //         .then((DocumentSnapshot documentSnapshot) {
+  //       if (documentSnapshot.exists) {
+  //         Map<String, dynamic> userData = documentSnapshot.data() as Map<String, dynamic>;
+  //         String userType = userData['userType'];
+  //         if (userType == 'executive') {
+  //           // If the user's userType is 'executive', navigate to the executive_details page
+  //           Navigator.push(
+  //             context,
+  //             MaterialPageRoute(builder: (context) => executive_details()),
+  //           );
+  //         } else {
+  //           // If the user's userType is 'user', navigate to the homepage
+  //           Navigator.push(
+  //             context,
+  //             MaterialPageRoute(builder: (context) => homepage()),
+  //           );
+  //         }
+  //       } else {
+  //         // Handle the case where the document does not exist (e.g., user data missing)
+  //         Navigator.push(
+  //           context,
+  //           MaterialPageRoute(builder: (context) => Login_page()),
+  //         );
+  //       }
+  //     });
+  //   } else {
+  //     // If there's no logged-in user, navigate to the login page
+  //     Navigator.push(
+  //       context,
+  //       MaterialPageRoute(builder: (context) => Login_page()),
+  //     );
+  //   }
+  // }
 
 }

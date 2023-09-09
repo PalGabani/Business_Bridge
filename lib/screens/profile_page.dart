@@ -203,9 +203,7 @@ class _profile_pageState extends State<profile_page> {
                   Container(
                     padding: EdgeInsets.only(top: 40, left: 10, right: 10),
                     height: 80,
-                    // Adjust the height as needed
                     color: Colors.transparent,
-                    // Background color for the app bar
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
@@ -236,14 +234,12 @@ class _profile_pageState extends State<profile_page> {
                   StreamBuilder<DocumentSnapshot>(
                     stream: FirebaseFirestore.instance
                         .collection('users')
-                        .doc(_user?.uid) // Use the UID of the current user
+                        .doc(_user?.uid)
                         .snapshots(),
                     builder: (context, snapshot) {
                       if (_user == null) {
-                        // If the user is null, navigate to the login page
                         WidgetsBinding.instance.addPostFrameCallback((_) {
-                          Navigator.of(context)
-                              .pushReplacement(MaterialPageRoute(
+                          Navigator.of(context).pushReplacement(MaterialPageRoute(
                             builder: (context) => Login_page(),
                           ));
                         });
@@ -251,116 +247,95 @@ class _profile_pageState extends State<profile_page> {
                       }
 
                       if (!snapshot.hasData) {
-                        return CircularProgressIndicator(); // Show a loading indicator while data is being fetched
+                        return CircularProgressIndicator();
                       }
 
                       if (snapshot.hasError) {
                         return Text('Error: ${snapshot.error}');
                       }
 
-                      final userData =
-                          snapshot.data?.data() as Map<String, dynamic>?;
+                      final userData = snapshot.data?.data() as Map<String, dynamic>?;
 
                       if (userData == null) {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => Login_page(),
-                        //   ),
-                        // );
-                        // Handle the case where the document doesn't exist or is null
                         return Center(
-                            child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              'User data not found! Login Again ,Goto Login',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headlineSmall!
-                                  .copyWith(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onTertiary,
-                                  ),
-                            ),
-                            ElevatedButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Login_page()),
-                                );
-                              },
-                              child: Text('Go to HomePage'),
-                            ),
-                          ],
-                        ));
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                'User data not found! Login Again ,Goto Login',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineSmall!
+                                    .copyWith(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onTertiary,
+                                ),
+                              ),
+                              ElevatedButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Login_page()),
+                                  );
+                                },
+                                child: Text('Go to HomePage'),
+                              ),
+                            ],
+                          ),
+                        );
                       }
 
                       return Center(
                         child: Padding(
-                          //full content padding container main.........
                           padding: const EdgeInsets.all(8.0),
                           child: Container(
-                          //color: Colors.red,
-                            //height: double.infinity,
                             width: double.infinity,
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                //image part.....
                                 Padding(
                                   padding: const EdgeInsets.only(top: 10.0),
                                   child: Container(
-                                      width: 120,
-                                      // Adjust the width and height as needed
-                                      height: 120,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        border: Border.all(
-                                          color: Colors.grey,
-                                          // Border color
-                                          width: 5.0, // Border width
-                                        ),
+                                    width: 120,
+                                    height: 120,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                        color: Colors.grey,
+                                        width: 5.0,
                                       ),
-                                      child: CircleAvatar(
-                                        radius: 58,
-                                        // Adjust the radius to fit within the border
-                                        backgroundColor: Colors.grey.withOpacity(0.5),
-                                        // Background color if the image is not loaded
-                                        backgroundImage: NetworkImage(
-                                            userData['image'] ?? 'N/A',),
-
-
-                                        child: isLoadingImage
-                                            ? CircularProgressIndicator(
-                                                color: Colors.grey,
-
-                                              )
-                                            : null, // Show CircularProgressIndicator when image is null
-                                      )),
+                                    ),
+                                    child: CircleAvatar(
+                                      radius: 58,
+                                      backgroundColor: Colors.grey.withOpacity(0.5),
+                                      backgroundImage: NetworkImage(
+                                        userData['image'] ?? 'N/A',
+                                      ),
+                                      child: isLoadingImage
+                                          ? CircularProgressIndicator(
+                                        color: Colors.grey,
+                                      )
+                                          : null,
+                                    ),
+                                  ),
                                 ),
-
-                                SizedBox(
-                                  height: 8,
-                                ),
+                                SizedBox(height: 8),
                                 Text(
                                   userData['bname'] ?? 'N/A',
                                   style: Theme.of(context)
                                       .textTheme
                                       .headlineMedium!
                                       .copyWith(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .onTertiary,
-                                      ),
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onTertiary,
+                                  ),
                                 ),
-                                SizedBox(
-                                  height: 8,
-                                ),
+                                SizedBox(height: 8),
                                 Padding(
                                   padding: const EdgeInsets.only(left: 15.0),
                                   child: Align(
@@ -372,200 +347,197 @@ class _profile_pageState extends State<profile_page> {
                                             .textTheme
                                             .headlineSmall!
                                             .copyWith(
-                                              color: Colors.grey,
-                                            ),
+                                          color: Colors.grey,
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 15.0, right: 13, top: 10),
+                                  padding: const EdgeInsets.only(left: 15.0,right: 10,top: 10),
                                   child: Container(
                                     width: double.infinity,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10),
                                       color: Colors.grey.withOpacity(0.35),
                                     ),
-                                    child: Padding(
-                                      padding:
-                                          const EdgeInsets.only(left: 15.0),
-                                      child: Container(
-                                        // color: Colors.blue,
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: SingleChildScrollView(
-                                            physics: BouncingScrollPhysics(),
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  "Business Name:",
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .bodyLarge!
-                                                      .copyWith(
-                                                        color: Colors.grey,
-                                                      ),
-                                                ),
-                                                Text(
-                                                  userData['bname'] ?? 'N/A',
-                                                  maxLines: 2,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  softWrap: true,
-                                                  style: TextStyle(
-                                                    fontSize: 20,
-                                                    color: Colors.white
-                                                        .withOpacity(0.9),
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  height: 10,
-                                                ),
-                                                Text(
-                                                  "Sector Name:",
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .bodyLarge!
-                                                      .copyWith(
-                                                        color: Colors.grey,
-                                                      ),
-                                                ),
-                                                Text(
-                                                  userData['sector'] ?? 'N/A',
-                                                  maxLines: 2,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  softWrap: true,
-                                                  style: TextStyle(
-                                                      fontSize: 20,
-                                                      color: Colors.white
-                                                          .withOpacity(0.9)),
-                                                ),
-                                                SizedBox(
-                                                  height: 10,
-                                                ),
-                                                Text(
-                                                  "User Name:",
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .bodyLarge!
-                                                      .copyWith(
-                                                        color: Colors.grey,
-                                                      ),
-                                                ),
-                                                Text(
-                                                  userData['username'] ?? 'N/A',
-                                                  maxLines: 2,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  softWrap: true,
-                                                  style: TextStyle(
-                                                    fontSize: 20,
-                                                    color: Colors.white
-                                                        .withOpacity(0.9),
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  height: 10,
-                                                ),
-                                                Text(
-                                                  "Contact No.:",
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .bodyLarge!
-                                                      .copyWith(
-                                                        color: Colors.grey,
-                                                      ),
-                                                ),
-                                                Text(
-                                                  userData['contact'] ?? 'N/A',
-                                                  style: TextStyle(
-                                                    fontSize: 20,
-                                                    color: Colors.white
-                                                        .withOpacity(0.9),
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  height: 10,
-                                                ),
-                                                Text(
-                                                  "Email ID:",
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .bodyLarge!
-                                                      .copyWith(
-                                                        color: Colors.grey,
-                                                      ),
-                                                ),
-                                                Text(
-                                                  userData['email'] ?? 'N/A',
-                                                  maxLines: 2,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  softWrap: true,
-                                                  style: TextStyle(
-                                                    fontSize: 20,
-                                                    color: Colors.white
-                                                        .withOpacity(0.9),
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  height: 10,
-                                                ),
-                                                Text(
-                                                  "Country Name:",
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .bodyLarge!
-                                                      .copyWith(
-                                                        color: Colors.grey,
-                                                      ),
-                                                ),
-                                                Text(
-                                                  userData['country'] ?? 'N/A',
-                                                  style: TextStyle(
-                                                    fontSize: 20,
-                                                    color: Colors.white
-                                                        .withOpacity(0.9),
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  height: 10,
-                                                ),
-                                                Text(
-                                                  "License No.:",
-                                                  maxLines: 2,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  softWrap: true,
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .bodyLarge!
-                                                      .copyWith(
-                                                        color: Colors.grey,
-                                                      ),
-                                                ),
-                                                Text(
-                                                  userData['license'] ?? 'N/A',
-                                                  style: TextStyle(
-                                                    fontSize: 20,
-                                                    color: Colors.white
-                                                        .withOpacity(0.9),
-                                                  ),
-                                                ),
-                                              ],
+                                    // Limit the maximum height of the scrollable container to 300
+                                    height: 400,
+                                    child: SingleChildScrollView(
+                                      physics: BouncingScrollPhysics(),
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(left: 10.0,top: 10,bottom: 5),
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Business Name:",
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyLarge!
+                                                  .copyWith(
+                                                color: Colors.grey,
+                                              ),
                                             ),
-                                          ),
+                                            Text(
+                                              userData['bname'] ?? 'N/A',
+                                              maxLines: 2,
+                                              overflow:
+                                              TextOverflow.ellipsis,
+                                              softWrap: true,
+                                              style: TextStyle(
+                                                fontSize: 20,
+                                                color: Colors.white
+                                                    .withOpacity(0.9),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                            Text(
+                                              "Sector Name:",
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyLarge!
+                                                  .copyWith(
+                                                color: Colors.grey,
+                                              ),
+                                            ),
+                                            Text(
+                                              userData['sector'] ?? 'N/A',
+                                              maxLines: 2,
+                                              overflow:
+                                              TextOverflow.ellipsis,
+                                              softWrap: true,
+                                              style: TextStyle(
+                                                  fontSize: 20,
+                                                  color: Colors.white
+                                                      .withOpacity(0.9)),
+                                            ),
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                            Text(
+                                              "User Name:",
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyLarge!
+                                                  .copyWith(
+                                                color: Colors.grey,
+                                              ),
+                                            ),
+                                            Text(
+                                              userData['username'] ?? 'N/A',
+                                              maxLines: 2,
+                                              overflow:
+                                              TextOverflow.ellipsis,
+                                              softWrap: true,
+                                              style: TextStyle(
+                                                fontSize: 20,
+                                                color: Colors.white
+                                                    .withOpacity(0.9),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                            Text(
+                                              "Contact No.:",
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyLarge!
+                                                  .copyWith(
+                                                color: Colors.grey,
+                                              ),
+                                            ),
+                                            Text(
+                                              userData['contact'] ?? 'N/A',
+                                              style: TextStyle(
+                                                fontSize: 20,
+                                                color: Colors.white
+                                                    .withOpacity(0.9),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                            Text(
+                                              "Email ID:",
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyLarge!
+                                                  .copyWith(
+                                                color: Colors.grey,
+                                              ),
+                                            ),
+                                            Text(
+                                              userData['email'] ?? 'N/A',
+                                              maxLines: 2,
+                                              overflow:
+                                              TextOverflow.ellipsis,
+                                              softWrap: true,
+                                              style: TextStyle(
+                                                fontSize: 20,
+                                                color: Colors.white
+                                                    .withOpacity(0.9),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                            Text(
+                                              "Country Name:",
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyLarge!
+                                                  .copyWith(
+                                                color: Colors.grey,
+                                              ),
+                                            ),
+                                            Text(
+                                              userData['country'] ?? 'N/A',
+                                              style: TextStyle(
+                                                fontSize: 20,
+                                                color: Colors.white
+                                                    .withOpacity(0.9),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                            Text(
+                                              "License No.:",
+                                              maxLines: 2,
+                                              overflow:
+                                              TextOverflow.ellipsis,
+                                              softWrap: true,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyLarge!
+                                                  .copyWith(
+                                                color: Colors.grey,
+                                              ),
+                                            ),
+                                            Text(
+                                              userData['license'] ?? 'N/A',
+                                              style: TextStyle(
+                                                fontSize: 20,
+                                                color: Colors.white
+                                                    .withOpacity(0.9),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                            // Include other details here
+                                          ],
                                         ),
                                       ),
                                     ),
                                   ),
-                                ),
+                                )
+
                               ],
                             ),
                           ),
@@ -578,7 +550,8 @@ class _profile_pageState extends State<profile_page> {
             ),
           ],
         ),
-      ),
+      )
+
     );
   }
 }

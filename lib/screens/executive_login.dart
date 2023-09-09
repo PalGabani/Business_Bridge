@@ -5,6 +5,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../widgets/pop_up.dart';
+import 'login_page_user.dart';
+
 class executive_login extends StatefulWidget{
   @override
   State<executive_login> createState() => _executive_loginState();
@@ -158,12 +161,39 @@ class _executive_loginState extends State<executive_login> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(
+      // appBar: AppBar(
+      //   actions: [Popup(),
+      //   ],
+      //   backgroundColor: Colors.transparent,
+      //   iconTheme: IconThemeData(
+      //     color: Colors.white
+      //
+      //   ),
+      // ),
+   appBar:   AppBar(
+        actions: [
+          Popup(),
+        ],
         backgroundColor: Colors.transparent,
         iconTheme: IconThemeData(
-          color: Colors.white
+          color: Colors.white,
+        ),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back), // Add a back button icon
+          onPressed: () {
+            // Navigate to the Login_page when the back button is pressed
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return Login_page(); // Replace with your login page
+                },
+              ),
+            );
+          },
         ),
       ),
+
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(

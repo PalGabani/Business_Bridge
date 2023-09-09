@@ -57,7 +57,7 @@ class _admin_ex_registrationState extends State<admin_ex_registration> {
     " 🇲🇿 Mozambique",
     " 🇲🇲 Myanmar",
     " 🇳🇵 Nepal",
-    " 🇳🇿 New Zealand"
+    " 🇳🇿 New Zealand",
         " 🇳🇬 Nigeria",
     " 🇳🇴 Norway",
     " 🇵🇰 Pakistan",
@@ -275,8 +275,8 @@ class _admin_ex_registrationState extends State<admin_ex_registration> {
                                           onTap: _pickImage,
                                           borderRadius: BorderRadius.circular(50), // Make it round
                                           child: Container(
-                                            width: 100, // Adjust size as needed
-                                            height: 100, // Adjust size as needed
+                                            width: 90, // Adjust size as needed
+                                            height: 90, // Adjust size as needed
                                             decoration: BoxDecoration(
                                               shape: BoxShape.circle, // Make it round
                                               color: Colors.grey[200], // Background color
@@ -287,15 +287,15 @@ class _admin_ex_registrationState extends State<admin_ex_registration> {
                                             ),
                                             child: _imageFile == null
                                                 ? Icon(
-                                              Icons.camera_alt,
-                                              size: 40,
+                                              Icons.add_a_photo_outlined,
+                                              size: 30,
                                               color: Colors.grey,
                                             )
                                                 : ClipOval(
                                               child: Image.file(
                                                 _imageFile!,
-                                                width: 100,
-                                                height: 100,
+                                                width: 80,
+                                                height: 80,
                                                 fit: BoxFit.cover,
                                               ),
                                             ),
@@ -313,10 +313,10 @@ class _admin_ex_registrationState extends State<admin_ex_registration> {
                                       ),
                                       //------------  business Name ---------------------------------//
                                       SizedBox(
-                                        height: 10,
+                                        height: 8,
                                       ),
                                       Container(
-                                        height: 60,
+                                        //height: 60,
                                         decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(10),
@@ -332,9 +332,10 @@ class _admin_ex_registrationState extends State<admin_ex_registration> {
                                           ],
                                         ),
                                         child: TextFormField(
+
                                           validator: (value) {
                                             if (value!.isEmpty) {
-                                              return 'please set executive id';
+                                              return 'Please set executive id';
                                             }
                                             return null;
                                           },
@@ -344,6 +345,7 @@ class _admin_ex_registrationState extends State<admin_ex_registration> {
                                               .colorScheme
                                               .secondary,
                                           decoration: InputDecoration(
+
                                             hintText: 'Enter Executive id :',
                                             hintStyle: Theme.of(context)
                                                 .textTheme
@@ -388,15 +390,79 @@ class _admin_ex_registrationState extends State<admin_ex_registration> {
                                         ),
                                       ),
                                       SizedBox(
-                                        height: 15,
+                                        height: 10,
                                       ),
 
                                       //------------  set user name.  ---------------------------------//
                                       Container(
-                                        height: 60,
+                                        //height: 60,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(10),
+
+                                          color: Colors.white,
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Color(0xff232855).withOpacity(0.3),
+                                              spreadRadius: 1,
+                                              blurRadius: 8,
+                                              offset: Offset(2, 7),
+                                            ),
+                                          ],
+                                        ),
+                                        child: TextFormField(
+                                          validator: (value) {
+                                            if (value!.isEmpty) {
+                                              return 'Please Enter Executive name';
+                                            }
+                                            // Use a regular expression to check if the name contains only letters
+                                            final RegExp nameRegExp = RegExp(r'^[A-Za-z ]+$');
+                                            if (!nameRegExp.hasMatch(value)) {
+                                              return 'Name should contain only letters';
+                                            }
+                                            return null;
+                                          },
+                                          controller: exnameController,
+                                          keyboardType: TextInputType.name,
+                                          cursorColor: Theme.of(context).colorScheme.secondary,
+                                          decoration: InputDecoration(
+                                            hintText: 'Enter Executive Name:',
+                                            hintStyle: Theme.of(context).textTheme.titleMedium!.copyWith(
+                                              color: Theme.of(context).colorScheme.secondary,
+                                            ),
+                                            label: Text(
+                                              'Executive Name',
+                                              style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                                                color: Theme.of(context).colorScheme.secondary,
+                                              ),
+                                            ),
+                                            prefixIcon: Icon(
+                                              Icons.person,
+                                              color: Theme.of(context).colorScheme.secondary,
+                                            ),
+                                            enabledBorder: OutlineInputBorder(
+                                              borderRadius: BorderRadius.circular(10),
+                                            ),
+                                            focusedBorder: OutlineInputBorder(
+                                              borderRadius: BorderRadius.circular(10),
+                                              borderSide: BorderSide(
+                                                width: 2,
+                                                color: Theme.of(context).colorScheme.secondary,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+
+
+                                      //-----------------------  Email.  ---------------------------------//
+                                      Container(
+                                        //height: 60,
                                         decoration: BoxDecoration(
                                           borderRadius:
-                                              BorderRadius.circular(10),
+                                          BorderRadius.circular(10),
                                           color: Colors.white,
                                           boxShadow: [
                                             BoxShadow(
@@ -411,50 +477,56 @@ class _admin_ex_registrationState extends State<admin_ex_registration> {
                                         child: TextFormField(
                                           validator: (value) {
                                             if (value!.isEmpty) {
-                                              return 'please Enter Executive name';
+                                              return 'Please Enter Executive E-mail';
+                                            }
+                                            if (!RegExp(
+                                                "^[a-zA-z0-9+_.-]+@[gmail.com]")
+                                                .hasMatch(value)) {
+                                              return 'Enter valid E-mail';
                                             }
                                             return null;
                                           },
-                                          controller: exnameController,
+                                          controller: emailController,
                                           keyboardType:
-                                              TextInputType.emailAddress,
+                                          TextInputType.emailAddress,
                                           cursorColor: Theme.of(context)
                                               .colorScheme
                                               .secondary,
                                           decoration: InputDecoration(
-                                            hintText: 'Enter Executive Name:',
+                                            hintText:
+                                            'Enter Executive Email ID:',
                                             hintStyle: Theme.of(context)
                                                 .textTheme
                                                 .titleMedium!
                                                 .copyWith(
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .secondary,
-                                                ),
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .secondary,
+                                            ),
                                             label: Text(
-                                              'Executive Name',
+                                              'Email',
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .titleMedium!
                                                   .copyWith(
-                                                    color: Theme.of(context)
-                                                        .colorScheme
-                                                        .secondary,
-                                                  ),
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .secondary,
+                                              ),
                                             ),
                                             prefixIcon: Icon(
-                                              Icons.perm_identity_sharp,
+                                              Icons.mail,
                                               color: Theme.of(context)
                                                   .colorScheme
                                                   .secondary,
                                             ),
                                             enabledBorder: OutlineInputBorder(
                                               borderRadius:
-                                                  BorderRadius.circular(10),
+                                              BorderRadius.circular(10),
                                             ),
                                             focusedBorder: OutlineInputBorder(
                                               borderRadius:
-                                                  BorderRadius.circular(10),
+                                              BorderRadius.circular(10),
                                               borderSide: BorderSide(
                                                 width: 2,
                                                 color: Theme.of(context)
@@ -467,12 +539,12 @@ class _admin_ex_registrationState extends State<admin_ex_registration> {
                                       ),
 
                                       SizedBox(
-                                        height: 15,
+                                        height: 10,
                                       ),
 
                                       //------------  set PassWord  ---------------------------------//
                                       Container(
-                                        height: 60,
+                                        //height: 60,
                                         decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(10),
@@ -490,6 +562,7 @@ class _admin_ex_registrationState extends State<admin_ex_registration> {
                                         child: TextFormField(
                                           keyboardType:
                                               TextInputType.visiblePassword,
+
                                           validator: (value) {
                                             if (value!.isEmpty) {
                                               return "Please Enter Password";
@@ -504,6 +577,7 @@ class _admin_ex_registrationState extends State<admin_ex_registration> {
                                               .colorScheme
                                               .secondary,
                                           obscureText: _obsecureText,
+
                                           decoration: InputDecoration(
                                             hintText: 'Enter Password:',
                                             hintStyle: Theme.of(context)
@@ -526,7 +600,7 @@ class _admin_ex_registrationState extends State<admin_ex_registration> {
                                                   ),
                                             ),
                                             prefixIcon: Icon(
-                                              Icons.lock_outline_sharp,
+                                              Icons.lock,
                                               color: Theme.of(context)
                                                   .colorScheme
                                                   .secondary,
@@ -563,16 +637,79 @@ class _admin_ex_registrationState extends State<admin_ex_registration> {
                                         ),
                                       ),
 
+
                                       SizedBox(
-                                        height: 15,
+                                        height: 10,
                                       ),
 
+                                      // ---------------------- contact no -----------------------
+                                      Container(
+                                        //height: 60,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(10),
+                                          color: Colors.white,
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Color(0xff232855).withOpacity(0.3),
+                                              spreadRadius: 1,
+                                              blurRadius: 8,
+                                              offset: Offset(2, 7),
+                                            ),
+                                          ],
+                                        ),
+                                        child: TextFormField(
+                                          validator: (value) {
+                                            if (value!.isEmpty) {
+                                              return 'Enter Executive contact no.';
+                                            }
+                                            // Check if the phone number is exactly 10 digits long
+                                            if (value.length != 10) {
+                                              return 'Phone number should be 10 digits long';
+                                            }
+                                            return null;
+                                          },
+                                          controller: contactController,
+                                          keyboardType: TextInputType.phone,
+                                          cursorColor: Theme.of(context).colorScheme.secondary,
+                                          maxLength: 10, // Set the maximum length to 10
+                                          decoration: InputDecoration(
+                                            hintText: 'Enter Executive\'s Contact no :',
+                                            hintStyle: Theme.of(context).textTheme.titleMedium!.copyWith(
+                                              color: Theme.of(context).colorScheme.secondary,
+                                            ),
+                                            label: Text(
+                                              'Contact no',
+                                              style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                                                color: Theme.of(context).colorScheme.secondary,
+                                              ),
+                                            ),
+                                            prefixIcon: Icon(
+                                              Icons.phone,
+                                              color: Theme.of(context).colorScheme.secondary,
+                                            ),
+                                            enabledBorder: OutlineInputBorder(
+                                              borderRadius: BorderRadius.circular(10),
+                                            ),
+                                            focusedBorder: OutlineInputBorder(
+                                              borderRadius: BorderRadius.circular(10),
+                                              borderSide: BorderSide(
+                                                width: 2,
+                                                color: Theme.of(context).colorScheme.secondary,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+
+                                      SizedBox(
+                                        height: 10,
+                                      ),
                                       //------------  Country  ---------------------------------//
                                       Container(
                                         height: 60,
                                         decoration: BoxDecoration(
                                           borderRadius:
-                                              BorderRadius.circular(10),
+                                          BorderRadius.circular(10),
                                           color: Colors.white,
                                           boxShadow: [
                                             BoxShadow(
@@ -591,20 +728,20 @@ class _admin_ex_registrationState extends State<admin_ex_registration> {
                                                 .textTheme
                                                 .titleMedium!
                                                 .copyWith(
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .secondary,
-                                                ),
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .secondary,
+                                            ),
                                             label: Text(
                                               'Country',
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .titleMedium!
                                                   .copyWith(
-                                                    color: Theme.of(context)
-                                                        .colorScheme
-                                                        .secondary,
-                                                  ),
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .secondary,
+                                              ),
                                             ),
                                             prefixIcon: Icon(
                                               Icons.flag,
@@ -614,11 +751,11 @@ class _admin_ex_registrationState extends State<admin_ex_registration> {
                                             ),
                                             enabledBorder: OutlineInputBorder(
                                               borderRadius:
-                                                  BorderRadius.circular(10),
+                                              BorderRadius.circular(10),
                                             ),
                                             focusedBorder: OutlineInputBorder(
                                               borderRadius:
-                                                  BorderRadius.circular(10),
+                                              BorderRadius.circular(10),
                                               borderSide: BorderSide(
                                                 width: 2,
                                                 color: Theme.of(context)
@@ -641,167 +778,8 @@ class _admin_ex_registrationState extends State<admin_ex_registration> {
                                           }).toList(),
                                         ),
                                       ),
-                                      SizedBox(
-                                        height: 15,
-                                      ),
-                                      //-----------------------  Email.  ---------------------------------//
-                                      Container(
-                                        height: 60,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          color: Colors.white,
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Color(0xff232855)
-                                                  .withOpacity(0.3),
-                                              spreadRadius: 1,
-                                              blurRadius: 8,
-                                              offset: Offset(2, 7),
-                                            ),
-                                          ],
-                                        ),
-                                        child: TextFormField(
-                                          validator: (value) {
-                                            if (value!.isEmpty) {
-                                              return 'please Enter Executive E-mail';
-                                            }
-                                            if (!RegExp(
-                                                    "^[a-zA-z0-9+_.-]+@[gmail.com]")
-                                                .hasMatch(value)) {
-                                              return 'Enter valid E-mail';
-                                            }
-                                            return null;
-                                          },
-                                          controller: emailController,
-                                          keyboardType:
-                                              TextInputType.emailAddress,
-                                          cursorColor: Theme.of(context)
-                                              .colorScheme
-                                              .secondary,
-                                          decoration: InputDecoration(
-                                            hintText:
-                                                'Enter Executive Email ID:',
-                                            hintStyle: Theme.of(context)
-                                                .textTheme
-                                                .titleMedium!
-                                                .copyWith(
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .secondary,
-                                                ),
-                                            label: Text(
-                                              'Email',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .titleMedium!
-                                                  .copyWith(
-                                                    color: Theme.of(context)
-                                                        .colorScheme
-                                                        .secondary,
-                                                  ),
-                                            ),
-                                            prefixIcon: Icon(
-                                              Icons.mail,
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .secondary,
-                                            ),
-                                            enabledBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                            ),
-                                            focusedBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              borderSide: BorderSide(
-                                                width: 2,
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .secondary,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 20,
-                                      ),
 
-                                      // ---------------------- contact no -----------------------
-                                      Container(
-                                        height: 60,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          color: Colors.white,
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Color(0xff232855)
-                                                  .withOpacity(0.3),
-                                              spreadRadius: 1,
-                                              blurRadius: 8,
-                                              offset: Offset(2, 7),
-                                            ),
-                                          ],
-                                        ),
-                                        child: TextFormField(
-                                          validator: (value) {
-                                            if (value!.isEmpty) {
-                                              return 'Enter Executive contact no.';
-                                            }
-                                            return null;
-                                          },
-                                          controller: contactController,
-                                          keyboardType: TextInputType.phone,
-                                          cursorColor: Theme.of(context)
-                                              .colorScheme
-                                              .secondary,
-                                          decoration: InputDecoration(
-                                            hintText:
-                                                'Enter Executive Contact no :',
-                                            hintStyle: Theme.of(context)
-                                                .textTheme
-                                                .titleMedium!
-                                                .copyWith(
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .secondary,
-                                                ),
-                                            label: Text(
-                                              'Contact no',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .titleMedium!
-                                                  .copyWith(
-                                                    color: Theme.of(context)
-                                                        .colorScheme
-                                                        .secondary,
-                                                  ),
-                                            ),
-                                            prefixIcon: Icon(
-                                              Icons.phone,
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .secondary,
-                                            ),
-                                            enabledBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                            ),
-                                            focusedBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              borderSide: BorderSide(
-                                                width: 2,
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .secondary,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
+
                                       SizedBox(
                                         height: 20,
                                       ),
@@ -853,7 +831,7 @@ class _admin_ex_registrationState extends State<admin_ex_registration> {
                                               ),
                                               child: Center(
                                                 child: Text(
-                                                  'Registration',
+                                                  'Register',
                                                   style: TextStyle(
                                                     color: Colors.black,
                                                     fontWeight: FontWeight.bold,

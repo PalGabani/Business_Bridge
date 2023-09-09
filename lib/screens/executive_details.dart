@@ -185,31 +185,33 @@ class _executive_detailsState extends ConsumerState<executive_details> {
                                           //   ),
                                           // ),
                                         ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(left: 20, top: 20),
-                                          child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              Text(userData['exname'],
-                                                  maxLines: 2,
-                                                  overflow: TextOverflow.ellipsis,
-                                                  softWrap: true,
-                                                  style: TextStyle(
-                                                      color: Colors.white, fontSize: 20)),
-                                              Text(userData['country'],
-                                                  style: TextStyle(
-                                                      color: Colors.white, fontSize: 15)),
-                                              Text(userData['contact'],
-                                                  style: TextStyle(
-                                                      color: Colors.white, fontSize: 15)),
-                                              Text(userData['email'],
-                                                  maxLines: 2,
-                                                  overflow: TextOverflow.ellipsis,
-                                                  softWrap: true,
+                                        Flexible(
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(left: 20, top: 20),
+                                            child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Text(userData['exname'],
+                                                    maxLines: 1, // Display in one line
+                                                    overflow: TextOverflow.ellipsis,
+                                                    softWrap: true,
+                                                    style: TextStyle(
+                                                        color: Colors.white, fontSize: 20)),
+                                                Text(userData['country'],
+                                                    style: TextStyle(
+                                                        color: Colors.white, fontSize: 15)),
+                                                Text(userData['contact'],
+                                                    style: TextStyle(
+                                                        color: Colors.white, fontSize: 15)),
+                                                Text(userData['email'],
+                                                    maxLines: 1, // Display in one line
+                                                    overflow: TextOverflow.ellipsis,
+                                                    softWrap: true,
 
-                                                  style: TextStyle(
-                                                      color: Colors.white, fontSize: 17)),
-                                            ],
+                                                    style: TextStyle(
+                                                        color: Colors.white, fontSize: 17)),
+                                              ],
+                                            ),
                                           ),
                                         )
                                       ],
