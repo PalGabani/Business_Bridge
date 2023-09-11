@@ -1,6 +1,7 @@
 import 'package:business_bridge/models/assign_page_projects.dart';
 import 'package:business_bridge/models/assign_project_details.dart';
 import 'package:business_bridge/screens/assign_project_page.dart';
+import 'package:business_bridge/screens/login_page_user.dart';
 import 'package:business_bridge/widgets/work_portal_projects.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -10,6 +11,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../provider/data_provider.dart';
+import '../utils/utility.dart';
 import '../widgets/case_study.dart';
 
 class executive_details extends ConsumerStatefulWidget {
@@ -86,6 +88,32 @@ class _executive_detailsState extends ConsumerState<executive_details> {
               ));
     }
 
+
+
+
+
+    void signOut() async {
+      try {
+        await FirebaseAuth.instance.signOut(); // Sign out the user from Firebase Authentication
+
+        // You can add additional code here to clear any cached user data or perform any other necessary cleanup
+        Utiles().toastmessege("Logout!");
+        // Navigate back to the login page
+        Navigator.of(context).pushReplacement(MaterialPageRoute(
+          builder: (context) => Login_page(),
+        ));
+      } catch (e) {
+        print("Error during sign out: $e");
+        Utiles().toastmessege("Some Error occurs on Logout!");
+        // Handle any errors that occur during the sign-out process
+        // You can show a snackbar or an error message to the user
+      }
+    }
+
+
+
+
+
     // TODO: implement build
     return WillPopScope(
       onWillPop: () async {
@@ -101,6 +129,15 @@ class _executive_detailsState extends ConsumerState<executive_details> {
                 color: Colors.white,
               )),
           iconTheme: IconThemeData(color: Colors.white),
+          actions: [
+            IconButton(
+              icon: Icon(Icons.logout, color: Colors.white),
+              onPressed: () {
+                // Handle the logout process here
+                signOut(); // Call the signOut function to log out the executive
+              },
+            ),
+          ],
         ),
         body: Container(
           // height: double.infinity,

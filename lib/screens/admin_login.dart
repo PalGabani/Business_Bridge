@@ -1,4 +1,5 @@
 import 'package:business_bridge/screens/admin_details.dart';
+import 'package:business_bridge/utils/utility.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -291,11 +292,13 @@ class _admin_loginState extends State<admin_login> {
                                     final enteredId = loginidController.text;
                                     final enteredPassword = passController.text;
                                     if (enteredId == "adminpsj" && enteredPassword == "49504950") {
+                                      Utiles().toastmessege("Login Successful");
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) {
                                             return admin_details();
+
                                           },
                                         ),
                                       );

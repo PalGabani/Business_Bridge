@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:business_bridge/screens/admin_ex_registration.dart';
 import 'package:business_bridge/screens/login_page_user.dart';
+import 'package:business_bridge/utils/utility.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -141,6 +142,7 @@ class _admin_detailsState extends State<admin_details> {
                           message: 'Logout', // Tooltip text
                           child: IconButton(
                             onPressed: () {
+                              Utiles().toastmessege("Log Out!");
                               // Navigate to the Login_page when logout is pressed
                               Navigator.pushReplacement(
                                 context,

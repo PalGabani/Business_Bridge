@@ -136,6 +136,7 @@ class _profile_pageState extends State<profile_page> {
 
                             // Close the dialog
                             Navigator.of(context).pop();
+
                             Navigator.of(context)
                                 .push(MaterialPageRoute(builder: (context) {
                               return Login_page();
@@ -166,7 +167,7 @@ class _profile_pageState extends State<profile_page> {
                   }
 
                   await FirebaseAuth.instance.signOut(); // Sign the user out
-
+                  Utiles().toastmessege("Log Out");
                   Navigator.push(
                     context,
                     MaterialPageRoute(
