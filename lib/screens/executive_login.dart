@@ -158,143 +158,146 @@ class _executive_loginState extends State<executive_login> {
   Widget build(BuildContext context) {
     final keyBoardSpace = MediaQuery.of(context).viewInsets.bottom;
 
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      resizeToAvoidBottomInset: false,
-      // appBar: AppBar(
-      //   actions: [Popup(),
-      //   ],
-      //   backgroundColor: Colors.transparent,
-      //   iconTheme: IconThemeData(
-      //     color: Colors.white
-      //
-      //   ),
-      // ),
+    return WillPopScope(
+      onWillPop: () async {
+        // Navigate to the Login_page when the back button is pressed
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return Login_page(); // Replace with your login page
+            },
+          ),
+        );
+        return true; // Return true to prevent default back button behavior
+      },
+      child: Scaffold(
+        extendBodyBehindAppBar: true,
+        resizeToAvoidBottomInset: false,
+        // appBar: AppBar(
+        //   actions: [Popup(),
+        //   ],
+        //   backgroundColor: Colors.transparent,
+        //   iconTheme: IconThemeData(
+        //     color: Colors.white
+        //
+        //   ),
+        // ),
    appBar:   AppBar(
-        actions: [
-          Popup(),
-        ],
-        backgroundColor: Colors.transparent,
-        iconTheme: IconThemeData(
-          color: Colors.white,
-        ),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back), // Add a back button icon
-          onPressed: () {
-            // Navigate to the Login_page when the back button is pressed
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) {
-                  return Login_page(); // Replace with your login page
-                },
-              ),
-            );
-          },
-        ),
-      ),
-
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage('assets/images/background_login.png'),
-              fit: BoxFit.cover),
+          actions: [
+            Popup(),
+          ],
+          backgroundColor: Colors.transparent,
+          iconTheme: IconThemeData(
+            color: Colors.white,
+          ),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back), // Add a back button icon
+            onPressed: () {
+              // Navigate to the Login_page when the back button is pressed
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return Login_page(); // Replace with your login page
+                  },
+                ),
+              );
+            },
+          ),
         ),
 
-        child: Stack(
-          children: [
-            Container(
-              color: Colors.transparent,
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 180,left: 30),
-                    child: Container(
-                      height: 80,
-                      width: double.infinity,
-                      color: Colors.transparent,
-                      child: Text("Work Portal",
-                          style:TextStyle(
-                            color: Colors.white,
-                            fontSize: 40,
-                          )),
-                    ),
-                  ),
+        body: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('assets/images/background_login.png'),
+                fit: BoxFit.cover),
+          ),
 
-                  // ----------------------- main part ------------------------
-                  Expanded(
+          child: Stack(
+            children: [
+              Container(
+                color: Colors.transparent,
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 180,left: 30),
                       child: Container(
-                        height: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(15),
-                              topRight: Radius.circular(15)),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Color(0xff9DB2BF).withOpacity(0.8),
-                              spreadRadius: 10,
-                              blurRadius: 10,
-                              offset: Offset(0, 5),
-                            ),
-                          ],
-                        ),
-                        child: SingleChildScrollView(
-                          physics: BouncingScrollPhysics(),
-                          child: Padding(
-                            padding: EdgeInsets.fromLTRB(
-                                30, 50, 30, keyBoardSpace + 20),
-                            child: Form(
-                              key: formkey,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    height: 60,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: Colors.white,
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Color(0xff232855)
-                                              .withOpacity(0.3),
-                                          spreadRadius: 1,
-                                          blurRadius: 8,
-                                          offset: Offset(2, 7),
-                                        ),
-                                      ],
-                                    ),
-                                    child: TextFormField(
-                                      validator: (value) {
-                                        if (value!.isEmpty) {
-                                          return 'please Enter Login id';
-                                        }
-                                        if (!RegExp(
-                                            "^[a-zA-z0-9+_.-]")
-                                            .hasMatch(value)) {
-                                          return 'Enter valid id';
-                                        }
-                                        return null;
-                                      },
-                                      controller: exidController,
-                                      keyboardType:
-                                      TextInputType.emailAddress,
-                                      cursorColor: Theme.of(context)
-                                          .colorScheme
-                                          .secondary,
-                                      decoration: InputDecoration(
-                                        hintText: 'Enter Login ID:',
-                                        hintStyle: Theme.of(context)
-                                            .textTheme
-                                            .titleMedium!
-                                            .copyWith(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .secondary,
-                                        ),
-                                        label: Text(
-                                          'Login id',
-                                          style: Theme.of(context)
+                        height: 80,
+                        width: double.infinity,
+                        color: Colors.transparent,
+                        child: Text("Work Portal",
+                            style:TextStyle(
+                              color: Colors.white,
+                              fontSize: 40,
+                            )),
+                      ),
+                    ),
+
+                    // ----------------------- main part ------------------------
+                    Expanded(
+                        child: Container(
+                          height: double.infinity,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(15),
+                                topRight: Radius.circular(15)),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color(0xff9DB2BF).withOpacity(0.8),
+                                spreadRadius: 10,
+                                blurRadius: 10,
+                                offset: Offset(0, 5),
+                              ),
+                            ],
+                          ),
+                          child: SingleChildScrollView(
+                            physics: BouncingScrollPhysics(),
+                            child: Padding(
+                              padding: EdgeInsets.fromLTRB(
+                                  30, 50, 30, keyBoardSpace + 20),
+                              child: Form(
+                                key: formkey,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      height: 60,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: Colors.white,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Color(0xff232855)
+                                                .withOpacity(0.3),
+                                            spreadRadius: 1,
+                                            blurRadius: 8,
+                                            offset: Offset(2, 7),
+                                          ),
+                                        ],
+                                      ),
+                                      child: TextFormField(
+                                        validator: (value) {
+                                          if (value!.isEmpty) {
+                                            return 'please Enter Login id';
+                                          }
+                                          if (!RegExp(
+                                              "^[a-zA-z0-9+_.-]")
+                                              .hasMatch(value)) {
+                                            return 'Enter valid id';
+                                          }
+                                          return null;
+                                        },
+                                        controller: exidController,
+                                        keyboardType:
+                                        TextInputType.emailAddress,
+                                        cursorColor: Theme.of(context)
+                                            .colorScheme
+                                            .secondary,
+                                        decoration: InputDecoration(
+                                          hintText: 'Enter Login ID:',
+                                          hintStyle: Theme.of(context)
                                               .textTheme
                                               .titleMedium!
                                               .copyWith(
@@ -302,205 +305,216 @@ class _executive_loginState extends State<executive_login> {
                                                 .colorScheme
                                                 .secondary,
                                           ),
-                                        ),
-                                        prefixIcon: Icon(
-                                          Icons.mail,
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .secondary,
-                                        ),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderRadius:
-                                          BorderRadius.circular(10),
-                                        ),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderRadius:
-                                          BorderRadius.circular(10),
-                                          borderSide: BorderSide(
-                                            width: 2,
+                                          label: Text(
+                                            'Login id',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleMedium!
+                                                .copyWith(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .secondary,
+                                            ),
+                                          ),
+                                          prefixIcon: Icon(
+                                            Icons.mail,
                                             color: Theme.of(context)
                                                 .colorScheme
                                                 .secondary,
                                           ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 25,
-                                  ),
-                                  Container(
-                                    height: 060,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: Colors.white,
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Color(0xff232855)
-                                              .withOpacity(0.3),
-                                          spreadRadius: 1,
-                                          blurRadius: 8,
-                                          offset: Offset(2, 7),
-                                        ),
-                                      ],
-                                    ),
-                                    child: TextFormField(
-                                      keyboardType:
-                                      TextInputType.visiblePassword,
-                                      validator: (value) {
-                                        if (value!.isEmpty) {
-                                          return "Please Enter Password";
-                                        }
-                                        if (value.trim().length < 8) {
-                                          return 'Password should be in 8 characters in length';
-                                        }
-                                        return null;
-                                      },
-                                      controller: passController,
-                                      cursorColor: Theme.of(context)
-                                          .colorScheme
-                                          .secondary,
-                                      obscureText: _obsecureText,
-                                      decoration: InputDecoration(
-                                        hintText: 'Enter Password:',
-                                        hintStyle: Theme.of(context)
-                                            .textTheme
-                                            .titleMedium!
-                                            .copyWith(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .secondary,
-                                        ),
-                                        label: Text(
-                                          'Password',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .titleMedium!
-                                              .copyWith(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .secondary,
-                                          ),
-                                        ),
-                                        prefixIcon: Icon(
-                                          Icons.lock_outline_sharp,
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .secondary,
-                                        ),
-                                        suffixIcon: GestureDetector(
-                                          onTap: () {
-                                            _obsecureText = !_obsecureText;
-                                            setState(() {});
-                                          },
-                                          child: Icon(
-                                            _obsecureText
-                                                ? Icons.visibility
-                                                : Icons.visibility_off,
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .secondary,
-                                          ),
-                                        ),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderRadius:
-                                          BorderRadius.circular(10),
-                                        ),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderRadius:
-                                          BorderRadius.circular(10),
-                                          borderSide: BorderSide(
-                                            width: 2,
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .secondary,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-
-                                  //------------  forgott password  ---------------------------------//
-                                  Align(
-                                    alignment: Alignment.centerRight,
-                                    child: TextButton(
-                                        onPressed: () {},
-                                        child: Text(
-                                          "Forgot password?",
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              color: Color(0xff9DB2BF),
-                                              fontWeight: FontWeight
-                                                  .bold // decoration: TextDecoration.underline,
-                                          ),
-                                        )),
-                                  ),
-                                  //-----------error msg show------------------------------///
-
-
-                                  //--------button-------///
-                                  GestureDetector(
-                                    onTap: () {
-                                      if (formkey.currentState!
-                                          .validate()) {
-                                        login();
-                                      }
-                                    },
-                                    child: Stack(
-                                      children: [
-                                        Container(
-                                          width: double.infinity,
-                                          height: 60,
-                                          decoration: BoxDecoration(
+                                          enabledBorder: OutlineInputBorder(
                                             borderRadius:
                                             BorderRadius.circular(10),
-                                            color: Color(0xff9DB2BF),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Color(0xff232855)
-                                                    .withOpacity(0.3),
-                                                spreadRadius: 1,
-                                                blurRadius: 8,
-                                                offset: Offset(2, 7),
-                                              ),
-                                            ],
                                           ),
-                                          child: Center(
-                                            child: Text(
-                                              'Login',
-                                              style: TextStyle(
-                                                color: Colors.black,
-                                                fontWeight:
-                                                FontWeight.bold,
-                                                fontSize: 20,
-                                              ),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderRadius:
+                                            BorderRadius.circular(10),
+                                            borderSide: BorderSide(
+                                              width: 2,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .secondary,
                                             ),
                                           ),
                                         ),
-                                        if (loading) // Show CircularProgressIndicator when loading is true
-                                          Positioned.fill(
-                                            child: Container(
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 25,
+                                    ),
+                                    Container(
+                                      height: 060,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: Colors.white,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Color(0xff232855)
+                                                .withOpacity(0.3),
+                                            spreadRadius: 1,
+                                            blurRadius: 8,
+                                            offset: Offset(2, 7),
+                                          ),
+                                        ],
+                                      ),
+                                      child: TextFormField(
+                                        keyboardType:
+                                        TextInputType.visiblePassword,
+                                        validator: (value) {
+                                          if (value!.isEmpty) {
+                                            return "Please Enter Password";
+                                          }
+                                          if (value.trim().length < 8) {
+                                            return 'Password should be in 8 characters in length';
+                                          }
+                                          return null;
+                                        },
+                                        controller: passController,
+                                        cursorColor: Theme.of(context)
+                                            .colorScheme
+                                            .secondary,
+                                        obscureText: _obsecureText,
+                                        decoration: InputDecoration(
+                                          hintText: 'Enter Password:',
+                                          hintStyle: Theme.of(context)
+                                              .textTheme
+                                              .titleMedium!
+                                              .copyWith(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .secondary,
+                                          ),
+                                          label: Text(
+                                            'Password',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleMedium!
+                                                .copyWith(
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .secondary,
+                                            ),
+                                          ),
+                                          prefixIcon: Icon(
+                                            Icons.lock_outline_sharp,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .secondary,
+                                          ),
+                                          suffixIcon: GestureDetector(
+                                            onTap: () {
+                                              _obsecureText = !_obsecureText;
+                                              setState(() {});
+                                            },
+                                            child: Icon(
+                                              _obsecureText
+                                                  ? Icons.visibility
+                                                  : Icons.visibility_off,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .secondary,
+                                            ),
+                                          ),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderRadius:
+                                            BorderRadius.circular(10),
+                                          ),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderRadius:
+                                            BorderRadius.circular(10),
+                                            borderSide: BorderSide(
+                                              width: 2,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .secondary,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
 
-                                              color: Colors.white.withOpacity(0.5),
-                                              child: Center(
-                                                child: CircularProgressIndicator(color: Colors.blueGrey,),
+                                    //------------  forgott password  ---------------------------------//
+                                    Align(
+                                      alignment: Alignment.centerRight,
+                                      child: TextButton(
+                                          onPressed: () {},
+                                          child: Text(
+                                            "Forgot password?",
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                color: Color(0xff9DB2BF),
+                                                fontWeight: FontWeight
+                                                    .bold // decoration: TextDecoration.underline,
+                                            ),
+                                          )),
+                                    ),
+                                    //-----------error msg show------------------------------///
+
+
+                                    //--------button-------///
+                                    GestureDetector(
+                                      onTap: () {
+                                        if (formkey.currentState!
+                                            .validate()) {
+                                          login();
+                                        }
+                                      },
+                                      child: Stack(
+                                        children: [
+                                          Container(
+                                            width: double.infinity,
+                                            height: 60,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                              BorderRadius.circular(10),
+                                              color: Color(0xff9DB2BF),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Color(0xff232855)
+                                                      .withOpacity(0.3),
+                                                  spreadRadius: 1,
+                                                  blurRadius: 8,
+                                                  offset: Offset(2, 7),
+                                                ),
+                                              ],
+                                            ),
+                                            child: Center(
+                                              child: Text(
+                                                'Login',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight:
+                                                  FontWeight.bold,
+                                                  fontSize: 20,
+                                                ),
                                               ),
                                             ),
                                           ),
-                                      ],
+                                          if (loading) // Show CircularProgressIndicator when loading is true
+                                            Positioned.fill(
+                                              child: Container(
+
+                                                color: Colors.white.withOpacity(0.5),
+                                                child: Center(
+                                                  child: CircularProgressIndicator(color: Colors.blueGrey,),
+                                                ),
+                                              ),
+                                            ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      )
-                  )
-                ],
-              ),
-            )
-          ],
+                        )
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
