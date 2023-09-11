@@ -362,7 +362,7 @@ class _profile_pageState extends State<profile_page> {
                                       color: Colors.grey.withOpacity(0.35),
                                     ),
                                     // Limit the maximum height of the scrollable container to 300
-                                    height: 400,
+                                    height: 409,
                                     child: SingleChildScrollView(
                                       physics: BouncingScrollPhysics(),
                                       child: Padding(

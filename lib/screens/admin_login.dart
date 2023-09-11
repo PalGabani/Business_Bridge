@@ -285,7 +285,7 @@ class _admin_loginState extends State<admin_login> {
                                     ),
                                   ),
                                 ),
-                                Text("adminpsj   49504950"),
+                               // Text("adminpsj   49504950"),
                                 //--------button-------///
                                 GestureDetector(
                                   onTap: () {

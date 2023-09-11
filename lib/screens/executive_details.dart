@@ -36,7 +36,7 @@ class _executive_detailsState extends ConsumerState<executive_details> {
 
   @override
   Widget build(BuildContext context, ) {
-    final DocumentReference executiveRef = FirebaseFirestore.instance.collection('executive').doc('abhishek'); // Replace 'abhishek' with the actual document ID
+    final DocumentReference executiveRef = FirebaseFirestore.instance.collection('executive').doc('IZTd3cPjOkfEHFwyts3USXwhXlu2'); // Replace 'abhishek' with the actual document ID
 
     final ap = ref.watch(assignedprojectsProvider);
 
@@ -247,6 +247,7 @@ class _executive_detailsState extends ConsumerState<executive_details> {
 
                                                     style: TextStyle(
                                                         color: Colors.white, fontSize: 17)),
+
                                               ],
                                             ),
                                           ),
@@ -291,16 +292,7 @@ class _executive_detailsState extends ConsumerState<executive_details> {
                               ),
                             ),
                           ),
-                          // Padding(
-                          //   padding: const EdgeInsets.only(left: 20,right: 20),
-                          //   child: Expanded(
-                          //     child: Container(
-                          //         color: Colors.blueGrey,
-                          //         // height: 460,
-                          //
-                          //         child: content),
-                          //   ),
-                          // ),
+
                         ],
                       ),
                     )),

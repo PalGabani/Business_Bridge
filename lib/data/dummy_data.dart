@@ -661,7 +661,7 @@ List<AssignedProject> assignedProjects = [
 ];
 
 const dummy_service_task = [
-  {'title': 'Pal', 'subtitle': 'Subtitle 1', 'content': 'Content 1','active':'0'},
+  {'title': 'Step 1', 'subtitle': 'Subtitle 1', 'content': 'Content 1','active':'0'},
   {'title': 'Step 2', 'subtitle': 'Subtitle 2', 'content': 'Content 2','active':'1'},
   {'title': 'Step 3', 'subtitle': 'Subtitle 3', 'content': 'Content 3','active':'2'},
   {'title': 'Step 4', 'subtitle': 'Subtitle 4', 'content': 'Content 4','active':'3'},

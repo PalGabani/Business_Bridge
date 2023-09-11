@@ -145,7 +145,7 @@ class _admin_ex_registrationState extends State<admin_ex_registration> {
           .doc(executiveCredential.user!.uid);
 
       await fireStore.doc(executiveCredential.user!.uid).set({
-        "id": euid.toString().trim(),
+        "id": euid,
         "img_url": imageUrl, // Set the image URL
         "exid": exidController.text.trim(),
         "exname": exnameController.text.trim(),
@@ -153,6 +153,7 @@ class _admin_ex_registrationState extends State<admin_ex_registration> {
         "country": chooseItem.toString().trim(),
         "email": emailController.text.trim(),
         "contact": contactController.text.trim(),
+        // "eid":euid,
       });
 
       Navigator.push(context, MaterialPageRoute(builder: (contex) {

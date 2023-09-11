@@ -2,6 +2,8 @@ import 'dart:io';
 import 'package:business_bridge/models/services.dart';
 import 'package:business_bridge/screens/homepage.dart';
 import 'package:business_bridge/screens/services_page.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -28,6 +30,15 @@ _GetServiceState({required this.sen});
   String date = DateFormat('MMMM dd,yyyy').format(DateTime.now());
   DateTime? selectedDate;
  String sen;
+
+ final executiveDetails = FirebaseFirestore.instance.collection("executive").doc("IZTd3cPjOkfEHFwyts3USXwhXlu2");
+// Function to get the current date in the desired format
+  // Function to get the current date in the desired format
+  String _getCurrentDate() {
+    final now = DateTime.now();
+    final formattedDate = DateFormat("MMMM d, y").format(now); // Format the date
+    return formattedDate;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -144,95 +155,128 @@ _GetServiceState({required this.sen});
                     SizedBox(
                       height: 5,
                     ),
-                    Row(
-                      children: [
-                        Text(
-                          "Our Executive Name : ",
-                          textAlign: TextAlign.justify,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          softWrap: true,
-                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            color: Theme.of(context).colorScheme.background,
-                            fontSize: 16,
-                          ),
-                        ),
-                        Expanded(
-                          child: Text(
-                            "Abhishek Malhan",
-                            textAlign: TextAlign.start,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            softWrap: true,
-                            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                              color: Theme.of(context).colorScheme.background,
-                              fontSize: 16,
+                    StreamBuilder<DocumentSnapshot>(
+                      stream: FirebaseFirestore.instance.collection('executive').doc('IZTd3cPjOkfEHFwyts3USXwhXlu2').snapshots(),
+                      builder: (context, snapshot) {
+                        if (!snapshot.hasData) {
+                          return CircularProgressIndicator(); // Show a loading indicator while data is being fetched
+                        }
+
+                        if (snapshot.hasError) {
+                          return Text('Error: ${snapshot.error}');
+                        }
+
+                        final executiveData = snapshot.data?.data() as Map<String, dynamic>?;
+
+                        if (executiveData == null) {
+                          // Handle the case where the document doesn't exist or is null
+                          return Text('Executive data not found!');
+                        }
+
+                        final executiveName = executiveData['exname'] ?? 'N/A';
+
+                        // final executiveName = executiveData['exname'] ?? 'N/A';
+                        return Column(
+                          children: [
+                            Row(
+                              children: [
+                                Text(
+                                  "Our Executive Name : ",
+                                  textAlign: TextAlign.justify,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  softWrap: true,
+                                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                    color: Theme.of(context).colorScheme.background,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    executiveName,
+                                    textAlign: TextAlign.start,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    softWrap: true,
+                                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                      color: Theme.of(context).colorScheme.background,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
-                        ),
-                      ],
+
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  "Executive Mobile no. : ",
+                                  textAlign: TextAlign.justify,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  softWrap: true,
+                                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                    color: Theme.of(context).colorScheme.background,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                Text(
+                                  executiveData['contact'] ?? 'N/A',
+                                  //"+91 9865328754",
+                                  textAlign: TextAlign.justify,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  softWrap: true,
+                                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                    color: Theme.of(context).colorScheme.background,
+                                    fontSize: 16,
+
+                                  ),
+                                ),
+                              ],
+                            ),
+
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  "Assign Date : ",
+                                  textAlign: TextAlign.justify,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  softWrap: true,
+                                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                    color: Theme.of(context).colorScheme.background,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                Text(
+                                  // date,
+                                  _getCurrentDate(),
+                                  textAlign: TextAlign.justify,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  softWrap: true,
+                                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                    color: Theme.of(context).colorScheme.background,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        );
+
+                      },
                     ),
 
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          "Executive Mobile no. : ",
-                          textAlign: TextAlign.justify,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          softWrap: true,
-                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            color: Theme.of(context).colorScheme.background,
-                            fontSize: 16,
-                          ),
-                        ),
-                        Text(
-                          "+91 9865328754",
-                          textAlign: TextAlign.justify,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          softWrap: true,
-                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            color: Theme.of(context).colorScheme.background,
-                            fontSize: 16,
 
-                          ),
-                        ),
-                      ],
-                    ),
 
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          "Assign Date : ",
-                          textAlign: TextAlign.justify,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          softWrap: true,
-                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            color: Theme.of(context).colorScheme.background,
-                            fontSize: 16,
-                          ),
-                        ),
-                        Text(
-                          date,
-                          textAlign: TextAlign.justify,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          softWrap: true,
-                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            color: Theme.of(context).colorScheme.background,
-                            fontSize: 16,
-                          ),
-                        ),
-                      ],
-                    ),
                   ],
                 ),
               ),
@@ -242,31 +286,9 @@ _GetServiceState({required this.sen});
                 padding: EdgeInsets.only(left: 10, right: 10),
                 width: 150,
                 height: 50,
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                      shape: MaterialStatePropertyAll(RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10))),
-                      backgroundColor: MaterialStatePropertyAll(
-                        Theme.of(context).colorScheme.background,
-
-                      )),
-                  // onPressed: () {
-                  //   showBottomSheet(
-                  //     context: context,
-                  //
-                  //     builder: (BuildContext context){
-                  //       return SizedBox(
-                  //         height: 100,
-                  //         child: Column(
-                  //           children: [
-                  //
-                  //           ],
-                  //         ),
-                  //       );
-                  //     }
-                  //   );
-                  // },
+                child:       ElevatedButton(
                   onPressed: () {
+
                     showDialog(
                       context: context,
                       builder: (BuildContext context) {
@@ -276,19 +298,31 @@ _GetServiceState({required this.sen});
                           actions: [
                             TextButton(
                               onPressed: () {
-                                // Handle the "Cancel" button tap
                                 Navigator.of(context).pop(); // Close the dialog
                               },
                               child: Text("Cancel"),
                             ),
                             TextButton(
                               onPressed: () {
-                                // Handle the "OK" button tap
-                                Navigator.push(context,
-                                    MaterialPageRoute(
-                                        builder: (context) {
-                                          return homepage();
-                                        }));
+                                final user = FirebaseAuth.instance.currentUser;
+                                Navigator.of(context).pop();
+                                // Define the new service map
+                                Map<String, dynamic> newService = {
+                                  "serviceName": sen,
+                                  "serviceDescription": "Your Service Description",
+                                  "index":1,
+                                  "useruid":user!.uid,
+                                  // Add other service properties as needed
+                                };
+
+
+                                final assignedExecutiveDoc =
+                                FirebaseFirestore.instance.collection("executive").doc('IZTd3cPjOkfEHFwyts3USXwhXlu2');
+
+                                // Update the assigned executive's document by adding the new service to the services array
+                                assignedExecutiveDoc.update({
+                                  "services": FieldValue.arrayUnion([newService]),
+                                });
                               },
                               child: Text("OK"),
                             ),
@@ -297,16 +331,16 @@ _GetServiceState({required this.sen});
                       },
                     );
                   },
-
                   child: Text(
                     'Done',
                     style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                        color: Theme.of(context).colorScheme.secondary,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20),
+                      color: Theme.of(context).colorScheme.secondary,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
                   ),
                 ),
-              ),
+                ),
             ],
           ),
         ),
