@@ -2,7 +2,6 @@ import 'package:business_bridge/screens/forget_password_user.dart';
 import 'package:business_bridge/screens/homepage.dart';
 import 'package:business_bridge/screens/sector_page.dart';
 
-import 'package:business_bridge/screens/sign_page_user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';

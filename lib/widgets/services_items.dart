@@ -3,9 +3,7 @@ import 'package:business_bridge/models/services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:transparent_image/transparent_image.dart';
 
-import '../models/case_study.dart';
 
 class serviceItem extends StatelessWidget {
   const serviceItem(

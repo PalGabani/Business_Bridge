@@ -1,6 +1,5 @@
 import 'dart:io';
-import 'dart:math';
-import 'package:business_bridge/screens/profile_page.dart';
+
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 import 'package:cloud_firestore/cloud_firestore.dart';

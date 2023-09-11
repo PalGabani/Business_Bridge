@@ -5,10 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:transparent_image/transparent_image.dart';
-
-import '../models/case_study.dart';
-import '../screens/assign_project_page.dart';
 
 class geted_service extends ConsumerStatefulWidget {
   const geted_service({

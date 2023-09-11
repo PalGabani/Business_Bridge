@@ -13,12 +13,12 @@ class services_page extends ConsumerStatefulWidget {
 
   services_page(
       {super.key,
-        required this.title,
+        //required this.title,
        // required this.services,
         //required this.availableC_S
       });
 
-  final String? title;
+  //final String? title;
   //final List<Services> services;
   //final List<case_Study> availableC_S;
   @override
@@ -99,7 +99,12 @@ class _services_pageState extends ConsumerState<services_page> {
     // }
     return Scaffold(
       appBar: AppBar(
-        title: Text("Services"),
+        backgroundColor:Color(0xffdee9f0),
+        automaticallyImplyLeading: false,
+        title: Padding(
+          padding: const EdgeInsets.only(left: 10.0),
+          child: Text("Services"),
+        ),
         scrolledUnderElevation: 0,
       ),
       body: content,

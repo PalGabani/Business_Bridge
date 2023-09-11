@@ -1,4 +1,3 @@
-import 'package:business_bridge/models/case_study.dart';
 import 'package:business_bridge/models/services.dart';
 import 'package:business_bridge/provider/data_provider.dart';
 import 'package:business_bridge/widgets/get_services.dart';
@@ -27,6 +26,8 @@ class services_details_page extends ConsumerWidget {
     return Scaffold(
 
       appBar: AppBar(
+        backgroundColor:Color(0xffdee9f0),
+
         scrolledUnderElevation: 0,
         title: Text(sr.title),
       ),

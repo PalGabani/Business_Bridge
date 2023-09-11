@@ -9,7 +9,7 @@ class Utiles {
       gravity: ToastGravity.BOTTOM_LEFT,
       timeInSecForIosWeb: 1,
       fontSize: 16,
-      backgroundColor: Colors.grey,
+      backgroundColor: Colors.grey.withOpacity(0.5),
       textColor: Colors.black,
     );
   }

@@ -1,4 +1,4 @@
-import 'package:business_bridge/screens/executive_details.dart';
+
 import 'package:business_bridge/screens/executive_login.dart';
 
 import 'package:flutter/cupertino.dart';

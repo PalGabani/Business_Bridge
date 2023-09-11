@@ -1,5 +1,5 @@
 import 'package:business_bridge/models/assign_page_projects.dart';
-import 'package:business_bridge/models/assign_project_details.dart';
+
 import 'package:business_bridge/screens/assign_project_page.dart';
 import 'package:business_bridge/screens/login_page_user.dart';
 import 'package:business_bridge/widgets/work_portal_projects.dart';

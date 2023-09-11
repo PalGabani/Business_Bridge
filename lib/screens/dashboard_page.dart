@@ -1,15 +1,11 @@
-import 'package:business_bridge/data/dummy_data.dart';
-import 'package:business_bridge/screens/homepage.dart';
-import 'package:business_bridge/widgets/getted_services_dashboard.dart';
+
 import 'package:business_bridge/widgets/timeline_stepper_widget.dart';
-import 'package:casa_vertical_stepper/casa_vertical_stepper.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../models/assign_page_projects.dart';
 import '../provider/data_provider.dart';
-import 'assign_project_page.dart';
 
 class dashboard_page extends ConsumerStatefulWidget {
   @override
@@ -121,7 +117,12 @@ final steps=apd[0].details12;
     return Scaffold(
 
       appBar: AppBar(
-        title: Text('Dashboard '),
+        backgroundColor:Color(0xffdee9f0),
+        automaticallyImplyLeading: false,
+        title: Padding(
+          padding: const EdgeInsets.only(left: 10.0),
+          child: Text('Dashboard '),
+        ),
       ),
 
        body: TimelineStepper(steps: steps, finalSteps: steps,  ),

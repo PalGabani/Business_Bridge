@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:business_bridge/models/services.dart';
+import 'package:business_bridge/screens/services_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -264,9 +265,38 @@ _GetServiceState({required this.sen});
                   //     }
                   //   );
                   // },
-                  onPressed: (){
-
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text("Congratulations!"),
+                          content: Text("Our Executive Assigned You."),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                // Handle the "Cancel" button tap
+                                Navigator.of(context).pop(); // Close the dialog
+                              },
+                              child: Text("Cancel"),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                // Handle the "OK" button tap
+                                Navigator.push(context,
+                                    MaterialPageRoute(
+                                        builder: (context) {
+                                          return services_page();
+                                        }));
+                              },
+                              child: Text("OK"),
+                            ),
+                          ],
+                        );
+                      },
+                    );
                   },
+
                   child: Text(
                     'Done',
                     style: Theme.of(context).textTheme.headlineLarge!.copyWith(

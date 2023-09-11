@@ -1,4 +1,4 @@
-import 'package:business_bridge/models/case_study.dart';
+
 import 'package:business_bridge/provider/casse_provider.dart';
 import 'package:business_bridge/provider/data_provider.dart';
 import 'package:business_bridge/screens/case_study_page.dart';
@@ -9,7 +9,7 @@ import 'package:business_bridge/screens/dashboard_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod/riverpod.dart';
+
 
 class homepage extends ConsumerStatefulWidget {
   @override
@@ -33,6 +33,7 @@ class _homepageState extends ConsumerState<homepage> {
     final details = ref.watch(caseStudyProvider);
 
     return Scaffold(
+    //  backgroundColor: Colors.grey.withOpacity(0.3),
       //--------navigation bar ------------
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
@@ -98,7 +99,7 @@ class _homepageState extends ConsumerState<homepage> {
             availableC_S: availablec_s,
           ),
           services_page(
-            title: "Services",
+           // title: "Services",
             //services: [],
           ),
           profile_page(),

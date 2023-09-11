@@ -1,6 +1,5 @@
 import 'package:business_bridge/models/assign_page_projects.dart';
-import 'package:business_bridge/models/assign_project_details.dart';
-import 'package:business_bridge/provider/data_provider.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

@@ -1,5 +1,4 @@
 import 'package:business_bridge/screens/edit_profile_page.dart';
-import 'package:business_bridge/screens/homepage.dart';
 import 'package:business_bridge/screens/login_page_user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
