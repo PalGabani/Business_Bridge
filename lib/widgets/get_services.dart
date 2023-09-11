@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:business_bridge/models/services.dart';
+import 'package:business_bridge/screens/homepage.dart';
 import 'package:business_bridge/screens/services_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -286,7 +287,7 @@ _GetServiceState({required this.sen});
                                 Navigator.push(context,
                                     MaterialPageRoute(
                                         builder: (context) {
-                                          return services_page();
+                                          return homepage();
                                         }));
                               },
                               child: Text("OK"),
