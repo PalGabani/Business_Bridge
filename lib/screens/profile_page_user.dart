@@ -79,9 +79,6 @@ class _profile_page_userState extends State<profile_page_user> {
               //     ));
               //   },
               // ),
-              SizedBox(
-                //width: 100,
-              ),
 
             ],
           ),
@@ -204,181 +201,181 @@ class _profile_page_userState extends State<profile_page_user> {
           ],
         ),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.only(left: 20),
-          child: Column(
-            children: [
+      body: Container(
+        height: 700,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 20),
+            child: Column(
+              children: [
+                StreamBuilder<DocumentSnapshot>(
+                  stream: FirebaseFirestore.instance
+                      .collection('users')
+                      .doc(_user?.uid) // Use the UID of the current user
+                      .snapshots(),
+                  builder: (context, snapshot) {
 
-              StreamBuilder<DocumentSnapshot>(
-                stream: FirebaseFirestore.instance
-                    .collection('users')
-                    .doc(_user?.uid) // Use the UID of the current user
-                    .snapshots(),
-                builder: (context, snapshot) {
+                    if (_user == null) {
+                      // If the user is null, navigate to the login page
+                      WidgetsBinding.instance.addPostFrameCallback((_) {
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) => Login_page(),
+                        ));
+                      });
+                      return CircularProgressIndicator();
+                    }
 
-                  if (_user == null) {
-                    // If the user is null, navigate to the login page
-                    WidgetsBinding.instance.addPostFrameCallback((_) {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context) => Login_page(),
+                    if (!snapshot.hasData) {
+                      return CircularProgressIndicator(); // Show a loading indicator while data is being fetched
+                    }
+
+                    if (snapshot.hasError) {
+                      return Text('Error: ${snapshot.error}');
+                    }
+
+                    final userData = snapshot.data?.data() as Map<String, dynamic>?;
+
+                    if (userData == null) {
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (context) => Login_page(),
+                      //   ),
+                      // );
+                      // Handle the case where the document doesn't exist or is null
+                      return Center(
+                          child: Column(
+                        children: [
+                          Text('User data not found! Login Again ,Goto Login'),
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => Login_page()),
+                              );
+                            },
+                            child: Text('Go to HomePage'),
+                          ),
+                        ],
                       ));
-                    });
-                    return CircularProgressIndicator();
-                  }
 
-                  if (!snapshot.hasData) {
-                    return CircularProgressIndicator(); // Show a loading indicator while data is being fetched
-                  }
 
-                  if (snapshot.hasError) {
-                    return Text('Error: ${snapshot.error}');
-                  }
+                    }
 
-                  final userData = snapshot.data?.data() as Map<String, dynamic>?;
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
 
-                  if (userData == null) {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => Login_page(),
-                    //   ),
-                    // );
-                    // Handle the case where the document doesn't exist or is null
-                    return Center(child: Column(
-                      children: [
-                        Text('User data not found! Login Again ,Goto Login'),
-                        ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => Login_page()),
-                            );
-                          },
-                          child: Text('Go to HomePage'),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.blueGrey.withOpacity(0.5),
                         ),
-                      ],
-                    ));
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 15,right: 15),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              CircleAvatar(
+                                radius: 50, // Adjust the radius as needed
+                                backgroundColor: Colors.grey, // Background color if the image is not loaded
+                                backgroundImage: NetworkImage(userData['image']),
+                              ),
 
+                              Row(
+                                children: [
+                                  Text(
+                                    "Business Name : ",
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                  Text(
+                                    userData['bname'] ?? 'N/A',
+                                    style: TextStyle(fontSize: 20),
+                                  )
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    "Sector Name : ",
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                  Text(
+                                    userData['sector'] ?? 'N/A',
+                                    style: TextStyle(fontSize: 20),
+                                  )
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    "User Name : ",
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                  Text(
+                                    userData['username'] ?? 'N/A',
+                                    style: TextStyle(fontSize: 20),
+                                  )
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    "Contact no : ",
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                  Text(
+                                    userData['contact'] ?? 'N/A',
+                                    style: TextStyle(fontSize: 20),
+                                  )
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    "Email Id: ",
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                  Text(
+                                    userData['email'] ?? 'N/A',
+                                    style: TextStyle(fontSize: 20),
+                                  )
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    "Country : ",
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                  Text(
+                                    userData['country'] ?? 'N/A',
+                                    style: TextStyle(fontSize: 20),
+                                  )
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    "License No/Gst no: ",
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                  Text(
+                                    userData['license'] ?? 'N/A',
+                                    style: TextStyle(fontSize: 20),
+                                  )
+                                ],
+                              ),
 
-                  }
-
-                  return Padding(
-
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.blueGrey.withOpacity(0.5),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            CircleAvatar(
-                              radius: 50, // Adjust the radius as needed
-                              backgroundColor: Colors.grey, // Background color if the image is not loaded
-                              backgroundImage: NetworkImage(userData['image']),
-                            ),
-
-
-                            Row(
-                              children: [
-                                Text(
-                                  "Business Name : ",
-                                  style: TextStyle(fontSize: 20),
-                                ),
-                                Text(
-                                  userData['bname'] ?? 'N/A',
-                                  style: TextStyle(fontSize: 20),
-                                )
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  "Sector Name : ",
-                                  style: TextStyle(fontSize: 20),
-                                ),
-                                Text(
-                                  userData['sector'] ?? 'N/A',
-                                  style: TextStyle(fontSize: 20),
-                                )
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  "User Name : ",
-                                  style: TextStyle(fontSize: 20),
-                                ),
-                                Text(
-                                  userData['username'] ?? 'N/A',
-                                  style: TextStyle(fontSize: 20),
-                                )
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  "Contact no : ",
-                                  style: TextStyle(fontSize: 20),
-                                ),
-                                Text(
-                                  userData['contact'] ?? 'N/A',
-                                  style: TextStyle(fontSize: 20),
-                                )
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  "Email Id: ",
-                                  style: TextStyle(fontSize: 20),
-                                ),
-                                Text(
-                                  userData['email'] ?? 'N/A',
-                                  style: TextStyle(fontSize: 20),
-                                )
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  "Country : ",
-                                  style: TextStyle(fontSize: 20),
-                                ),
-                                Text(
-                                  userData['country'] ?? 'N/A',
-                                  style: TextStyle(fontSize: 20),
-                                )
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  "License No/Gst no: ",
-                                  style: TextStyle(fontSize: 20),
-                                ),
-                                Text(
-                                  userData['license'] ?? 'N/A',
-                                  style: TextStyle(fontSize: 20),
-                                )
-                              ],
-                            ),
-
-
-
-                            // Add similar rows for other user data here
-                          ],
+                              // Add similar rows for other user data here
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  );
-                },
-              ),
-            ],
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),
