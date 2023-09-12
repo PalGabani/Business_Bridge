@@ -108,13 +108,30 @@ class _workProjectState extends ConsumerState<workProject> {
                         height: MediaQuery.of(context).size.height,
                         //width: double.infinity,// Set a fixed height or adjust as needed
                         child: ListView.builder(
-                          itemCount: executiveServices.length,
-                          itemBuilder: (context, index) {
-                            final service = executiveServices[index];
+                        itemCount: executiveServices.length,
+                        itemBuilder: (context, index) {
+                          final service = executiveServices[index];
+                          final userUid = service['useruid'] ?? ''; // Assuming 'userUid' is stored in the service data
 
-                            return Padding(
-                              padding: const EdgeInsets.only(left: 20.0,right: 20,top: 10),
-                              child: Container(
+                          return FutureBuilder<DocumentSnapshot>(
+                            future: FirebaseFirestore.instance.collection('users').doc(userUid).get(),
+                            builder: (context, userSnapshot) {
+                              if (userSnapshot.connectionState == ConnectionState.waiting) {
+                                return CircularProgressIndicator();
+                              }
+
+                              if (userSnapshot.hasError) {
+                                return Text('Error fetching user data: ${userSnapshot.error}');
+                              }
+
+                              final userData = userSnapshot.data!.data() as Map<String, dynamic>?;
+
+                              if (userData == null) {
+                                return Text('User data not found!');
+                              }
+
+                              return Padding(
+                                padding: const EdgeInsets.only(left: 20.0,right: 20),
                                 child: Card(
                                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                                   elevation: 3,
@@ -134,29 +151,31 @@ class _workProjectState extends ConsumerState<workProject> {
                                         //   style: TextStyle(color: Colors.white, fontSize: 16),
                                         // ),
                                         Text(
-                                          'Company: $companyname',
+                                          'Company: ${userData['bname'] ?? 'N/A'}',
                                           style: TextStyle(color: Colors.white, fontSize: 16),
                                         ),
                                         Text(
-                                          'Country: $country',
+                                          'Country: ${userData['country'] ?? 'N/A'}',
                                           style: TextStyle(color: Colors.white, fontSize: 16),
                                         ),
                                         Text(
-                                          'Contact: $contact',
+                                          'Contact: ${userData['contact'] ?? 'N/A'}',
                                           style: TextStyle(color: Colors.white, fontSize: 16),
                                         ),
                                         Text(
-                                          'Email: $email',
+                                          'Email: ${userData['email'] ?? 'N/A'}',
                                           style: TextStyle(color: Colors.white, fontSize: 16),
                                         ),
                                       ],
                                     ),
                                   ),
                                 ),
-                              ),
-                            );
-                          },
-                        ),
+                              );
+                            },
+                          );
+                        },
+                      ),
+
                       );
 
                     },
