@@ -71,7 +71,7 @@ class _executive_detailsState extends ConsumerState<executive_details> {
     void selectpro(BuildContext context, AssignedProject ap, ) {
       List<Map<String, String>> step=ap.details12;
       Navigator.of(context).push(
-        MaterialPageRoute(builder: (ctx) => assign_project_page(apd: ap,finalSteps: step,),),);
+        MaterialPageRoute(builder: (ctx) => assign_project_page(apd: ap,finalSteps: step,data: [],),),);
     }
 
     if (ap.isNotEmpty) {

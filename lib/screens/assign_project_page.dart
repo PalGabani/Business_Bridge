@@ -5,7 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class assign_project_page extends ConsumerStatefulWidget {
+  final List<Map<String, String>> data;
+
   assign_project_page({
+    required this.data,
     super.key,
     required this.apd,
 required this.finalSteps
@@ -17,6 +20,7 @@ required this.finalSteps
   @override
   ConsumerState<assign_project_page> createState() =>
       _assign_project_pageState(
+        data: data,
           apd: apd,
               finalSteps:finalSteps
       );
@@ -24,8 +28,11 @@ required this.finalSteps
 
 class _assign_project_pageState extends ConsumerState<assign_project_page> {
   final AssignedProject apd;
+  final List<Map<String, String>> data;
+
   List<Map<String, String>> finalSteps;
    _assign_project_pageState({
+     required this.data,
     required this.apd,
 required this.finalSteps
   });

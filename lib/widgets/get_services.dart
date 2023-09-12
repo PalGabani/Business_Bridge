@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:business_bridge/models/services.dart';
+import 'package:business_bridge/screens/getted_service_dashboard.dart';
 import 'package:business_bridge/screens/homepage.dart';
 import 'package:business_bridge/screens/services_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -39,7 +40,7 @@ _GetServiceState({required this.sen});
     final formattedDate = DateFormat("MMMM d, y").format(now); // Format the date
     return formattedDate;
   }
-
+var ename,econtct,ecountry,eemail;
   @override
   Widget build(BuildContext context) {
     final keyBoardSpace = MediaQuery.of(context).viewInsets.bottom;
@@ -174,7 +175,16 @@ _GetServiceState({required this.sen});
                         }
 
                         final executiveName = executiveData['exname'] ?? 'N/A';
+                          ename=executiveName;
 
+                        final executiveEmail = executiveData['email'] ?? 'N/A';
+                        eemail=executiveEmail;
+
+                        final executivecon = executiveData['contact'] ?? 'N/A';
+                        econtct=executivecon;
+
+                        final executivecountry = executiveData['country'] ?? 'N/A';
+                        ecountry=executivecountry;
                         // final executiveName = executiveData['exname'] ?? 'N/A';
                         return Column(
                           children: [
@@ -310,11 +320,22 @@ _GetServiceState({required this.sen});
                                 Map<String, dynamic> newService = {
                                   "serviceName": sen,
                                   "serviceDescription": "Your Service Description",
+
                                   "index":1,
                                   "useruid":user!.uid,
                                   // Add other service properties as needed
                                 };
 
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => ServiceDetailPage(
+                                      serviceName: sen,
+                                      executivename:  ename,
+                                      email:eemail, contact: econtct, country: ecountry ,
+                                      // You can replace this with the actual description
+                                    ),
+                                  ),
+                                );
 
                                 final assignedExecutiveDoc =
                                 FirebaseFirestore.instance.collection("executive").doc('IZTd3cPjOkfEHFwyts3USXwhXlu2');
